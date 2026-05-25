@@ -1,0 +1,66 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Pocket Network
+providerId: pocket-network
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - Pocket Network
+  - Grove
+  - Rate Limiting
+  - RPC
+description: Reconciled rate limits for the Grove portal (Pocket Network's dominant gateway) and the
+  underlying Shannon protocol. Grove enforces per-application limits via Envoy Proxy in front of
+  PATH; the Shannon protocol enforces application-level relay budgets via on-chain compute-unit
+  stake.
+sources:
+  - https://grove.city/pricing
+  - https://path.grove.city/
+  - https://docs.pokt.network/
+headers:
+  limit: x-ratelimit-limit
+  remaining: x-ratelimit-remaining
+  reset: x-ratelimit-reset
+  retryAfter: retry-after
+responseCodes:
+  throttled: 429
+  quotaExceeded: 402
+algorithm: token-bucket
+spendLimits:
+  - tier: Public
+    creditPurchase: N/A
+    monthlyCap: best-effort
+  - tier: Portal Paid
+    creditPurchase: pay-as-you-go
+    monthlyCap: no limit
+  - tier: Enterprise
+    creditPurchase: contract
+    monthlyCap: contract
+limits:
+  - tier: Public (per IP)
+    surface: Grove public endpoints (eth.rpc.grove.city, solana.rpc.grove.city, etc.)
+    rps: 30
+    rpm: 1800
+    notes: Shared best-effort rate limit. Intended for development only. Subject to change without
+      notice.
+  - tier: Portal Paid (per Application)
+    surface: rpc.grove.city/v1/{appId}
+    rps: 300
+    rpm: 18000
+    notes: Default starting throughput per application. Higher limits available on request via the
+      Grove portal.
+  - tier: Enterprise (per Application)
+    surface: dedicated PATH gateway
+    rps: custom
+    rpm: custom
+    notes: Negotiated per contract. Backed by dedicated supplier capacity and SLA.
+protocolLimits:
+  - tier: Shannon Application Stake
+    description: Each Application's relay budget per session is a function of its POKT stake and
+      the per-session relay-mining difficulty. Overruns at the protocol layer are dropped (no
+      throttling penalty), but additional relays will not be served until the next session.
+  - tier: Shannon Supplier Capacity
+    description: Suppliers serve relays at their own throughput. PATH gateways score suppliers via
+      QoS and route around overloaded suppliers automatically.

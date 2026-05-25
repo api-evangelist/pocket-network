@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/pocket-network/pocket-network-shannon-actor-schema.json",
+  "title": "Pocket Network Shannon Actor",
+  "description": "Schema describing the three on-chain actor types — Application, Supplier, Gateway — registered on the Shannon protocol. Each stakes POKT to participate in the relay economy.",
+  "type": "object",
+  "definitions": {
+    "Application": {
+      "type": "object",
+      "description": "An Application stakes POKT to consume relays from suppliers for one or more services. Minimum stake is 100 POKT.",
+      "required": ["address", "stake", "service_configs"],
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "Bech32 Shannon address (prefix 'pokt1')."
+        },
+        "stake": {
+          "$ref": "#/definitions/Coin"
+        },
+        "service_configs": {
+          "type": "array",
+          "description": "Services the application can consume relays for.",
+          "items": { "$ref": "#/definitions/ApplicationServiceConfig" }
+        },
+        "delegatee_gateway_addresses": {
+          "type": "array",
+          "description": "Gateway addresses the application has delegated relay signing authority to.",
+          "items": { "type": "string" }
+        },
+        "pending_undelegations": {
+          "type": "array",
+          "description": "Pending undelegations by session end height.",
+          "items": { "type": "object" }
+        }
+      }
+    },
+    "Supplier": {
+      "type": "object",
+      "description": "A Supplier stakes POKT and runs a RelayMiner to serve relays for the services it supports. Earns POKT proportional to validated relay volume.",
+      "required": ["operator_address", "stake", "services"],
+      "properties": {
+        "owner_address": {
+          "type": "string",
+          "description": "Bech32 Shannon address that owns the supplier stake."
+        },
+        "operator_address": {
+          "type": "string",
+          "description": "Bech32 Shannon address of the operator (may equal owner_address)."
+        },
+        "stake": {
+          "$ref": "#/definitions/Coin"
+        },
+        "services": {
+          "type": "array",
+          "description": "Services this supplier serves, with endpoint URLs and revenue-share splits.",
+          "items": { "$ref": "#/definitions/SupplierServiceConfig" }
+        },
+        "service_config_history": {
+          "type": "array",
+          "description": "Per-session history of service configurations for this supplier.",
+          "items": { "type": "object" }
+        }
+      }
+    },
+    "Gateway": {
+      "type": "object",
+      "description": "A Gateway stakes POKT (minimum 1 POKT) and is authorized by Applications via delegation to sign relays on their behalf. Gateways typically run PATH.",
+      "required": ["address", "stake"],
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "Bech32 Shannon address of the gateway."
+        },
+        "stake": {
+          "$ref": "#/definitions/Coin"
+        }
+      }
+    },
+    "ApplicationServiceConfig": {
+      "type": "object",
+      "required": ["service_id"],
+      "properties": {
+        "service_id": {
+          "type": "string",
+          "description": "Service identifier (e.g. 'eth', 'solana', 'base')."
+        }
+      }
+    },
+    "SupplierServiceConfig": {
+      "type": "object",
+      "required": ["service_id", "endpoints"],
+      "properties": {
+        "service_id": {
+          "type": "string"
+        },
+        "endpoints": {
+          "type": "array",
+          "description": "RelayMiner endpoint URLs that proxy this service.",
+          "items": {
+            "type": "object",
+            "required": ["url", "rpc_type"],
+            "properties": {
+              "url": { "type": "string", "format": "uri" },
+              "rpc_type": {
+                "type": "string",
+                "enum": ["UNKNOWN_RPC", "GRPC", "WEBSOCKET", "JSON_RPC", "REST"]
+              },
+              "configs": { "type": "array", "items": { "type": "object" } }
+            }
+          }
+        },
+        "rev_share": {
+          "type": "array",
+          "description": "Revenue-share splits for this service.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "address": { "type": "string" },
+              "rev_share_percentage": { "type": "number" }
+            }
+          }
+        }
+      }
+    },
+    "Coin": {
+      "type": "object",
+      "description": "Cosmos SDK coin amount. POKT amounts use the 'upokt' denom (1 POKT = 1e6 upokt).",
+      "required": ["denom", "amount"],
+      "properties": {
+        "denom": { "type": "string", "examples": ["upokt"] },
+        "amount": { "type": "string", "description": "Stringified integer to preserve precision." }
+      }
+    }
+  },
+  "oneOf": [
+    { "$ref": "#/definitions/Application" },
+    { "$ref": "#/definitions/Supplier" },
+    { "$ref": "#/definitions/Gateway" }
+  ]
+}

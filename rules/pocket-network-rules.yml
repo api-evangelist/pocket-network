@@ -1,0 +1,77 @@
+extends:
+  - 'spectral:oas'
+  - 'spectral:asyncapi'
+
+rules:
+  pocket-network-title-required:
+    description: Every Pocket Network OpenAPI spec must declare a clear title.
+    given: '$.info'
+    severity: error
+    then:
+      field: title
+      function: truthy
+
+  pocket-network-description-required:
+    description: Every operation must include a description so integrators understand the relay
+      semantics.
+    given: "$.paths[*][get,post,put,patch,delete]"
+    severity: warn
+    then:
+      field: description
+      function: truthy
+
+  pocket-network-operation-summary-title-case:
+    description: Operation summaries should use Title Case (matches API Evangelist style).
+    given: "$.paths[*][get,post,put,patch,delete].summary"
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[A-Z][A-Za-z0-9]*( [A-Z][A-Za-z0-9]*)*$'
+
+  pocket-network-tags-required:
+    description: Every operation must be tagged so it groups under a Shannon module or PATH surface.
+    given: "$.paths[*][get,post,put,patch,delete]"
+    severity: warn
+    then:
+      field: tags
+      function: truthy
+
+  pocket-network-server-url-required:
+    description: At least one server must be declared. Production specs should use the
+      grove.city or poktroll.com host families.
+    given: '$.servers'
+    severity: error
+    then:
+      function: length
+      functionOptions:
+        min: 1
+
+  pocket-network-json-rpc-body-schema:
+    description: Operations that accept a JSON-RPC payload must reference the JsonRpcRequest schema
+      (or an equivalent envelope).
+    given: "$.paths[?(@property == '/v1/{appId}' || @property == '/v1')].post.requestBody.content['application/json'].schema"
+    severity: warn
+    then:
+      function: truthy
+
+  pocket-network-shannon-rest-bech32:
+    description: Path parameters named 'address' on Shannon REST endpoints should describe Bech32
+      'pokt1...' addresses.
+    given: "$.paths..parameters[?(@.name == 'address')]"
+    severity: warn
+    then:
+      field: description
+      function: pattern
+      functionOptions:
+        match: 'Bech32|pokt1'
+
+  pocket-network-compute-units-mentioned:
+    description: API descriptions for Shannon and PATH should mention compute units somewhere — the
+      protocol's metering unit.
+    given: '$.info.description'
+    severity: info
+    then:
+      function: pattern
+      functionOptions:
+        match: '(compute units?|CU)'

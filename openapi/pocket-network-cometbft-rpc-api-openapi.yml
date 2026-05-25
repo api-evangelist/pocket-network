@@ -1,0 +1,181 @@
+openapi: 3.1.0
+info:
+  title: Pocket Network CometBFT RPC API
+  description: >
+    Shannon full nodes expose the standard CometBFT (Tendermint) RPC on port
+    26657. It is a JSON-RPC 2.0 surface covering consensus, mempool, and
+    network-level queries — node status, network info, peer set, block by
+    height, block results, and unconfirmed transactions. Grove operates a
+    public Shannon mainnet RPC at
+    `shannon-grove-rpc.mainnet.poktroll.com`. Most operations are exposed both
+    as JSON-RPC methods and as HTTP GET shortcuts at the same root URL.
+  version: v1
+  contact:
+    name: Pocket Network Foundation
+    url: https://pocket.network
+  license:
+    name: MIT
+    url: https://github.com/pokt-network/poktroll/blob/main/LICENSE
+servers:
+  - url: https://shannon-grove-rpc.mainnet.poktroll.com
+    description: Grove-operated Shannon mainnet CometBFT RPC
+  - url: https://shannon-testnet-grove-rpc.beta.poktroll.com
+    description: Grove-operated Shannon beta testnet CometBFT RPC
+tags:
+  - name: Status
+    description: Node status and network info
+  - name: Consensus
+    description: Block, header, and consensus queries
+  - name: Mempool
+    description: Mempool inspection and broadcast
+paths:
+  /status:
+    get:
+      summary: Get Cometbft Node Status
+      description: Return node info, sync status, validator info, and latest block height.
+      operationId: getCometbftStatus
+      tags:
+        - Status
+      responses:
+        '200':
+          description: Node status envelope.
+          content:
+            application/json:
+              schema:
+                type: object
+  /net_info:
+    get:
+      summary: Get Cometbft Network Info
+      description: Return network info including listening status, peer count, and peer list.
+      operationId: getCometbftNetInfo
+      tags:
+        - Status
+      responses:
+        '200':
+          description: Network info envelope.
+          content:
+            application/json:
+              schema:
+                type: object
+  /block:
+    get:
+      summary: Get Cometbft Block
+      description: Return a block by height (or latest if omitted).
+      operationId: getCometbftBlock
+      tags:
+        - Consensus
+      parameters:
+        - name: height
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Block envelope.
+          content:
+            application/json:
+              schema:
+                type: object
+  /block_results:
+    get:
+      summary: Get Cometbft Block Results
+      description: Return ABCI execution results for a block (events, gas, tx_results).
+      operationId: getCometbftBlockResults
+      tags:
+        - Consensus
+      parameters:
+        - name: height
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Block results envelope.
+          content:
+            application/json:
+              schema:
+                type: object
+  /commit:
+    get:
+      summary: Get Cometbft Block Commit
+      description: Return the precommit signatures attached to a block.
+      operationId: getCometbftCommit
+      tags:
+        - Consensus
+      parameters:
+        - name: height
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Commit envelope.
+          content:
+            application/json:
+              schema:
+                type: object
+  /tx:
+    get:
+      summary: Get Cometbft Transaction
+      description: Return a transaction by hash, optionally including the inclusion proof.
+      operationId: getCometbftTransaction
+      tags:
+        - Consensus
+      parameters:
+        - name: hash
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: prove
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Transaction envelope.
+          content:
+            application/json:
+              schema:
+                type: object
+  /unconfirmed_txs:
+    get:
+      summary: Get Cometbft Unconfirmed Transactions
+      description: Return the current set of unconfirmed transactions in the mempool.
+      operationId: getCometbftUnconfirmedTransactions
+      tags:
+        - Mempool
+      responses:
+        '200':
+          description: Unconfirmed transactions envelope.
+          content:
+            application/json:
+              schema:
+                type: object
+  /broadcast_tx_sync:
+    get:
+      summary: Broadcast Cometbft Transaction Synchronously
+      description: >
+        Broadcast a transaction and return once CheckTx has run (does not wait
+        for inclusion in a block).
+      operationId: broadcastCometbftTxSync
+      tags:
+        - Mempool
+      parameters:
+        - name: tx
+          in: query
+          required: true
+          description: Hex- or base64-encoded transaction bytes.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Broadcast result.
+          content:
+            application/json:
+              schema:
+                type: object

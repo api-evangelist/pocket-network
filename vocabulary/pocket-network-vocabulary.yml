@@ -1,0 +1,124 @@
+specification: API Commons Vocabulary
+specificationVersion: '0.1'
+provider: Pocket Network
+providerId: pocket-network
+created: '2026-05-25'
+modified: '2026-05-25'
+description: Vocabulary for the Pocket Network and Grove ecosystem — Shannon protocol actors, relay
+  primitives, gateway terminology, and commercial constructs used by the Grove portal.
+tags:
+  - Pocket Network
+  - Grove
+  - PATH
+  - Shannon
+  - Web3
+  - RPC
+  - Blockchain
+  - Decentralized Infrastructure
+
+concepts:
+  - id: relay
+    label: Relay
+    description: The unit of work in Pocket Network — a single API call (typically JSON-RPC) from a
+      client through a gateway to a supplier serving a service. One request equals one relay; cost
+      is denominated in compute units.
+  - id: compute-unit
+    label: Compute Unit (CU)
+    description: Shannon's USD-pegged metering unit. One billion compute units equals one US dollar.
+      Each compute unit consumed by a relay results in an on-chain burn of POKT.
+  - id: service
+    label: Service
+    description: An external data source the network serves (e.g. eth, solana, base, arbitrum). Each
+      service has an on-chain definition with its compute-units-per-relay multiplier and source
+      owner.
+  - id: session
+    label: Session
+    description: A block-window-scoped grouping of an application, a service, and a candidate set of
+      suppliers. The gateway selects which supplier serves each relay within the session.
+  - id: claim
+    label: Claim
+    description: An on-chain claim posted by a supplier asserting how many relays it served in a
+      session. Followed by a proof in a later block window.
+  - id: proof
+    label: Proof
+    description: A cryptographic proof (Sparse Merkle Trie inclusion proof) submitted by a supplier
+      to validate its claim and unlock POKT rewards.
+
+actors:
+  - id: application
+    label: Application
+    description: An on-chain actor that stakes POKT (minimum 100 POKT) to consume relays. Delegates
+      relay-signing authority to one or more gateways.
+  - id: supplier
+    label: Supplier
+    description: An on-chain actor that stakes POKT and runs a RelayMiner to serve relays for the
+      services it supports. Earns POKT proportional to validated relay volume.
+  - id: gateway
+    label: Gateway
+    description: An on-chain actor (minimum 1 POKT) authorized by applications to sign relays. Runs
+      PATH (or equivalent) to route relays to suppliers.
+  - id: validator
+    label: Validator
+    description: A CometBFT validator securing the Shannon Cosmos chain via Proof-of-Stake.
+  - id: source-owner
+    label: Source Owner
+    description: The on-chain owner of a Service. Receives a share of compute-unit-denominated
+      revenue when their service is consumed.
+
+software:
+  - id: path
+    label: PATH (Path API and Toolkit Harness)
+    description: Open-source Go gateway maintained by Grove. Routes JSON-RPC, REST, and WebSocket
+      relays to Shannon suppliers, scores them via QoS, and signs requests with the operator's
+      gateway and application keys.
+  - id: relayminer
+    label: RelayMiner
+    description: The supplier-side daemon that receives signed relay requests from a gateway,
+      forwards them to the underlying service, and returns responses.
+  - id: appgate
+    label: AppGate
+    description: An application-side gateway daemon used in self-sovereign mode (applications run
+      their own gateway instead of delegating to a third party).
+  - id: poktrolld
+    label: poktrolld
+    description: The Shannon node binary and Cosmos SDK CLI. Provides query, tx, and keys commands
+      for every Shannon module.
+  - id: pocketdex
+    label: Pocketdex
+    description: SubQuery-based indexer for Shannon that powers explorers and analytics.
+
+ecosystem:
+  - id: pocket-network-foundation
+    label: Pocket Network Foundation (PNF)
+    description: Non-profit steward of the Pocket Network protocol and the F-Chains public-data
+      program.
+  - id: grove
+    label: Grove
+    description: For-profit Web3 infrastructure company that operates the largest Pocket Network
+      gateway (rpc.grove.city), maintains PATH, and offers managed RPC.
+  - id: pip
+    label: Pocket Improvement Proposal (PIP)
+    description: 'On-chain governance proposal mechanism. Notable: PIP-41 (passed January 2026)
+      introduced deflationary tokenomics with a 97.5% mint ratio.'
+  - id: morse
+    label: Morse
+    description: The legacy Pocket Network protocol (pocket-core). Deprecated June 2025 when
+      traffic migrated to Shannon. Wallets and stakes were bridged via Soothe Vault.
+  - id: shannon
+    label: Shannon
+    description: The current Pocket Network protocol — a Cosmos SDK + CometBFT chain with
+      permissionless service registration and usage-based deflationary tokenomics.
+
+commercial:
+  - id: grove-portal
+    label: Grove Portal
+    description: Grove's web dashboard for creating applications, generating endpoints, monitoring
+      relay volume, and managing billing.
+  - id: application-id
+    label: Application ID
+    description: The opaque identifier embedded in Grove portal endpoint URLs
+      (`https://eth.rpc.grove.city/v1/{appId}`) that identifies the billable application.
+  - id: public-endpoint
+    label: Public Endpoint
+    description: Grove-operated, no-API-key, IP-rate-limited endpoint per chain (e.g.
+      `eth.rpc.grove.city/v1`). Suitable for development and exploration.

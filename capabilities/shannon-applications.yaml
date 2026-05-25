@@ -1,0 +1,105 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Pocket Network Shannon — Applications
+  description: 'List and inspect Shannon Applications via the Pocket application module REST surface.
+    Lead operation: listShannonApplications. Self-contained Naftiko capability for the Application
+    module.'
+  tags:
+  - Pocket Network
+  - Shannon
+  - Applications
+  - Staking
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds: []
+capability:
+  consumes:
+  - type: http
+    namespace: shannon-applications
+    baseUri: https://shannon-grove-api.mainnet.poktroll.com
+    description: Shannon application-module capability.
+    resources:
+    - name: application
+      path: /pocket/application/v1/application
+      operations:
+      - name: listshannonapplications
+        method: GET
+        description: List Shannon Applications
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: application-by-address
+      path: /pocket/application/v1/application/{address}
+      operations:
+      - name: getshannonapplication
+        method: GET
+        description: Get Shannon Application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: address
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: none
+  exposes:
+  - type: rest
+    namespace: shannon-applications-rest
+    port: 8080
+    description: REST adapter for Shannon Application module.
+    resources:
+    - path: /v1/applications
+      name: application
+      operations:
+      - method: GET
+        name: listshannonapplications
+        description: List Shannon Applications
+        call: shannon-applications.listshannonapplications
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/applications/{address}
+      name: application-by-address
+      operations:
+      - method: GET
+        name: getshannonapplication
+        description: Get Shannon Application
+        call: shannon-applications.getshannonapplication
+        with:
+          address: rest.path.address
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: shannon-applications-mcp
+    port: 9090
+    transport: http
+    tools:
+    - name: pocket-network-list-applications
+      description: List Shannon Applications
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: shannon-applications.listshannonapplications
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pocket-network-get-application
+      description: Get Shannon Application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: shannon-applications.getshannonapplication
+      with:
+        address: tools.address
+      outputParameters:
+      - type: object
+        mapping: $.

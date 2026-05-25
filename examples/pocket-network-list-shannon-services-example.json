@@ -1,0 +1,36 @@
+{
+  "name": "List Shannon Services",
+  "description": "List every Service registered on Shannon (each represents a data source the network can serve relays for, with compute-unit pricing).",
+  "endpoint": "GET https://shannon-grove-api.mainnet.poktroll.com/pocket/service/v1/service",
+  "request": {
+    "headers": {
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "service": [
+        {
+          "id": "eth",
+          "name": "Ethereum Mainnet",
+          "compute_units_per_relay": "1",
+          "owner_address": "pokt1..."
+        },
+        {
+          "id": "solana",
+          "name": "Solana Mainnet",
+          "compute_units_per_relay": "2",
+          "owner_address": "pokt1..."
+        },
+        {
+          "id": "base",
+          "name": "Base Mainnet",
+          "compute_units_per_relay": "1",
+          "owner_address": "pokt1..."
+        }
+      ],
+      "pagination": { "next_key": null, "total": "60" }
+    }
+  }
+}

@@ -1,0 +1,131 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Pocket Network PATH Gateway — Relays
+  description: 'Send JSON-RPC, REST, and WebSocket relays through Grove''s hosted PATH gateway on
+    rpc.grove.city. Lead operation: sendAuthenticatedRelay. Self-contained Naftiko capability for the
+    PATH relay surface.'
+  tags:
+  - Pocket Network
+  - Grove
+  - PATH
+  - Relays
+  - RPC
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    GROVE_PORTAL_APP_ID: GROVE_PORTAL_APP_ID
+    GROVE_PORTAL_AUTH_TOKEN: GROVE_PORTAL_AUTH_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: path-gateway-relays
+    baseUri: https://eth.rpc.grove.city
+    description: PATH gateway relay business capability. Self-contained.
+    resources:
+    - name: v1-appid
+      path: /v1/{appId}
+      operations:
+      - name: sendauthenticatedrelay
+        method: POST
+        description: Send Authenticated JSON-RPC Relay
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: JSON-RPC 2.0 request envelope.
+          required: true
+    - name: v1-public
+      path: /v1
+      operations:
+      - name: sendpublicrelay
+        method: POST
+        description: Send Public JSON-RPC Relay
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+    authentication:
+      type: apikey
+      key: appId
+      value: '{{env.GROVE_PORTAL_APP_ID}}'
+      placement: path
+  exposes:
+  - type: rest
+    namespace: path-gateway-relays-rest
+    port: 8080
+    description: REST adapter for PATH gateway relays.
+    resources:
+    - path: /v1/v1/{appId}
+      name: v1-appid
+      description: REST surface for authenticated relays.
+      operations:
+      - method: POST
+        name: sendauthenticatedrelay
+        description: Send Authenticated JSON-RPC Relay
+        call: path-gateway-relays.sendauthenticatedrelay
+        with:
+          appId: rest.path.appId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1
+      name: v1-public
+      operations:
+      - method: POST
+        name: sendpublicrelay
+        description: Send Public JSON-RPC Relay
+        call: path-gateway-relays.sendpublicrelay
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: path-gateway-relays-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PATH gateway relays.
+    tools:
+    - name: pocket-network-send-authenticated-relay
+      description: Send Authenticated JSON-RPC Relay
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: path-gateway-relays.sendauthenticatedrelay
+      with:
+        appId: tools.appId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pocket-network-send-public-relay
+      description: Send Public JSON-RPC Relay
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: path-gateway-relays.sendpublicrelay
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

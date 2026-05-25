@@ -1,0 +1,95 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Pocket Network Shannon — Tokenomics
+  description: 'Read the Shannon tokenomics parameters (mint ratio, DAO/proposer/source-owner/supplier
+    allocations) and bank totals. Lead operation: getShannonTokenomicsParameters. Self-contained
+    Naftiko capability.'
+  tags:
+  - Pocket Network
+  - Shannon
+  - Tokenomics
+  - POKT
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds: []
+capability:
+  consumes:
+  - type: http
+    namespace: shannon-tokenomics
+    baseUri: https://shannon-grove-api.mainnet.poktroll.com
+    description: Shannon tokenomics capability.
+    resources:
+    - name: tokenomics-params
+      path: /pocket/tokenomics/v1/params
+      operations:
+      - name: getshannontokenomicsparameters
+        method: GET
+        description: Get Shannon Tokenomics Parameters
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: total-supply
+      path: /cosmos/bank/v1beta1/supply
+      operations:
+      - name: getshannontotalsupply
+        method: GET
+        description: Get Shannon Total Supply
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: none
+  exposes:
+  - type: rest
+    namespace: shannon-tokenomics-rest
+    port: 8080
+    resources:
+    - path: /v1/tokenomics/params
+      name: tokenomics-params
+      operations:
+      - method: GET
+        name: getshannontokenomicsparameters
+        description: Get Shannon Tokenomics Parameters
+        call: shannon-tokenomics.getshannontokenomicsparameters
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/supply
+      name: total-supply
+      operations:
+      - method: GET
+        name: getshannontotalsupply
+        description: Get Shannon Total Supply
+        call: shannon-tokenomics.getshannontotalsupply
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: shannon-tokenomics-mcp
+    port: 9090
+    transport: http
+    tools:
+    - name: pocket-network-get-tokenomics-params
+      description: Get Shannon Tokenomics Parameters
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: shannon-tokenomics.getshannontokenomicsparameters
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pocket-network-get-total-supply
+      description: Get Shannon Total Supply
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: shannon-tokenomics.getshannontotalsupply
+      outputParameters:
+      - type: object
+        mapping: $.

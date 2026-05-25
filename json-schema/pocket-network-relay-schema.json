@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/pocket-network/pocket-network-relay-schema.json",
+  "title": "Pocket Network Relay",
+  "description": "Schema describing a Shannon relay request and response as proxied by the PATH gateway. A Relay is the canonical unit of work in Pocket Network — every JSON-RPC call to a service (eth, solana, base, etc.) is metered as one or more relays priced in compute units.",
+  "type": "object",
+  "definitions": {
+    "RelayRequest": {
+      "type": "object",
+      "description": "JSON-RPC payload routed through PATH to a Shannon supplier.",
+      "required": ["jsonrpc", "method"],
+      "properties": {
+        "jsonrpc": {
+          "type": "string",
+          "const": "2.0",
+          "description": "JSON-RPC version. Always '2.0'."
+        },
+        "id": {
+          "oneOf": [
+            { "type": "integer" },
+            { "type": "string" },
+            { "type": "null" }
+          ],
+          "description": "Client-supplied correlation ID echoed in the response."
+        },
+        "method": {
+          "type": "string",
+          "description": "JSON-RPC method of the target service (e.g. 'eth_blockNumber', 'eth_getBalance', 'getSlot')."
+        },
+        "params": {
+          "oneOf": [
+            { "type": "array" },
+            { "type": "object" }
+          ],
+          "description": "Method parameters. Service-specific."
+        }
+      },
+      "additionalProperties": false
+    },
+    "RelayResponse": {
+      "type": "object",
+      "description": "JSON-RPC response returned by the selected supplier.",
+      "required": ["jsonrpc"],
+      "properties": {
+        "jsonrpc": {
+          "type": "string",
+          "const": "2.0"
+        },
+        "id": {
+          "oneOf": [
+            { "type": "integer" },
+            { "type": "string" },
+            { "type": "null" }
+          ]
+        },
+        "result": {
+          "description": "Successful result. Shape depends on the service and method."
+        },
+        "error": {
+          "$ref": "#/definitions/RelayError"
+        }
+      },
+      "oneOf": [
+        { "required": ["result"] },
+        { "required": ["error"] }
+      ]
+    },
+    "RelayError": {
+      "type": "object",
+      "required": ["code", "message"],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "description": "JSON-RPC error code surfaced by the supplier."
+        },
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "description": "Optional service-specific error data."
+        }
+      }
+    },
+    "RelayContext": {
+      "type": "object",
+      "description": "Metadata that the PATH gateway adds when scoring suppliers and routing relays. Exposed in development/debug builds; production responses are returned verbatim from the supplier.",
+      "properties": {
+        "service_id": {
+          "type": "string",
+          "description": "Shannon service identifier (e.g. 'eth', 'solana', 'base', 'arbitrum')."
+        },
+        "supplier_address": {
+          "type": "string",
+          "description": "Bech32 Shannon address of the supplier that served the relay."
+        },
+        "application_address": {
+          "type": "string",
+          "description": "Bech32 Shannon address of the application whose stake paid for the relay."
+        },
+        "session_block_height": {
+          "type": "integer",
+          "description": "Block height of the active session at the time the relay was served."
+        },
+        "compute_units": {
+          "type": "integer",
+          "description": "Compute units consumed by this relay (1 CU = $0.000000001 USD post-Shannon)."
+        },
+        "qos_score": {
+          "type": "number",
+          "description": "Quality-of-Service score (0-1) the gateway assigned to the supplier at relay time."
+        }
+      }
+    }
+  },
+  "properties": {
+    "request": { "$ref": "#/definitions/RelayRequest" },
+    "response": { "$ref": "#/definitions/RelayResponse" },
+    "context": { "$ref": "#/definitions/RelayContext" }
+  }
+}

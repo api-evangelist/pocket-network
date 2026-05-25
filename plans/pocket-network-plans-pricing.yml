@@ -1,0 +1,114 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Pocket Network
+providerId: pocket-network
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - Pocket Network
+  - Grove
+  - PATH
+  - RPC
+  - Pricing
+description: 'Reconciled plans for the Grove portal (the dominant gateway on Pocket Network Shannon)
+  and the underlying protocol-level wholesale pricing. Source: grove.city/pricing, pocket.network,
+  and the on-chain Shannon tokenomics parameters.'
+sources:
+  - https://grove.city/pricing
+  - https://pocket.network/
+  - https://docs.pokt.network/
+  - https://path.grove.city/
+plans:
+  - id: grove-free-public
+    name: Grove Public Endpoints
+    type: free
+    description: No-API-key public endpoints per chain (e.g. eth.rpc.grove.city/v1). Intended for
+      development; throttled per IP.
+    entries:
+      - label: Relays
+        name: relays
+        type: included
+        metric: relay
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: 69+ supported chains
+      - name: No API key required
+      - name: Shared per-IP rate limit
+      - name: Best-effort QoS
+      - name: Free public RPCs with 99.9% uptime target
+  - id: grove-portal-paid
+    name: Grove Portal — Pay-As-You-Go
+    type: usage-based
+    description: Authenticated Grove portal applications with dedicated quotas, dashboards, and
+      relay analytics. Billed per relay.
+    entries:
+      - label: Relays
+        name: relays
+        type: metered
+        metric: relay
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1000000
+        price: '1.00'
+        userMultiplied: false
+        description: $1 per 1,000,000 relays (limited-time promo via RELAY2025 valid through Jan 1, 2026).
+    elements:
+      - name: 69+ supported chains
+      - name: Per-application API keys with portal-managed Application IDs
+      - name: Relay analytics dashboard
+      - name: Authenticated bearer or whitelist controls
+      - name: Custom rate limits per application
+      - name: Service-level support
+  - id: grove-enterprise
+    name: Grove Enterprise
+    type: contract
+    description: Negotiated agreements for high-volume teams, dedicated PATH gateways, archive node
+      access, custom chain support, and SLAs.
+    entries:
+      - label: Custom
+        name: relays
+        type: contract
+        metric: relay
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: Call
+        userMultiplied: false
+    elements:
+      - name: Dedicated PATH gateway deployment
+      - name: Custom service onboarding
+      - name: Archive and debug/trace method support where available
+      - name: SLA-backed availability
+      - name: Direct supplier relationships
+      - name: Premium support
+  - id: pocket-network-wholesale
+    name: Pocket Network Wholesale (Non-Profit)
+    type: usage-based
+    description: Protocol-level wholesale rate offered by the Pocket Network Foundation to public
+      goods and non-profit consumers. Compute-unit based on-chain pricing.
+    entries:
+      - label: Compute Units
+        name: compute_units
+        type: metered
+        metric: compute_unit
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1000000000
+        price: '1.00'
+        userMultiplied: false
+        description: $1 per 1,000,000,000 compute units (1 CU = $0.000000001 USD).
+    elements:
+      - name: Direct on-chain settlement in POKT
+      - name: 97.5% mint ratio (deflationary post-PIP-41)
+      - name: Permissionless service registration
+      - name: F-Chains public-data program

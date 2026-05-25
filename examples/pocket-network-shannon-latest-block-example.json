@@ -1,0 +1,29 @@
+{
+  "name": "Get latest Shannon block via Grove REST",
+  "description": "Read the latest CometBFT block from the Grove-operated Shannon mainnet REST endpoint.",
+  "endpoint": "GET https://shannon-grove-api.mainnet.poktroll.com/cosmos/base/tendermint/v1beta1/blocks/latest",
+  "request": {
+    "headers": {
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "block_id": {
+        "hash": "...",
+        "part_set_header": { "total": 1, "hash": "..." }
+      },
+      "block": {
+        "header": {
+          "chain_id": "pocket",
+          "height": "1234567",
+          "time": "2026-05-25T22:00:00.000Z",
+          "proposer_address": "..."
+        },
+        "data": { "txs": [] },
+        "last_commit": { "height": "1234566" }
+      }
+    }
+  }
+}

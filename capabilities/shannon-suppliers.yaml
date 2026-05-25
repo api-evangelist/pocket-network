@@ -1,0 +1,103 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Pocket Network Shannon — Suppliers
+  description: 'List and inspect Shannon Suppliers via the Pocket supplier module REST surface.
+    Lead operation: listShannonSuppliers. Self-contained Naftiko capability for the Supplier module.'
+  tags:
+  - Pocket Network
+  - Shannon
+  - Suppliers
+  - RelayMiner
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds: []
+capability:
+  consumes:
+  - type: http
+    namespace: shannon-suppliers
+    baseUri: https://shannon-grove-api.mainnet.poktroll.com
+    description: Shannon supplier-module capability.
+    resources:
+    - name: supplier
+      path: /pocket/supplier/v1/supplier
+      operations:
+      - name: listshannonsuppliers
+        method: GET
+        description: List Shannon Suppliers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: supplier-by-address
+      path: /pocket/supplier/v1/supplier/{address}
+      operations:
+      - name: getshannonsupplier
+        method: GET
+        description: Get Shannon Supplier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: address
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: none
+  exposes:
+  - type: rest
+    namespace: shannon-suppliers-rest
+    port: 8080
+    resources:
+    - path: /v1/suppliers
+      name: supplier
+      operations:
+      - method: GET
+        name: listshannonsuppliers
+        description: List Shannon Suppliers
+        call: shannon-suppliers.listshannonsuppliers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/suppliers/{address}
+      name: supplier-by-address
+      operations:
+      - method: GET
+        name: getshannonsupplier
+        description: Get Shannon Supplier
+        call: shannon-suppliers.getshannonsupplier
+        with:
+          address: rest.path.address
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: shannon-suppliers-mcp
+    port: 9090
+    transport: http
+    tools:
+    - name: pocket-network-list-suppliers
+      description: List Shannon Suppliers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: shannon-suppliers.listshannonsuppliers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pocket-network-get-supplier
+      description: Get Shannon Supplier
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: shannon-suppliers.getshannonsupplier
+      with:
+        address: tools.address
+      outputParameters:
+      - type: object
+        mapping: $.

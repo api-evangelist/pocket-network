@@ -1,0 +1,87 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://schema.org/",
+    "pocket": "https://api.pocket.network/v1/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Relay": {
+      "@id": "pocket:Relay",
+      "@context": {
+        "id": { "@id": "pocket:Relay/id", "@type": "xsd:string" },
+        "method": { "@id": "pocket:Relay/method", "@type": "xsd:string" },
+        "params": { "@id": "pocket:Relay/params", "@container": "@list" },
+        "result": { "@id": "pocket:Relay/result" },
+        "computeUnits": { "@id": "pocket:Relay/computeUnits", "@type": "xsd:integer" },
+        "serviceId": { "@id": "pocket:Relay/serviceId", "@type": "xsd:string" },
+        "supplierAddress": { "@id": "pocket:Relay/supplierAddress", "@type": "xsd:string" },
+        "applicationAddress": { "@id": "pocket:Relay/applicationAddress", "@type": "xsd:string" },
+        "sessionBlockHeight": { "@id": "pocket:Relay/sessionBlockHeight", "@type": "xsd:integer" }
+      }
+    },
+
+    "Application": {
+      "@id": "pocket:Application",
+      "@context": {
+        "address": { "@id": "pocket:Application/address", "@type": "xsd:string" },
+        "stake": { "@id": "pocket:Application/stake" },
+        "serviceConfigs": { "@id": "pocket:Application/serviceConfigs", "@container": "@list" },
+        "delegateeGatewayAddresses": {
+          "@id": "pocket:Application/delegateeGatewayAddresses",
+          "@container": "@list"
+        }
+      }
+    },
+
+    "Supplier": {
+      "@id": "pocket:Supplier",
+      "@context": {
+        "operatorAddress": { "@id": "pocket:Supplier/operatorAddress", "@type": "xsd:string" },
+        "ownerAddress": { "@id": "pocket:Supplier/ownerAddress", "@type": "xsd:string" },
+        "stake": { "@id": "pocket:Supplier/stake" },
+        "services": { "@id": "pocket:Supplier/services", "@container": "@list" }
+      }
+    },
+
+    "Gateway": {
+      "@id": "pocket:Gateway",
+      "@context": {
+        "address": { "@id": "pocket:Gateway/address", "@type": "xsd:string" },
+        "stake": { "@id": "pocket:Gateway/stake" }
+      }
+    },
+
+    "Service": {
+      "@id": "pocket:Service",
+      "@context": {
+        "id": { "@id": "pocket:Service/id", "@type": "xsd:string" },
+        "name": { "@id": "pocket:Service/name", "@type": "xsd:string" },
+        "computeUnitsPerRelay": {
+          "@id": "pocket:Service/computeUnitsPerRelay",
+          "@type": "xsd:integer"
+        },
+        "ownerAddress": { "@id": "pocket:Service/ownerAddress", "@type": "xsd:string" }
+      }
+    },
+
+    "Session": {
+      "@id": "pocket:Session",
+      "@context": {
+        "applicationAddress": { "@id": "pocket:Session/applicationAddress", "@type": "xsd:string" },
+        "serviceId": { "@id": "pocket:Session/serviceId", "@type": "xsd:string" },
+        "blockHeight": { "@id": "pocket:Session/blockHeight", "@type": "xsd:integer" },
+        "suppliers": { "@id": "pocket:Session/suppliers", "@container": "@list" }
+      }
+    },
+
+    "ComputeUnit": {
+      "@id": "pocket:ComputeUnit",
+      "@context": {
+        "amount": { "@id": "pocket:ComputeUnit/amount", "@type": "xsd:integer" },
+        "usdPrice": { "@id": "pocket:ComputeUnit/usdPrice", "@type": "xsd:decimal" }
+      }
+    }
+  }
+}

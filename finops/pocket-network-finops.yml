@@ -1,0 +1,95 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Pocket Network
+providerId: pocket-network
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - FinOps
+  - Cost Management
+  - FOCUS
+  - Web3
+  - RPC
+  - Relays
+description: FOCUS-aligned FinOps definition for Pocket Network Shannon and the Grove portal.
+  Relay-based metering at the gateway level; compute-unit metering at the protocol level with
+  on-chain POKT burn on every consumed compute unit.
+sources:
+  - https://grove.city/pricing
+  - https://pocket.network/
+  - https://docs.pokt.network/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Grove
+serviceCategory: Infrastructure (Web3 / RPC)
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Purchase
+    - Credit
+    - Adjustment
+  primaryUnit: relay
+  secondaryUnits:
+    - compute_unit
+    - request
+    - websocket_minute
+focusColumns:
+  ServiceName: Pocket Network / Grove Portal
+  ServiceCategory: Web3 Infrastructure
+  ProviderName: Grove
+  PublisherName: Grove
+  InvoiceIssuerName: Grove
+  PricingCategory: Usage-Based
+  PricingUnit: relay
+  BillingCurrency: USD
+meters:
+  - name: relays
+    unit: relay
+    aggregation: sum
+    dimensions:
+      - application_id
+      - chain
+      - method
+      - region
+  - name: compute_units
+    unit: compute_unit
+    aggregation: sum
+    dimensions:
+      - application_address
+      - service_id
+      - supplier_address
+    description: On-chain Shannon metering unit. 1 USD = 1,000,000,000 compute units.
+  - name: pokt_burned
+    unit: upokt
+    aggregation: sum
+    dimensions:
+      - application_address
+      - service_id
+    description: POKT burned per relay under the post-PIP-41 deflationary mint ratio (97.5%).
+  - name: websocket_minutes
+    unit: minute
+    aggregation: sum
+    dimensions:
+      - application_id
+      - chain
+costAllocation:
+  tagging:
+    portalApplicationId: x-application-id (Grove portal dashboard tag)
+    chain: subdomain (eth, solana, base, arbitrum, ...)
+  exports:
+    - format: CSV (Grove portal usage export)
+    - format: On-chain query (Shannon REST /pocket/* + /cosmos/bank/v1beta1/supply)
+optimizationLevers:
+  - Route public-traffic to free per-IP endpoints to reduce billed relays.
+  - Use batch JSON-RPC payloads where supported by the chain to reduce relay count.
+  - Pin to the cheapest service-ID variant (e.g. archive vs full) per use case.
+  - For >$50k/yr spend, negotiate Enterprise with dedicated PATH for predictable unit cost.

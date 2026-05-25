@@ -1,0 +1,383 @@
+openapi: 3.1.0
+info:
+  title: Pocket Network Shannon RPC API
+  description: >
+    The Pocket Network Shannon chain is a Cosmos SDK + CometBFT chain
+    (poktroll). Every full node exposes the standard Cosmos REST and CometBFT
+    RPC surfaces. Public endpoints are operated by Grove and Pocket Network
+    Foundation. This profile documents the read-only endpoints most often
+    consumed by integrators — block, transaction, validator, supply, and
+    on-chain module queries (application, supplier, gateway, service, session,
+    proof, tokenomics). Write operations are signed transactions broadcast via
+    the same REST surface or the poktrolld CLI; they share the
+    `/cosmos/tx/v1beta1/txs` endpoint.
+  version: v1
+  contact:
+    name: Pocket Network Foundation
+    url: https://pocket.network
+  license:
+    name: MIT
+    url: https://github.com/pokt-network/poktroll/blob/main/LICENSE
+servers:
+  - url: https://shannon-grove-api.mainnet.poktroll.com
+    description: Grove-operated Shannon mainnet REST endpoint
+  - url: https://shannon-testnet-grove-api.beta.poktroll.com
+    description: Grove-operated Shannon beta testnet REST endpoint
+tags:
+  - name: Blocks
+    description: Block and consensus state queries
+  - name: Transactions
+    description: Transaction lookup and broadcast
+  - name: Bank
+    description: POKT supply, balances, and burn tracking
+  - name: Validators
+    description: Staking and validator queries
+  - name: Application
+    description: Pocket application module — applications stake POKT to consume relays
+  - name: Supplier
+    description: Pocket supplier module — suppliers stake POKT and serve relays via RelayMiner
+  - name: Gateway
+    description: Pocket gateway module — gateways stake POKT and proxy relays for applications
+  - name: Service
+    description: Pocket service module — services represent the data sources (EVM chains, Solana, etc.) the network serves
+  - name: Session
+    description: Pocket session module — sessions group applications, suppliers, and services for a given block window
+  - name: Proof
+    description: Pocket proof module — claims and proofs that suppliers submit to earn POKT
+  - name: Tokenomics
+    description: Pocket tokenomics module — global mint, burn, and reward parameters
+paths:
+  /cosmos/base/tendermint/v1beta1/blocks/latest:
+    get:
+      summary: Get Latest Shannon Block
+      description: Return the most recently committed CometBFT block.
+      operationId: getLatestShannonBlock
+      tags:
+        - Blocks
+      responses:
+        '200':
+          description: Block envelope.
+          content:
+            application/json:
+              schema:
+                type: object
+  /cosmos/base/tendermint/v1beta1/blocks/{height}:
+    get:
+      summary: Get Shannon Block By Height
+      description: Return the Shannon block at a specific height.
+      operationId: getShannonBlockByHeight
+      tags:
+        - Blocks
+      parameters:
+        - name: height
+          in: path
+          required: true
+          description: Block height.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Block envelope.
+          content:
+            application/json:
+              schema:
+                type: object
+  /cosmos/tx/v1beta1/txs/{hash}:
+    get:
+      summary: Get Shannon Transaction By Hash
+      description: Return a Shannon transaction by its hash.
+      operationId: getShannonTransaction
+      tags:
+        - Transactions
+      parameters:
+        - name: hash
+          in: path
+          required: true
+          description: Transaction hash (hex, 64 chars).
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Transaction envelope.
+          content:
+            application/json:
+              schema:
+                type: object
+  /cosmos/tx/v1beta1/txs:
+    post:
+      summary: Broadcast Shannon Transaction
+      description: >
+        Broadcast a signed Shannon transaction. The request body is a
+        TxRaw-encoded transaction with broadcast mode (sync, async, block).
+      operationId: broadcastShannonTransaction
+      tags:
+        - Transactions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tx_bytes
+                - mode
+              properties:
+                tx_bytes:
+                  type: string
+                  description: Base64-encoded TxRaw.
+                mode:
+                  type: string
+                  enum:
+                    - BROADCAST_MODE_SYNC
+                    - BROADCAST_MODE_ASYNC
+                    - BROADCAST_MODE_BLOCK
+      responses:
+        '200':
+          description: Broadcast result with tx hash and code.
+          content:
+            application/json:
+              schema:
+                type: object
+  /cosmos/bank/v1beta1/balances/{address}:
+    get:
+      summary: Get Shannon Address Balances
+      description: Return all coin balances for a Shannon address (upokt and IBC tokens).
+      operationId: getShannonBalances
+      tags:
+        - Bank
+      parameters:
+        - name: address
+          in: path
+          required: true
+          description: Bech32 Shannon address (pokt1...).
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Balance set.
+          content:
+            application/json:
+              schema:
+                type: object
+  /cosmos/bank/v1beta1/supply:
+    get:
+      summary: Get Shannon Total Supply
+      description: Return the total Shannon supply for every denom (upokt and IBC).
+      operationId: getShannonTotalSupply
+      tags:
+        - Bank
+      responses:
+        '200':
+          description: Supply totals.
+          content:
+            application/json:
+              schema:
+                type: object
+  /cosmos/staking/v1beta1/validators:
+    get:
+      summary: List Shannon Validators
+      description: List Cosmos staking validators for the Shannon chain.
+      operationId: listShannonValidators
+      tags:
+        - Validators
+      responses:
+        '200':
+          description: Validator set.
+          content:
+            application/json:
+              schema:
+                type: object
+  /pocket/application/v1/application:
+    get:
+      summary: List Shannon Applications
+      description: >
+        List every Application module entry. Applications stake POKT to
+        consume relays via gateways for one or more services.
+      operationId: listShannonApplications
+      tags:
+        - Application
+      responses:
+        '200':
+          description: Application list.
+          content:
+            application/json:
+              schema:
+                type: object
+  /pocket/application/v1/application/{address}:
+    get:
+      summary: Get Shannon Application
+      description: Return a single Application by Shannon address.
+      operationId: getShannonApplication
+      tags:
+        - Application
+      parameters:
+        - name: address
+          in: path
+          required: true
+          description: Bech32 Shannon address (pokt1...).
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Application record.
+          content:
+            application/json:
+              schema:
+                type: object
+  /pocket/supplier/v1/supplier:
+    get:
+      summary: List Shannon Suppliers
+      description: >
+        List every Supplier module entry. Suppliers stake POKT and run a
+        RelayMiner to serve relays for the services they support.
+      operationId: listShannonSuppliers
+      tags:
+        - Supplier
+      responses:
+        '200':
+          description: Supplier list.
+          content:
+            application/json:
+              schema:
+                type: object
+  /pocket/supplier/v1/supplier/{address}:
+    get:
+      summary: Get Shannon Supplier
+      description: Return a single Supplier by Shannon operator address.
+      operationId: getShannonSupplier
+      tags:
+        - Supplier
+      parameters:
+        - name: address
+          in: path
+          required: true
+          description: Bech32 Shannon operator address.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Supplier record.
+          content:
+            application/json:
+              schema:
+                type: object
+  /pocket/gateway/v1/gateway:
+    get:
+      summary: List Shannon Gateways
+      description: >
+        List every Gateway module entry. Gateways stake POKT and are authorized
+        by Applications to sign relays on their behalf.
+      operationId: listShannonGateways
+      tags:
+        - Gateway
+      responses:
+        '200':
+          description: Gateway list.
+          content:
+            application/json:
+              schema:
+                type: object
+  /pocket/service/v1/service:
+    get:
+      summary: List Shannon Services
+      description: >
+        List every service registered on Shannon. A service represents an
+        external data source (e.g. eth, solana, base, arbitrum) the network can
+        serve relays for. Each service has compute-unit pricing.
+      operationId: listShannonServices
+      tags:
+        - Service
+      responses:
+        '200':
+          description: Service list.
+          content:
+            application/json:
+              schema:
+                type: object
+  /pocket/service/v1/service/{serviceId}:
+    get:
+      summary: Get Shannon Service
+      description: Return a single service definition.
+      operationId: getShannonService
+      tags:
+        - Service
+      parameters:
+        - name: serviceId
+          in: path
+          required: true
+          description: Service identifier (e.g. "eth", "solana", "base").
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Service record.
+          content:
+            application/json:
+              schema:
+                type: object
+  /pocket/session/v1/get_session:
+    get:
+      summary: Get Shannon Session
+      description: >
+        Return the active session for a given application/service pair at a
+        given block height. Sessions group applications and suppliers for the
+        duration of a session window.
+      operationId: getShannonSession
+      tags:
+        - Session
+      parameters:
+        - name: application_address
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: service_id
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: block_height
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Session record.
+          content:
+            application/json:
+              schema:
+                type: object
+  /pocket/proof/v1/params:
+    get:
+      summary: Get Shannon Proof Parameters
+      description: >
+        Return the parameters of the on-chain Proof module (claim and proof
+        windows, minimum relay difficulty, target submission probability).
+      operationId: getShannonProofParameters
+      tags:
+        - Proof
+      responses:
+        '200':
+          description: Proof parameters.
+          content:
+            application/json:
+              schema:
+                type: object
+  /pocket/tokenomics/v1/params:
+    get:
+      summary: Get Shannon Tokenomics Parameters
+      description: >
+        Return the Shannon tokenomics parameters — mint ratio, allocations to
+        DAO/proposer/source-owner/supplier, and global inflation/deflation
+        settings (post-PIP-41 deflationary 97.5% mint ratio).
+      operationId: getShannonTokenomicsParameters
+      tags:
+        - Tokenomics
+      responses:
+        '200':
+          description: Tokenomics parameters.
+          content:
+            application/json:
+              schema:
+                type: object

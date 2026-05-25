@@ -1,0 +1,50 @@
+provider: Pocket Network
+providerId: pocket-network
+reviewer: API Evangelist
+reviewed: '2026-05-25'
+modified: '2026-05-25'
+tier: 1
+verdict: >
+  Pocket Network is the most mature decentralized RPC layer in Web3 — a fully on-chain Cosmos chain
+  (Shannon) backed by 5,000+ supplier nodes across 60-69+ blockchains, paired with Grove's
+  open-source PATH gateway and Grove's hosted rpc.grove.city endpoints. The June 2025 Morse →
+  Shannon migration and the January 2026 PIP-41 deflationary tokenomics overhaul put the protocol
+  on credible footing as a long-run alternative to centralized providers like Alchemy and Infura.
+  The catalog entry profiles three coordinated API surfaces — the PATH gateway, the Shannon Cosmos
+  REST API, and the CometBFT consensus RPC — plus the on-chain actor model that makes the economic
+  layer programmable.
+strengths:
+  - Open-source PATH gateway in Go under MIT — any operator can stand up a sovereign endpoint
+  - 60-69+ chains supported with consistent JSON-RPC envelope semantics
+  - Free public per-IP endpoints per chain for development
+  - Compute-unit pricing pegged to USD eliminates exposure to POKT volatility for consumers
+  - Deflationary tokenomics (97.5% mint ratio) ties network usage to token economic value
+  - Active dev cadence — Shannon v1.31 (Feb 2026) and ongoing partnership push
+  - Strong public-goods posture via the F-Chains program and Pocket Network Foundation
+weaknesses:
+  - Two parallel "docs" sites (docs.pokt.network and docs.grove.city) with overlapping content
+  - Grove docs hosted on a GitBook-style stack with occasional 404s on deep links
+  - No central OpenAPI publication — Cosmos REST and CometBFT RPC are documented prose-only
+  - PATH self-hosting still requires gateway/application AAT setup that is non-trivial vs.
+    centralized RPC signups
+  - Public-endpoint rate limits are best-effort and undocumented numerically
+opportunities:
+  - Generate canonical OpenAPI 3.1 specs from the protobuf service definitions in poktroll
+  - Publish AsyncAPI for the WebSocket relay surface (already supported by PATH)
+  - Surface compute-unit pricing per service in machine-readable form (JSON Schema or YAML)
+risks:
+  - Multi-supplier QoS scoring means individual relays may return inconsistent responses if
+    suppliers run different node versions — clients should treat responses as best-effort consensus
+  - Archive-node and debug/trace method coverage depends on supplier participation per service
+  - POKT token economics still depend on continued usage growth to fully realize deflation
+sources:
+  - https://pocket.network/
+  - https://grove.city/
+  - https://path.grove.city/
+  - https://docs.pokt.network/
+  - https://dev.poktroll.com/
+  - https://github.com/pokt-network/poktroll
+  - https://github.com/buildwithgrove/path
+  - https://pocket.network/shannon-upgrade-faq/
+  - https://pocket.network/pocket-developer-guide/
+  - https://medium.com/decentralized-infrastructure/pocket-network-shannon-state-shift-day-b8c06122cb76
