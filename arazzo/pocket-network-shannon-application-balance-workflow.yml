@@ -1,0 +1,58 @@
+arazzo: 1.0.1
+info:
+  title: Pocket Network Shannon Application Balance
+  summary: Look up a Shannon application, then read the on-chain balances of its address.
+  description: >-
+    Resolves a Pocket Network Shannon Application module entry by address and
+    then reads the bank balances held by that same address. Applications stake
+    POKT to consume relays, so pairing the application record with its current
+    upokt balance gives a consumer a complete picture of an application account
+    in two calls. Each step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: shannonRpcApi
+  url: ../openapi/pocket-network-shannon-rpc-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: shannon-application-balance
+  summary: Fetch a Shannon application record and the bank balances of its address.
+  description: >-
+    Reads the Application module entry for the supplied address, then queries
+    the bank module for every coin balance held by that address.
+  inputs:
+    type: object
+    required:
+    - address
+    properties:
+      address:
+        type: string
+        description: Bech32 Shannon address of the application (pokt1...).
+  steps:
+  - stepId: getApplication
+    description: >-
+      Read the Application module entry for the supplied Shannon address.
+    operationId: getShannonApplication
+    parameters:
+    - name: address
+      in: path
+      value: $inputs.address
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      application: $response.body#/application
+  - stepId: getBalances
+    description: >-
+      Read every coin balance held by the application's Shannon address.
+    operationId: getShannonBalances
+    parameters:
+    - name: address
+      in: path
+      value: $inputs.address
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      balances: $response.body#/balances
+  outputs:
+    application: $steps.getApplication.outputs.application
+    balances: $steps.getBalances.outputs.balances

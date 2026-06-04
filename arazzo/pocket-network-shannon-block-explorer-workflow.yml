@@ -1,0 +1,52 @@
+arazzo: 1.0.1
+info:
+  title: Pocket Network Shannon Block Explorer
+  summary: Read the latest Shannon block height, then fetch that exact block by height.
+  description: >-
+    A minimal block-explorer flow for the Pocket Network Shannon chain. It first
+    reads the most recently committed CometBFT block from the Cosmos REST
+    surface to learn the current chain height, then re-fetches the block at that
+    specific height so a consumer has a stable, height-addressed copy of the
+    block. Each step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: shannonRpcApi
+  url: ../openapi/pocket-network-shannon-rpc-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: shannon-block-explorer
+  summary: Resolve the latest Shannon height and fetch the block at that height.
+  description: >-
+    Reads the latest committed block to discover the current height, then
+    fetches the same block addressed explicitly by its height value.
+  inputs:
+    type: object
+    properties: {}
+  steps:
+  - stepId: getLatestBlock
+    description: >-
+      Read the most recently committed Shannon block and extract its height
+      from the block header.
+    operationId: getLatestShannonBlock
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      latestHeight: $response.body#/block/header/height
+  - stepId: getBlockAtHeight
+    description: >-
+      Fetch the Shannon block addressed explicitly by the height resolved from
+      the latest block.
+    operationId: getShannonBlockByHeight
+    parameters:
+    - name: height
+      in: path
+      value: $steps.getLatestBlock.outputs.latestHeight
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      blockId: $response.body#/block_id
+      blockHeader: $response.body#/block/header
+  outputs:
+    latestHeight: $steps.getLatestBlock.outputs.latestHeight
+    blockHeader: $steps.getBlockAtHeight.outputs.blockHeader

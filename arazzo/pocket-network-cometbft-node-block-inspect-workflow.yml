@@ -1,0 +1,64 @@
+arazzo: 1.0.1
+info:
+  title: Pocket Network CometBFT Node Block Inspect
+  summary: Read node status for the latest height, fetch that block, then its ABCI results.
+  description: >-
+    Inspects a Shannon full node through its CometBFT RPC surface. It reads node
+    status to discover the latest block height the node has synced, fetches the
+    block at that height, and then fetches the ABCI execution results for the
+    same block so a consumer can see both the block contents and the events,
+    gas, and per-transaction results produced when it was applied. Each step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: cometbftRpcApi
+  url: ../openapi/pocket-network-cometbft-rpc-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: cometbft-node-block-inspect
+  summary: Resolve the node's latest height, then read the block and its results.
+  description: >-
+    Reads node status to learn the latest synced height, fetches the block at
+    that height, and reads the ABCI execution results for that block.
+  inputs:
+    type: object
+    properties: {}
+  steps:
+  - stepId: getStatus
+    description: >-
+      Read node status and extract the latest block height the node has synced.
+    operationId: getCometbftStatus
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      latestHeight: $response.body#/result/sync_info/latest_block_height
+  - stepId: getBlock
+    description: >-
+      Fetch the CometBFT block at the latest synced height.
+    operationId: getCometbftBlock
+    parameters:
+    - name: height
+      in: query
+      value: $steps.getStatus.outputs.latestHeight
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      block: $response.body#/result/block
+  - stepId: getBlockResults
+    description: >-
+      Fetch the ABCI execution results (events, gas, tx_results) for the same
+      block height.
+    operationId: getCometbftBlockResults
+    parameters:
+    - name: height
+      in: query
+      value: $steps.getStatus.outputs.latestHeight
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      txResults: $response.body#/result/txs_results
+  outputs:
+    latestHeight: $steps.getStatus.outputs.latestHeight
+    block: $steps.getBlock.outputs.block
+    txResults: $steps.getBlockResults.outputs.txResults

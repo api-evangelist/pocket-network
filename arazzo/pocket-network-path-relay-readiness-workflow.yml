@@ -1,0 +1,85 @@
+arazzo: 1.0.1
+info:
+  title: Pocket Network PATH Relay Readiness
+  summary: Confirm the PATH gateway is ready, then send an authenticated JSON-RPC relay through it.
+  description: >-
+    Guards a relay against an unready gateway. It first probes the PATH
+    readiness endpoint to confirm the gateway has loaded its session, supplier,
+    and QoS data, and only then sends an authenticated JSON-RPC relay through a
+    Grove portal application. The flow branches on the readiness probe: when the
+    gateway reports ready the relay is sent, and when it is not ready the
+    workflow ends without issuing the relay. The relay body is the standard
+    JSON-RPC 2.0 envelope of the target chain, which PATH forwards verbatim.
+    Each step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: pathGatewayApi
+  url: ../openapi/pocket-network-path-gateway-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: path-relay-readiness
+  summary: Gate an authenticated relay on the PATH gateway readiness probe.
+  description: >-
+    Probes PATH readiness and, only when the gateway reports ready, sends an
+    authenticated JSON-RPC relay through the supplied portal application.
+  inputs:
+    type: object
+    required:
+    - appId
+    - method
+    properties:
+      appId:
+        type: string
+        description: Grove portal Application ID embedded in the relay URL.
+      authorization:
+        type: string
+        description: Optional bearer token for portal-secured applications.
+      method:
+        type: string
+        description: JSON-RPC method of the target chain (e.g. eth_blockNumber).
+      params:
+        type: array
+        description: JSON-RPC method parameters for the target chain method.
+  steps:
+  - stepId: checkReadiness
+    description: >-
+      Probe the PATH readiness endpoint and branch on whether the gateway is
+      ready to serve relays.
+    operationId: getPathReadiness
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: gatewayReady
+      type: goto
+      stepId: sendRelay
+      criteria:
+      - condition: $statusCode == 200
+  - stepId: sendRelay
+    description: >-
+      Send an authenticated JSON-RPC relay through the Grove portal application
+      once the gateway has reported ready.
+    operationId: sendAuthenticatedRelay
+    parameters:
+    - name: appId
+      in: path
+      value: $inputs.appId
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    requestBody:
+      contentType: application/json
+      payload:
+        jsonrpc: '2.0'
+        id: 1
+        method: $inputs.method
+        params: $inputs.params
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      result: $response.body#/result
+  outputs:
+    readiness: $steps.checkReadiness.outputs.status
+    result: $steps.sendRelay.outputs.result

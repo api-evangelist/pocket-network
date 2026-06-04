@@ -1,0 +1,90 @@
+arazzo: 1.0.1
+info:
+  title: Pocket Network Shannon Application Session
+  summary: Resolve an application, confirm the target service exists, then fetch its active session.
+  description: >-
+    Walks the Shannon relay-economics chain from an application down to its
+    active session. It reads the Application module entry for the supplied
+    address, confirms the requested service is registered on the network, and
+    then fetches the active session that groups that application and the
+    suppliers serving the service for the current block window. The flow
+    branches on whether a block height was supplied, requesting a
+    height-pinned session when one is given and the current session otherwise.
+    Each step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: shannonRpcApi
+  url: ../openapi/pocket-network-shannon-rpc-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: shannon-application-session
+  summary: Chain application, service, and session lookups for a Shannon app.
+  description: >-
+    Reads the application, confirms the service, then resolves the active
+    session for the application/service pair, optionally pinned to a height.
+  inputs:
+    type: object
+    required:
+    - applicationAddress
+    - serviceId
+    properties:
+      applicationAddress:
+        type: string
+        description: Bech32 Shannon address of the application (pokt1...).
+      serviceId:
+        type: string
+        description: Service identifier to session against (e.g. "eth", "solana").
+      blockHeight:
+        type: integer
+        description: Optional block height to pin the session lookup to.
+  steps:
+  - stepId: getApplication
+    description: >-
+      Read the Application module entry for the supplied Shannon address to
+      confirm the application is staked.
+    operationId: getShannonApplication
+    parameters:
+    - name: address
+      in: path
+      value: $inputs.applicationAddress
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      application: $response.body#/application
+  - stepId: getService
+    description: >-
+      Confirm the requested service is registered on Shannon before resolving a
+      session against it.
+    operationId: getShannonService
+    parameters:
+    - name: serviceId
+      in: path
+      value: $inputs.serviceId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      service: $response.body#/service
+  - stepId: getSession
+    description: >-
+      Resolve the active session for the application/service pair, pinned to the
+      supplied block height when one was provided.
+    operationId: getShannonSession
+    parameters:
+    - name: application_address
+      in: query
+      value: $inputs.applicationAddress
+    - name: service_id
+      in: query
+      value: $inputs.serviceId
+    - name: block_height
+      in: query
+      value: $inputs.blockHeight
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      session: $response.body#/session
+  outputs:
+    application: $steps.getApplication.outputs.application
+    service: $steps.getService.outputs.service
+    session: $steps.getSession.outputs.session

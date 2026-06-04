@@ -1,0 +1,61 @@
+arazzo: 1.0.1
+info:
+  title: Pocket Network Shannon Supplier and Gateway Survey
+  summary: List suppliers, drill into the first supplier, then list gateways for network context.
+  description: >-
+    Surveys the relay-serving side of the Shannon network. It lists every
+    Supplier module entry, drills into the first returned supplier by its
+    operator address for full detail, and then lists every Gateway module entry
+    so a consumer can see the suppliers that serve relays alongside the gateways
+    authorized to proxy them. Each step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: shannonRpcApi
+  url: ../openapi/pocket-network-shannon-rpc-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: shannon-supplier-gateway-survey
+  summary: List suppliers, detail the first one, and list gateways.
+  description: >-
+    Lists the supplier set, fetches the detail record for the first supplier by
+    operator address, then lists the gateway set for network context.
+  inputs:
+    type: object
+    properties: {}
+  steps:
+  - stepId: listSuppliers
+    description: >-
+      List every Supplier module entry and capture the operator address of the
+      first supplier for a detail lookup.
+    operationId: listShannonSuppliers
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      suppliers: $response.body#/supplier
+      firstSupplierAddress: $response.body#/supplier/0/operator_address
+  - stepId: getSupplier
+    description: >-
+      Read the full Supplier record for the first supplier returned by the list.
+    operationId: getShannonSupplier
+    parameters:
+    - name: address
+      in: path
+      value: $steps.listSuppliers.outputs.firstSupplierAddress
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      supplier: $response.body#/supplier
+  - stepId: listGateways
+    description: >-
+      List every Gateway module entry to pair the supplier detail with the
+      gateways authorized to proxy relays.
+    operationId: listShannonGateways
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      gateways: $response.body#/gateway
+  outputs:
+    supplier: $steps.getSupplier.outputs.supplier
+    gateways: $steps.listGateways.outputs.gateways
