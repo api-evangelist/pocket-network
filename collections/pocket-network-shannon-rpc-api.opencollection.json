@@ -1,0 +1,354 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pocket Network Shannon RPC API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Blocks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Latest Shannon Block",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-api.mainnet.poktroll.com/cosmos/base/tendermint/v1beta1/blocks/latest"
+          },
+          "docs": "Return the most recently committed CometBFT block."
+        },
+        {
+          "info": {
+            "name": "Get Shannon Block By Height",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-api.mainnet.poktroll.com/cosmos/base/tendermint/v1beta1/blocks/:height",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "path",
+                "description": "Block height."
+              }
+            ]
+          },
+          "docs": "Return the Shannon block at a specific height."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Shannon Transaction By Hash",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-api.mainnet.poktroll.com/cosmos/tx/v1beta1/txs/:hash",
+            "params": [
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path",
+                "description": "Transaction hash (hex, 64 chars)."
+              }
+            ]
+          },
+          "docs": "Return a Shannon transaction by its hash."
+        },
+        {
+          "info": {
+            "name": "Broadcast Shannon Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://shannon-grove-api.mainnet.poktroll.com/cosmos/tx/v1beta1/txs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Broadcast a signed Shannon transaction. The request body is a TxRaw-encoded transaction with broadcast mode (sync, async, block).\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Bank",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Shannon Address Balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-api.mainnet.poktroll.com/cosmos/bank/v1beta1/balances/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Bech32 Shannon address (pokt1...)."
+              }
+            ]
+          },
+          "docs": "Return all coin balances for a Shannon address (upokt and IBC tokens)."
+        },
+        {
+          "info": {
+            "name": "Get Shannon Total Supply",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-api.mainnet.poktroll.com/cosmos/bank/v1beta1/supply"
+          },
+          "docs": "Return the total Shannon supply for every denom (upokt and IBC)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Validators",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Shannon Validators",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-api.mainnet.poktroll.com/cosmos/staking/v1beta1/validators"
+          },
+          "docs": "List Cosmos staking validators for the Shannon chain."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Application",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Shannon Applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-api.mainnet.poktroll.com/pocket/application/v1/application"
+          },
+          "docs": "List every Application module entry. Applications stake POKT to consume relays via gateways for one or more services.\n"
+        },
+        {
+          "info": {
+            "name": "Get Shannon Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-api.mainnet.poktroll.com/pocket/application/v1/application/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Bech32 Shannon address (pokt1...)."
+              }
+            ]
+          },
+          "docs": "Return a single Application by Shannon address."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Supplier",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Shannon Suppliers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-api.mainnet.poktroll.com/pocket/supplier/v1/supplier"
+          },
+          "docs": "List every Supplier module entry. Suppliers stake POKT and run a RelayMiner to serve relays for the services they support.\n"
+        },
+        {
+          "info": {
+            "name": "Get Shannon Supplier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-api.mainnet.poktroll.com/pocket/supplier/v1/supplier/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Bech32 Shannon operator address."
+              }
+            ]
+          },
+          "docs": "Return a single Supplier by Shannon operator address."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Gateway",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Shannon Gateways",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-api.mainnet.poktroll.com/pocket/gateway/v1/gateway"
+          },
+          "docs": "List every Gateway module entry. Gateways stake POKT and are authorized by Applications to sign relays on their behalf.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Service",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Shannon Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-api.mainnet.poktroll.com/pocket/service/v1/service"
+          },
+          "docs": "List every service registered on Shannon. A service represents an external data source (e.g. eth, solana, base, arbitrum) the network can serve relays for. Each service has compute-unit pricing.\n"
+        },
+        {
+          "info": {
+            "name": "Get Shannon Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-api.mainnet.poktroll.com/pocket/service/v1/service/:serviceId",
+            "params": [
+              {
+                "name": "serviceId",
+                "value": "",
+                "type": "path",
+                "description": "Service identifier (e.g. \"eth\", \"solana\", \"base\")."
+              }
+            ]
+          },
+          "docs": "Return a single service definition."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Session",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Shannon Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-api.mainnet.poktroll.com/pocket/session/v1/get_session",
+            "params": [
+              {
+                "name": "application_address",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "block_height",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Return the active session for a given application/service pair at a given block height. Sessions group applications and suppliers for the duration of a session window.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Proof",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Shannon Proof Parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-api.mainnet.poktroll.com/pocket/proof/v1/params"
+          },
+          "docs": "Return the parameters of the on-chain Proof module (claim and proof windows, minimum relay difficulty, target submission probability).\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tokenomics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Shannon Tokenomics Parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-api.mainnet.poktroll.com/pocket/tokenomics/v1/params"
+          },
+          "docs": "Return the Shannon tokenomics parameters — mint ratio, allocations to DAO/proposer/source-owner/supplier, and global inflation/deflation settings (post-PIP-41 deflationary 97.5% mint ratio).\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

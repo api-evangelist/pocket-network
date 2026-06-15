@@ -1,295 +1,281 @@
 aid: pocket-network
 url: https://raw.githubusercontent.com/api-evangelist/pocket-network/refs/heads/main/apis.yml
 apis:
-- aid: pocket-network:pocket-network-path-gateway-api
-  name: Pocket Network PATH Gateway API
-  tags:
+  - aid: pocket-network:pocket-network-path-gateway-api
+    name: Pocket Network PATH Gateway API
+    tags:
+      - Pocket Network
+      - Grove
+      - PATH
+      - RPC
+      - Relays
+    humanURL: https://path.grove.city/
+    properties:
+      - url: https://path.grove.city/develop/path/introduction
+        type: Documentation
+      - url: https://path.grove.city/develop/path/cheatsheet
+        type: Documentation
+      - url: openapi/pocket-network-path-gateway-api-openapi.yml
+        type: OpenAPI
+      - url: json-schema/pocket-network-relay-schema.json
+        type: JSONSchema
+      - url: json-ld/pocket-network-context.jsonld
+        type: JSONLD
+      - url: https://github.com/buildwithgrove/path
+        type: SourceCode
+    description: >-
+      PATH is the open-source Go gateway (github.com/buildwithgrove/path) that exposes Pocket Network Shannon as a
+      single HTTP surface. It proxies JSON-RPC, REST, and WebSocket relays to Shannon suppliers, scores them via QoS,
+      and signs each relay with the operator's gateway and application keys. Grove operates the largest hosted PATH
+      deployment on rpc.grove.city across 69+ chains, both as authenticated portal endpoints and as no-key public
+      endpoints per chain (e.g. eth.rpc.grove.city, solana.rpc.grove.city).
+  - aid: pocket-network:pocket-network-shannon-rpc-api
+    name: Pocket Network Shannon RPC API
+    tags:
+      - Pocket Network
+      - Shannon
+      - Cosmos
+      - Blockchain
+    humanURL: https://dev.poktroll.com/
+    properties:
+      - url: https://dev.poktroll.com/
+        type: Documentation
+      - url: https://docs.pokt.network/pokt-protocol/the-shannon-upgrade
+        type: Documentation
+      - url: openapi/pocket-network-shannon-rpc-api-openapi.yml
+        type: OpenAPI
+      - url: json-schema/pocket-network-shannon-actor-schema.json
+        type: JSONSchema
+      - url: https://github.com/pokt-network/poktroll
+        type: SourceCode
+    description: >-
+      The Shannon chain is a Cosmos SDK + CometBFT chain (github.com/pokt-network/poktroll) that supplanted Morse in
+      June 2025. The REST surface exposes the standard Cosmos modules (bank, staking, base) alongside Pocket-specific
+      modules — application, supplier, gateway, service, session, proof, and tokenomics. Service fees are denominated in
+      compute units (1 USD = 1B CU) and post-PIP-41 a 97.5% mint ratio makes POKT deflationary. Grove operates a public
+      Shannon mainnet REST endpoint at shannon-grove-api.mainnet.poktroll.com.
+  - aid: pocket-network:pocket-network-cometbft-rpc-api
+    name: Pocket Network CometBFT RPC API
+    tags:
+      - Pocket Network
+      - Shannon
+      - CometBFT
+      - Tendermint
+      - Consensus
+    humanURL: https://dev.poktroll.com/
+    properties:
+      - url: https://docs.cometbft.com/v0.38/rpc/
+        type: Documentation
+      - url: openapi/pocket-network-cometbft-rpc-api-openapi.yml
+        type: OpenAPI
+      - url: https://github.com/pokt-network/poktroll
+        type: SourceCode
+    description: >-
+      The CometBFT (Tendermint) JSON-RPC surface exposed by every Shannon full node on port 26657. Covers
+      consensus-level queries (status, net_info, blocks, block_results, tx), mempool inspection, and synchronous
+      transaction broadcast. Grove operates a public Shannon mainnet CometBFT RPC at
+      shannon-grove-rpc.mainnet.poktroll.com.
+name: Pocket Network
+tags:
+  - Web3
+  - Blockchain
+  - RPC
+  - Decentralized Infrastructure
   - Pocket Network
   - Grove
   - PATH
-  - RPC
-  - Relays
-  humanURL: https://path.grove.city/
-  properties:
-  - url: https://path.grove.city/develop/path/introduction
-    type: Documentation
-  - url: https://path.grove.city/develop/path/cheatsheet
-    type: Documentation
-  - url: openapi/pocket-network-path-gateway-api-openapi.yml
-    type: OpenAPI
-  - url: json-schema/pocket-network-relay-schema.json
-    type: JSONSchema
-  - url: json-ld/pocket-network-context.jsonld
-    type: JSONLD
-  - type: NaftikoCapability
-    url: capabilities/path-gateway-relays.yaml
-  - url: https://github.com/buildwithgrove/path
-    type: SourceCode
-  description: PATH is the open-source Go gateway (github.com/buildwithgrove/path) that exposes Pocket
-    Network Shannon as a single HTTP surface. It proxies JSON-RPC, REST, and WebSocket relays to
-    Shannon suppliers, scores them via QoS, and signs each relay with the operator's gateway and
-    application keys. Grove operates the largest hosted PATH deployment on rpc.grove.city across
-    69+ chains, both as authenticated portal endpoints and as no-key public endpoints per chain
-    (e.g. eth.rpc.grove.city, solana.rpc.grove.city).
-- aid: pocket-network:pocket-network-shannon-rpc-api
-  name: Pocket Network Shannon RPC API
-  tags:
-  - Pocket Network
   - Shannon
   - Cosmos
-  - Blockchain
-  humanURL: https://dev.poktroll.com/
-  properties:
-  - url: https://dev.poktroll.com/
-    type: Documentation
-  - url: https://docs.pokt.network/pokt-protocol/the-shannon-upgrade
-    type: Documentation
-  - url: openapi/pocket-network-shannon-rpc-api-openapi.yml
-    type: OpenAPI
-  - url: json-schema/pocket-network-shannon-actor-schema.json
-    type: JSONSchema
-  - type: NaftikoCapability
-    url: capabilities/shannon-blocks.yaml
-  - type: NaftikoCapability
-    url: capabilities/shannon-applications.yaml
-  - type: NaftikoCapability
-    url: capabilities/shannon-suppliers.yaml
-  - type: NaftikoCapability
-    url: capabilities/shannon-gateways.yaml
-  - type: NaftikoCapability
-    url: capabilities/shannon-services.yaml
-  - type: NaftikoCapability
-    url: capabilities/shannon-tokenomics.yaml
-  - url: https://github.com/pokt-network/poktroll
-    type: SourceCode
-  description: The Shannon chain is a Cosmos SDK + CometBFT chain (github.com/pokt-network/poktroll)
-    that supplanted Morse in June 2025. The REST surface exposes the standard Cosmos modules (bank,
-    staking, base) alongside Pocket-specific modules — application, supplier, gateway, service,
-    session, proof, and tokenomics. Service fees are denominated in compute units (1 USD = 1B CU)
-    and post-PIP-41 a 97.5% mint ratio makes POKT deflationary. Grove operates a public Shannon
-    mainnet REST endpoint at shannon-grove-api.mainnet.poktroll.com.
-- aid: pocket-network:pocket-network-cometbft-rpc-api
-  name: Pocket Network CometBFT RPC API
-  tags:
-  - Pocket Network
-  - Shannon
-  - CometBFT
-  - Tendermint
-  - Consensus
-  humanURL: https://dev.poktroll.com/
-  properties:
-  - url: https://docs.cometbft.com/v0.38/rpc/
-    type: Documentation
-  - url: openapi/pocket-network-cometbft-rpc-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/cometbft-status.yaml
-  - url: https://github.com/pokt-network/poktroll
-    type: SourceCode
-  description: The CometBFT (Tendermint) JSON-RPC surface exposed by every Shannon full node on
-    port 26657. Covers consensus-level queries (status, net_info, blocks, block_results, tx),
-    mempool inspection, and synchronous transaction broadcast. Grove operates a public Shannon
-    mainnet CometBFT RPC at shannon-grove-rpc.mainnet.poktroll.com.
-name: Pocket Network
-tags:
-- Web3
-- Blockchain
-- RPC
-- Decentralized Infrastructure
-- Pocket Network
-- Grove
-- PATH
-- Shannon
-- Cosmos
-- POKT
+  - POKT
 kind: contract
 image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
-- type: ArazzoWorkflows
-  url: arazzo/
-  workflows:
-  - url: arazzo/pocket-network-cometbft-node-block-inspect-workflow.yml
-    name: Pocket Network CometBFT Node Block Inspect
-    summary: Read node status for the latest height, fetch that block, then its ABCI results.
-  - url: arazzo/pocket-network-path-relay-readiness-workflow.yml
-    name: Pocket Network PATH Relay Readiness
-    summary: Confirm the PATH gateway is ready, then send an authenticated JSON-RPC relay through it.
-  - url: arazzo/pocket-network-shannon-application-balance-workflow.yml
-    name: Pocket Network Shannon Application Balance
-    summary: Look up a Shannon application, then read the on-chain balances of its address.
-  - url: arazzo/pocket-network-shannon-application-session-workflow.yml
-    name: Pocket Network Shannon Application Session
-    summary: Resolve an application, confirm the target service exists, then fetch its active session.
-  - url: arazzo/pocket-network-shannon-block-explorer-workflow.yml
-    name: Pocket Network Shannon Block Explorer
-    summary: Read the latest Shannon block height, then fetch that exact block by height.
-  - url: arazzo/pocket-network-shannon-service-economics-workflow.yml
-    name: Pocket Network Shannon Service Economics
-    summary: Read a service definition, the network tokenomics parameters, and total supply.
-  - url: arazzo/pocket-network-shannon-supplier-gateway-survey-workflow.yml
-    name: Pocket Network Shannon Supplier and Gateway Survey
-    summary: List suppliers, drill into the first supplier, then list gateways for network context.
-  - url: arazzo/pocket-network-shannon-transaction-lookup-workflow.yml
-    name: Pocket Network Shannon Transaction Lookup
-    summary: Find the latest block, then look up a supplied transaction hash on Shannon.
-- type: Portal
-  url: https://pocket.network
-- type: Portal
-  url: https://grove.city
-  name: Grove
-- url: https://path.grove.city/
-  name: PATH by Grove
-  type: Documentation
-- url: https://docs.pokt.network/
-  name: Pocket Network Documentation
-  type: Documentation
-- url: https://docs.grove.city/
-  name: Grove Documentation
-  type: Documentation
-- url: https://dev.poktroll.com/
-  name: Shannon Developer Docs
-  type: Documentation
-- url: https://status.pocket.network/
-  name: Pocket Network Status
-  type: StatusPage
-- url: https://status.grove.city/
-  name: Grove Status
-  type: StatusPage
-- url: https://explorer.pocket.network/pocket-mainnet
-  name: Pocket Network Explorer
-  type: Documentation
-- url: https://wallet.pocket.network/
-  name: Pocket Network Wallet
-  type: Documentation
-- url: https://forum.pokt.network/
-  name: Pocket Network Forum
-  type: Forum
-- url: https://discord.gg/pocket-network
-  name: Pocket Network Discord
-  type: Forum
-- url: https://github.com/pokt-network
-  type: GitHubOrganization
-- url: https://github.com/buildwithgrove
-  type: GitHubOrganization
-- url: https://github.com/pokt-network/poktroll
-  name: Shannon Protocol (poktroll)
-  type: SourceCode
-- url: https://github.com/buildwithgrove/path
-  name: PATH Gateway
-  type: SourceCode
-- url: https://github.com/pokt-network/path
-  name: PATH (pokt-network mirror)
-  type: SourceCode
-- url: https://github.com/pokt-network/shannon-sdk
-  name: Shannon SDK (Go)
-  type: SDK
-- url: https://github.com/pokt-network/poktroll-clients-py
-  name: poktroll Clients (Python)
-  type: SDK
-- url: https://github.com/pokt-network/shannon-tx-builder
-  name: Shannon Transaction Builder (Python)
-  type: SDK
-- url: https://github.com/pokt-network/pocket-js
-  name: pocket-js (JavaScript Protocol Library)
-  type: SDK
-- url: https://github.com/pokt-network/homebrew-pocketd
-  name: Homebrew tap (poktrolld)
-  type: Tool
-- url: https://github.com/pokt-network/pocketdex
-  name: Pocketdex (SubQuery indexer)
-  type: Tool
-- url: https://github.com/pokt-network/pocket-explorer
-  name: Pocket Explorer
-  type: Tool
-- url: https://github.com/pokt-network/poktroll/releases
-  name: poktroll Releases
-  type: ChangeLog
-- url: https://medium.com/decentralized-infrastructure
-  name: Grove Blog (Decentralized Infrastructure on Medium)
-  type: Blog
-- url: https://pocket.network/blog/
-  name: Pocket Network Blog
-  type: Blog
-- url: https://pocket.network/pocket-developer-guide/
-  name: Shannon Developer Guide
-  type: GettingStarted
-- url: https://pocket.network/shannon-upgrade-faq/
-  name: Shannon Upgrade FAQ
-  type: Documentation
-- url: https://pocket.network/decentralized-data-stack/
-  name: Decentralized Data Stack
-  type: Documentation
-- url: https://grove.city/chains
-  name: Supported Chains
-  type: Documentation
-- url: https://grove.city/partners
-  name: Grove Partners
-  type: Documentation
-- url: https://grove.city/pricing
-  name: Grove Pricing
-  type: Pricing
-- url: https://pocket.network/legal/privacy-policy/
-  type: PrivacyPolicy
-- url: https://pocket.network/legal/terms-of-service/
-  type: TermsOfService
-- url: plans/pocket-network-plans-pricing.yml
-  type: Plans
-- url: rate-limits/pocket-network-rate-limits.yml
-  type: RateLimits
-- url: finops/pocket-network-finops.yml
-  type: FinOps
-- url: rules/pocket-network-rules.yml
-  type: SpectralRules
-- url: vocabulary/pocket-network-vocabulary.yml
-  type: Vocabulary
-- type: Features
-  data:
-  - Shannon protocol — Cosmos SDK + CometBFT chain replacing Morse in June 2025
-  - 5,000+ independent nodes serving 60-69+ blockchains (EVM, Layer-2s, Cosmos, Solana)
-  - PATH gateway (Go, MIT) — open-source single-binary gateway for any operator to run
-  - Grove hosted endpoints — rpc.grove.city per-chain subdomains for portal and public traffic
-  - Compute-unit metering — $1 = 1B CU, deflationary via POKT burn on every relay (PIP-41)
-  - On-chain actors — Application, Supplier, Gateway, Validator, Source Owner
-  - RelayMiner — supplier-side daemon proxying relays with revenue-share splits
-  - Quality-of-Service scoring inside PATH routes around degraded suppliers automatically
-  - Public free per-IP endpoints across every supported chain for development
-  - 99.9% uptime target on Grove public endpoints
-  - Authenticated portal applications via opaque Application IDs in URL path
-  - Permissionless service registration — anyone can add a new chain by staking a service
-  - F-Chains public-data program for non-profit/public-goods consumers
-  - $1 per billion compute units wholesale, $1 per million relays Grove pay-as-you-go (RELAY2025)
-  - poktrolld CLI (homebrew-pocketd) for full Cosmos SDK tx/query/keys operations
-  - Shannon SDK (Go), poktroll-clients-py (Python), shannon-tx-builder (Python)
-  - Pocketdex (SubQuery) indexer powering Pocket Explorer
-  - Pocket Network Foundation governance with on-chain PIP proposals
-  - Available as decentralized RPC backend for Cosmos Keplr chain registry integrations
-  sources:
-  - https://pocket.network/
-  - https://grove.city/
-  - https://path.grove.city/
-  - https://docs.pokt.network/
-  - https://dev.poktroll.com/
-  - https://github.com/pokt-network/poktroll
-  - https://github.com/buildwithgrove/path
-  updated: '2026-05-25'
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/pocket-network/overview
+  - type: ArazzoWorkflows
+    url: arazzo/
+    workflows:
+      - url: arazzo/pocket-network-cometbft-node-block-inspect-workflow.yml
+        name: Pocket Network CometBFT Node Block Inspect
+        summary: Read node status for the latest height, fetch that block, then its ABCI results.
+      - url: arazzo/pocket-network-path-relay-readiness-workflow.yml
+        name: Pocket Network PATH Relay Readiness
+        summary: Confirm the PATH gateway is ready, then send an authenticated JSON-RPC relay through it.
+      - url: arazzo/pocket-network-shannon-application-balance-workflow.yml
+        name: Pocket Network Shannon Application Balance
+        summary: Look up a Shannon application, then read the on-chain balances of its address.
+      - url: arazzo/pocket-network-shannon-application-session-workflow.yml
+        name: Pocket Network Shannon Application Session
+        summary: Resolve an application, confirm the target service exists, then fetch its active session.
+      - url: arazzo/pocket-network-shannon-block-explorer-workflow.yml
+        name: Pocket Network Shannon Block Explorer
+        summary: Read the latest Shannon block height, then fetch that exact block by height.
+      - url: arazzo/pocket-network-shannon-service-economics-workflow.yml
+        name: Pocket Network Shannon Service Economics
+        summary: Read a service definition, the network tokenomics parameters, and total supply.
+      - url: arazzo/pocket-network-shannon-supplier-gateway-survey-workflow.yml
+        name: Pocket Network Shannon Supplier and Gateway Survey
+        summary: List suppliers, drill into the first supplier, then list gateways for network context.
+      - url: arazzo/pocket-network-shannon-transaction-lookup-workflow.yml
+        name: Pocket Network Shannon Transaction Lookup
+        summary: Find the latest block, then look up a supplied transaction hash on Shannon.
+  - type: Portal
+    url: https://pocket.network
+  - type: Portal
+    url: https://grove.city
+    name: Grove
+  - url: https://path.grove.city/
+    name: PATH by Grove
+    type: Documentation
+  - url: https://docs.pokt.network/
+    name: Pocket Network Documentation
+    type: Documentation
+  - url: https://docs.grove.city/
+    name: Grove Documentation
+    type: Documentation
+  - url: https://dev.poktroll.com/
+    name: Shannon Developer Docs
+    type: Documentation
+  - url: https://status.pocket.network/
+    name: Pocket Network Status
+    type: StatusPage
+  - url: https://status.grove.city/
+    name: Grove Status
+    type: StatusPage
+  - url: https://explorer.pocket.network/pocket-mainnet
+    name: Pocket Network Explorer
+    type: Documentation
+  - url: https://wallet.pocket.network/
+    name: Pocket Network Wallet
+    type: Documentation
+  - url: https://forum.pokt.network/
+    name: Pocket Network Forum
+    type: Forum
+  - url: https://discord.gg/pocket-network
+    name: Pocket Network Discord
+    type: Forum
+  - url: https://github.com/pokt-network
+    type: GitHubOrganization
+  - url: https://github.com/buildwithgrove
+    type: GitHubOrganization
+  - url: https://github.com/pokt-network/poktroll
+    name: Shannon Protocol (poktroll)
+    type: SourceCode
+  - url: https://github.com/buildwithgrove/path
+    name: PATH Gateway
+    type: SourceCode
+  - url: https://github.com/pokt-network/path
+    name: PATH (pokt-network mirror)
+    type: SourceCode
+  - url: https://github.com/pokt-network/shannon-sdk
+    name: Shannon SDK (Go)
+    type: SDK
+  - url: https://github.com/pokt-network/poktroll-clients-py
+    name: poktroll Clients (Python)
+    type: SDK
+  - url: https://github.com/pokt-network/shannon-tx-builder
+    name: Shannon Transaction Builder (Python)
+    type: SDK
+  - url: https://github.com/pokt-network/pocket-js
+    name: pocket-js (JavaScript Protocol Library)
+    type: SDK
+  - url: https://github.com/pokt-network/homebrew-pocketd
+    name: Homebrew tap (poktrolld)
+    type: Tool
+  - url: https://github.com/pokt-network/pocketdex
+    name: Pocketdex (SubQuery indexer)
+    type: Tool
+  - url: https://github.com/pokt-network/pocket-explorer
+    name: Pocket Explorer
+    type: Tool
+  - url: https://github.com/pokt-network/poktroll/releases
+    name: poktroll Releases
+    type: ChangeLog
+  - url: https://medium.com/decentralized-infrastructure
+    name: Grove Blog (Decentralized Infrastructure on Medium)
+    type: Blog
+  - url: https://pocket.network/blog/
+    name: Pocket Network Blog
+    type: Blog
+  - url: https://pocket.network/pocket-developer-guide/
+    name: Shannon Developer Guide
+    type: GettingStarted
+  - url: https://pocket.network/shannon-upgrade-faq/
+    name: Shannon Upgrade FAQ
+    type: Documentation
+  - url: https://pocket.network/decentralized-data-stack/
+    name: Decentralized Data Stack
+    type: Documentation
+  - url: https://grove.city/chains
+    name: Supported Chains
+    type: Documentation
+  - url: https://grove.city/partners
+    name: Grove Partners
+    type: Documentation
+  - url: https://grove.city/pricing
+    name: Grove Pricing
+    type: Pricing
+  - url: https://pocket.network/legal/privacy-policy/
+    type: PrivacyPolicy
+  - url: https://pocket.network/legal/terms-of-service/
+    type: TermsOfService
+  - url: plans/pocket-network-plans-pricing.yml
+    type: Plans
+  - url: rate-limits/pocket-network-rate-limits.yml
+    type: RateLimits
+  - url: finops/pocket-network-finops.yml
+    type: FinOps
+  - url: rules/pocket-network-rules.yml
+    type: SpectralRules
+  - url: vocabulary/pocket-network-vocabulary.yml
+    type: Vocabulary
+  - type: Features
+    data:
+      - Shannon protocol — Cosmos SDK + CometBFT chain replacing Morse in June 2025
+      - 5,000+ independent nodes serving 60-69+ blockchains (EVM, Layer-2s, Cosmos, Solana)
+      - PATH gateway (Go, MIT) — open-source single-binary gateway for any operator to run
+      - Grove hosted endpoints — rpc.grove.city per-chain subdomains for portal and public traffic
+      - Compute-unit metering — $1 = 1B CU, deflationary via POKT burn on every relay (PIP-41)
+      - On-chain actors — Application, Supplier, Gateway, Validator, Source Owner
+      - RelayMiner — supplier-side daemon proxying relays with revenue-share splits
+      - Quality-of-Service scoring inside PATH routes around degraded suppliers automatically
+      - Public free per-IP endpoints across every supported chain for development
+      - 99.9% uptime target on Grove public endpoints
+      - Authenticated portal applications via opaque Application IDs in URL path
+      - Permissionless service registration — anyone can add a new chain by staking a service
+      - F-Chains public-data program for non-profit/public-goods consumers
+      - $1 per billion compute units wholesale, $1 per million relays Grove pay-as-you-go (RELAY2025)
+      - poktrolld CLI (homebrew-pocketd) for full Cosmos SDK tx/query/keys operations
+      - Shannon SDK (Go), poktroll-clients-py (Python), shannon-tx-builder (Python)
+      - Pocketdex (SubQuery) indexer powering Pocket Explorer
+      - Pocket Network Foundation governance with on-chain PIP proposals
+      - Available as decentralized RPC backend for Cosmos Keplr chain registry integrations
+    sources:
+      - https://pocket.network/
+      - https://grove.city/
+      - https://path.grove.city/
+      - https://docs.pokt.network/
+      - https://dev.poktroll.com/
+      - https://github.com/pokt-network/poktroll
+      - https://github.com/buildwithgrove/path
+    updated: '2026-05-25'
 created: '2026-05-25'
 modified: '2026-05-25'
 position: Consuming
-description: Pocket Network is the decentralized RPC layer of Web3 — a permissionless, fully open
-  data delivery protocol built on Cosmos SDK and CometBFT (the Shannon upgrade, June 2025). 5,000+
-  independent supplier nodes serve relays across 60-69+ blockchains, metered in compute units at
-  $1/billion and settled on-chain in POKT under deflationary tokenomics (PIP-41, 97.5% mint ratio).
-  Grove (grove.city) is the for-profit infrastructure company that operates the largest gateway
-  on the network — rpc.grove.city — and maintains PATH, the open-source Go gateway any operator
-  can run to expose Pocket Network as a single HTTP endpoint. Grove offers free no-API-key per-IP
-  public endpoints per chain (eth.rpc.grove.city, solana.rpc.grove.city, etc.) plus paid portal
-  applications with relay analytics and SLAs. Together they form the canonical decentralized
-  alternative to Alchemy / Infura / QuickNode for serving JSON-RPC, REST, and WebSocket traffic
-  to any public blockchain.
+description: >-
+  Pocket Network is the decentralized RPC layer of Web3 — a permissionless, fully open data delivery protocol built on
+  Cosmos SDK and CometBFT (the Shannon upgrade, June 2025). 5,000+ independent supplier nodes serve relays across 60-69+
+  blockchains, metered in compute units at $1/billion and settled on-chain in POKT under deflationary tokenomics
+  (PIP-41, 97.5% mint ratio). Grove (grove.city) is the for-profit infrastructure company that operates the largest
+  gateway on the network — rpc.grove.city — and maintains PATH, the open-source Go gateway any operator can run to
+  expose Pocket Network as a single HTTP endpoint. Grove offers free no-API-key per-IP public endpoints per chain
+  (eth.rpc.grove.city, solana.rpc.grove.city, etc.) plus paid portal applications with relay analytics and SLAs.
+  Together they form the canonical decentralized alternative to Alchemy / Infura / QuickNode for serving JSON-RPC, REST,
+  and WebSocket traffic to any public blockchain.
 maintainers:
-- FN: Kin Lane
-  email: info@apievangelist.com
-  X: apievangelist
-  url: https://apievangelist.com
+  - FN: Kin Lane
+    email: info@apievangelist.com
+    X: apievangelist
+    url: https://apievangelist.com
 specificationVersion: '0.16'

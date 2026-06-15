@@ -1,0 +1,1600 @@
+{
+  "item": [
+    {
+      "id": "57513b6b-ee7b-413b-9495-fa5034504909",
+      "name": "Blocks",
+      "description": {
+        "content": "Block and consensus state queries",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "436126e2-3687-465d-b3be-3592b172b124",
+          "name": "Get Latest Shannon Block",
+          "request": {
+            "name": "Get Latest Shannon Block",
+            "description": {
+              "content": "Return the most recently committed CometBFT block.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cosmos",
+                "base",
+                "tendermint",
+                "v1beta1",
+                "blocks",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e0e37cbc-f2cc-4959-bc8c-0975b6edb483",
+              "name": "Block envelope.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cosmos",
+                    "base",
+                    "tendermint",
+                    "v1beta1",
+                    "blocks",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e2147d7-ffe7-4e28-aed1-1b2ab7ae1e59",
+          "name": "Get Shannon Block By Height",
+          "request": {
+            "name": "Get Shannon Block By Height",
+            "description": {
+              "content": "Return the Shannon block at a specific height.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cosmos",
+                "base",
+                "tendermint",
+                "v1beta1",
+                "blocks",
+                ":height"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "height",
+                  "description": "(Required) Block height."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "220d5ae9-7949-4965-ae64-8198e70a7769",
+              "name": "Block envelope.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cosmos",
+                    "base",
+                    "tendermint",
+                    "v1beta1",
+                    "blocks",
+                    ":height"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "height",
+                      "description": "(Required) Block height."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "64e39345-a573-40f2-acf7-204b62a04524",
+      "name": "Transactions",
+      "description": {
+        "content": "Transaction lookup and broadcast",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "66ccb055-e36b-452e-80a2-e9ce8390b0bb",
+          "name": "Get Shannon Transaction By Hash",
+          "request": {
+            "name": "Get Shannon Transaction By Hash",
+            "description": {
+              "content": "Return a Shannon transaction by its hash.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cosmos",
+                "tx",
+                "v1beta1",
+                "txs",
+                ":hash"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hash",
+                  "description": "(Required) Transaction hash (hex, 64 chars)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7400e0fc-6e0c-45d0-8e5d-8d1270f379e3",
+              "name": "Transaction envelope.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cosmos",
+                    "tx",
+                    "v1beta1",
+                    "txs",
+                    ":hash"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hash",
+                      "description": "(Required) Transaction hash (hex, 64 chars)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "abce8f0f-74b6-49de-82a6-f24470dc6c33",
+          "name": "Broadcast Shannon Transaction",
+          "request": {
+            "name": "Broadcast Shannon Transaction",
+            "description": {
+              "content": "Broadcast a signed Shannon transaction. The request body is a TxRaw-encoded transaction with broadcast mode (sync, async, block).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cosmos",
+                "tx",
+                "v1beta1",
+                "txs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tx_bytes\": \"<string>\",\n  \"mode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "85857da3-9c26-4f8e-be86-644cb80b4778",
+              "name": "Broadcast result with tx hash and code.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cosmos",
+                    "tx",
+                    "v1beta1",
+                    "txs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tx_bytes\": \"<string>\",\n  \"mode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "d4d0868e-6571-454a-b274-d131990a8651",
+      "name": "Bank",
+      "description": {
+        "content": "POKT supply, balances, and burn tracking",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "928c0edd-431b-4c6e-be3d-63f640d148cc",
+          "name": "Get Shannon Address Balances",
+          "request": {
+            "name": "Get Shannon Address Balances",
+            "description": {
+              "content": "Return all coin balances for a Shannon address (upokt and IBC tokens).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cosmos",
+                "bank",
+                "v1beta1",
+                "balances",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Bech32 Shannon address (pokt1...)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e25c66a1-27ee-4c4e-879b-b37cba1343cd",
+              "name": "Balance set.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cosmos",
+                    "bank",
+                    "v1beta1",
+                    "balances",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Bech32 Shannon address (pokt1...)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9285948d-ba50-4c97-9842-6d2ad19cc35f",
+          "name": "Get Shannon Total Supply",
+          "request": {
+            "name": "Get Shannon Total Supply",
+            "description": {
+              "content": "Return the total Shannon supply for every denom (upokt and IBC).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cosmos",
+                "bank",
+                "v1beta1",
+                "supply"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f410b993-fdd4-4e88-81c7-89d6dcd13147",
+              "name": "Supply totals.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cosmos",
+                    "bank",
+                    "v1beta1",
+                    "supply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "fc1e9a89-b180-47f9-bd18-9dbcb1552605",
+      "name": "Validators",
+      "description": {
+        "content": "Staking and validator queries",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b2b8555f-a3e9-4b73-8a76-5c5aaac6f31a",
+          "name": "List Shannon Validators",
+          "request": {
+            "name": "List Shannon Validators",
+            "description": {
+              "content": "List Cosmos staking validators for the Shannon chain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cosmos",
+                "staking",
+                "v1beta1",
+                "validators"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "77890e22-778a-49f4-9799-3a21fa2cb929",
+              "name": "Validator set.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cosmos",
+                    "staking",
+                    "v1beta1",
+                    "validators"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6521ac93-3482-45e8-9cfd-451ef0beebf7",
+      "name": "Application",
+      "description": {
+        "content": "Pocket application module — applications stake POKT to consume relays",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c972ae5c-882a-49ff-8596-6122506de9e1",
+          "name": "List Shannon Applications",
+          "request": {
+            "name": "List Shannon Applications",
+            "description": {
+              "content": "List every Application module entry. Applications stake POKT to consume relays via gateways for one or more services.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pocket",
+                "application",
+                "v1",
+                "application"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5c0e4f73-c9ec-4658-9db4-0383aafa0232",
+              "name": "Application list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pocket",
+                    "application",
+                    "v1",
+                    "application"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47d77ef8-8f0f-42de-be05-e6c6d92c44da",
+          "name": "Get Shannon Application",
+          "request": {
+            "name": "Get Shannon Application",
+            "description": {
+              "content": "Return a single Application by Shannon address.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pocket",
+                "application",
+                "v1",
+                "application",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Bech32 Shannon address (pokt1...)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7dca0fc-5153-4856-8e2c-0b476f2bab85",
+              "name": "Application record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pocket",
+                    "application",
+                    "v1",
+                    "application",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Bech32 Shannon address (pokt1...)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6eb0574a-e69f-4280-9210-3134445bb8f6",
+      "name": "Supplier",
+      "description": {
+        "content": "Pocket supplier module — suppliers stake POKT and serve relays via RelayMiner",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7828f1ff-fcb0-458f-97d6-e95db0654115",
+          "name": "List Shannon Suppliers",
+          "request": {
+            "name": "List Shannon Suppliers",
+            "description": {
+              "content": "List every Supplier module entry. Suppliers stake POKT and run a RelayMiner to serve relays for the services they support.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pocket",
+                "supplier",
+                "v1",
+                "supplier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3ae34294-67e2-4b27-b84b-dd8f4a07e370",
+              "name": "Supplier list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pocket",
+                    "supplier",
+                    "v1",
+                    "supplier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a04e0319-441a-4277-809c-df948edb59dd",
+          "name": "Get Shannon Supplier",
+          "request": {
+            "name": "Get Shannon Supplier",
+            "description": {
+              "content": "Return a single Supplier by Shannon operator address.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pocket",
+                "supplier",
+                "v1",
+                "supplier",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Bech32 Shannon operator address."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3a172f26-17db-40e8-8848-63426d03b94e",
+              "name": "Supplier record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pocket",
+                    "supplier",
+                    "v1",
+                    "supplier",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Bech32 Shannon operator address."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "2da9714d-2295-476d-a5fd-f079232b9414",
+      "name": "Gateway",
+      "description": {
+        "content": "Pocket gateway module — gateways stake POKT and proxy relays for applications",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6fea09d3-4fdd-4020-b0d0-1ee9b4ed63a0",
+          "name": "List Shannon Gateways",
+          "request": {
+            "name": "List Shannon Gateways",
+            "description": {
+              "content": "List every Gateway module entry. Gateways stake POKT and are authorized by Applications to sign relays on their behalf.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pocket",
+                "gateway",
+                "v1",
+                "gateway"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "00b2986a-f972-49fb-a57f-528e8c607ef5",
+              "name": "Gateway list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pocket",
+                    "gateway",
+                    "v1",
+                    "gateway"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "fc82007f-b2bb-4e49-b2e8-1d6ac519a898",
+      "name": "Service",
+      "description": {
+        "content": "Pocket service module — services represent the data sources (EVM chains, Solana, etc.) the network serves",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5f63ae82-cdcf-4fa4-8725-80ae18514c5f",
+          "name": "List Shannon Services",
+          "request": {
+            "name": "List Shannon Services",
+            "description": {
+              "content": "List every service registered on Shannon. A service represents an external data source (e.g. eth, solana, base, arbitrum) the network can serve relays for. Each service has compute-unit pricing.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pocket",
+                "service",
+                "v1",
+                "service"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3790f64b-7543-42f0-b02d-8b13ecfe24ae",
+              "name": "Service list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pocket",
+                    "service",
+                    "v1",
+                    "service"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40e7a429-8f67-4e5f-a139-3a43f7251801",
+          "name": "Get Shannon Service",
+          "request": {
+            "name": "Get Shannon Service",
+            "description": {
+              "content": "Return a single service definition.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pocket",
+                "service",
+                "v1",
+                "service",
+                ":serviceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "serviceId",
+                  "description": "(Required) Service identifier (e.g. \"eth\", \"solana\", \"base\")."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0a63e5fb-f8b9-46a1-959d-ab1b92a08c91",
+              "name": "Service record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pocket",
+                    "service",
+                    "v1",
+                    "service",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceId",
+                      "description": "(Required) Service identifier (e.g. \"eth\", \"solana\", \"base\")."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "80057528-588d-47fa-8f2f-2b2090d38a4e",
+      "name": "Session",
+      "description": {
+        "content": "Pocket session module — sessions group applications, suppliers, and services for a given block window",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ea7f244c-76b3-4bb9-b8a2-8629067cbbbe",
+          "name": "Get Shannon Session",
+          "request": {
+            "name": "Get Shannon Session",
+            "description": {
+              "content": "Return the active session for a given application/service pair at a given block height. Sessions group applications and suppliers for the duration of a session window.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pocket",
+                "session",
+                "v1",
+                "get_session"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "application_address",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "service_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "block_height",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9c6ca08a-10cf-4672-8581-b0b999a30683",
+              "name": "Session record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pocket",
+                    "session",
+                    "v1",
+                    "get_session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "application_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "block_height",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "90cb4d0a-ff43-4dc3-9323-24d1857b3d12",
+      "name": "Proof",
+      "description": {
+        "content": "Pocket proof module — claims and proofs that suppliers submit to earn POKT",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "27ea009c-9fef-4dfc-913d-717724c0110b",
+          "name": "Get Shannon Proof Parameters",
+          "request": {
+            "name": "Get Shannon Proof Parameters",
+            "description": {
+              "content": "Return the parameters of the on-chain Proof module (claim and proof windows, minimum relay difficulty, target submission probability).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pocket",
+                "proof",
+                "v1",
+                "params"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f70df0a1-0f30-4e3a-b115-93e365b71453",
+              "name": "Proof parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pocket",
+                    "proof",
+                    "v1",
+                    "params"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "66953272-e23c-4944-ac02-ae8f83a16772",
+      "name": "Tokenomics",
+      "description": {
+        "content": "Pocket tokenomics module — global mint, burn, and reward parameters",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "20c1e34e-50a7-496b-abbe-ec67d0ab6099",
+          "name": "Get Shannon Tokenomics Parameters",
+          "request": {
+            "name": "Get Shannon Tokenomics Parameters",
+            "description": {
+              "content": "Return the Shannon tokenomics parameters — mint ratio, allocations to DAO/proposer/source-owner/supplier, and global inflation/deflation settings (post-PIP-41 deflationary 97.5% mint ratio).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pocket",
+                "tokenomics",
+                "v1",
+                "params"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8db645fd-0904-49f6-a298-3346f8864b0c",
+              "name": "Tokenomics parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pocket",
+                    "tokenomics",
+                    "v1",
+                    "params"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://shannon-grove-api.mainnet.poktroll.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b6ceb3c6-2d9a-4451-ab3a-308790c30437",
+    "name": "Pocket Network Shannon RPC API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Pocket Network Shannon chain is a Cosmos SDK + CometBFT chain (poktroll). Every full node exposes the standard Cosmos REST and CometBFT RPC surfaces. Public endpoints are operated by Grove and Pocket Network Foundation. This profile documents the read-only endpoints most often consumed by integrators — block, transaction, validator, supply, and on-chain module queries (application, supplier, gateway, service, session, proof, tokenomics). Write operations are signed transactions broadcast via the same REST surface or the poktrolld CLI; they share the `/cosmos/tx/v1beta1/txs` endpoint.\n\n\nContact Support:\n Name: Pocket Network Foundation",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pocket Network PATH Gateway API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "appId",
+      "value": "{{appId}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Relays",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send Authenticated JSON-RPC Relay",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rpc.grove.city/v1/:appId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "Target-Service-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "Grove portal Application ID (alphanumeric)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send a JSON-RPC payload for the configured service through a Grove portal application. The path segment `appId` is the Grove portal Application ID returned by the dashboard; the subdomain selects the chain (e.g. `eth.rpc.grove.city`). The request body is the standard JSON-RPC 2.0 envelope of the target chain — PATH does not rewrite it.\n"
+        },
+        {
+          "info": {
+            "name": "Send Public JSON-RPC Relay",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rpc.grove.city/v1",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send a JSON-RPC payload to a Grove public endpoint. No portal Application ID is required — the chain is identified by the subdomain. Public endpoints are throttled per-IP and intended for development.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Path Liveness",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rpc.grove.city/healthz"
+          },
+          "docs": "Liveness probe exposed by self-hosted PATH instances on port 3069. Returns 200 when the service is running.\n"
+        },
+        {
+          "info": {
+            "name": "Get Path Readiness",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rpc.grove.city/readyz"
+          },
+          "docs": "Readiness probe. Returns 200 when PATH has loaded its session, supplier, and QoS data and is ready to serve relays.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

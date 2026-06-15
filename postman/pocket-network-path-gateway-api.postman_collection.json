@@ -1,0 +1,761 @@
+{
+  "info": {
+    "_postman_id": "5c8c71cb-a122-4588-9bf4-d0c12365f498",
+    "name": "Pocket Network PATH Gateway API",
+    "description": "PATH (Path API and Toolkit Harness) is the open-source Go gateway maintained by Grove (github.com/buildwithgrove/path mirrored at github.com/pokt-network/path) that exposes Pocket Network Shannon as a single HTTP surface. PATH proxies JSON-RPC, REST, and WebSocket calls for every service (blockchain) staked on Shannon, selects suppliers via Quality-of-Service scoring, signs relay requests with the operator's Gateway and Application keys, and returns upstream responses verbatim. The same protocol drives Grove's hosted endpoints on rpc.grove.city \u2014 each chain is exposed as a subdomain such as `eth.rpc.grove.city/v1/{appId}` or `solana.rpc.grove.city/v1/{appId}`. The payload for every operation is the JSON-RPC envelope of the target chain (e.g. Ethereum eth_*, Solana getBalance) so PATH itself is service-agnostic.\n\n\nContact Support:\n Name: Grove Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:14:08.000Z",
+    "updatedAt": "2026-06-05T15:14:08.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5c8c71cb-a122-4588-9bf4-d0c12365f498"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "{appId}",
+          "item": [
+            {
+              "name": "Send Authenticated JSON-RPC Relay",
+              "id": "6730d88e-52fa-4ecc-a446-0480d7a79c3e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "Override the service-id derived from the subdomain. Used when self-hosting PATH behind a single hostname.\n",
+                    "key": "Target-Service-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"<string>\",\n  \"method\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"params\": \"<array>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/:appId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    ":appId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "c3909b9e-d364-4b55-879c-faa5c0ddce9a",
+                      "key": "appId",
+                      "value": "<string>",
+                      "description": "(Required) Grove portal Application ID (alphanumeric)."
+                    }
+                  ]
+                },
+                "description": "Send a JSON-RPC payload for the configured service through a Grove portal application. The path segment `appId` is the Grove portal Application ID returned by the dashboard; the subdomain selects the chain (e.g. `eth.rpc.grove.city`). The request body is the standard JSON-RPC 2.0 envelope of the target chain \u2014 PATH does not rewrite it.\n"
+              },
+              "response": [
+                {
+                  "id": "1efc45cf-cf69-4a7c-8c16-e673922fc630",
+                  "name": "Successful relay response from a Shannon supplier.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Override the service-id derived from the subdomain. Used when self-hosting PATH behind a single hostname.\n",
+                        "key": "Target-Service-Id",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "appId",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"jsonrpc\": \"<string>\",\n  \"method\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"params\": \"<array>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/:appId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        ":appId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "appId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"jsonrpc\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"result\": {},\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"data\": {}\n  }\n}",
+                  "createdAt": "2026-06-05T15:14:09.000Z",
+                  "updatedAt": "2026-06-05T15:14:09.000Z",
+                  "uid": "35240-1efc45cf-cf69-4a7c-8c16-e673922fc630"
+                },
+                {
+                  "id": "e002dbc1-190c-4deb-825d-e089df37576e",
+                  "name": "Missing or invalid portal authentication.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Override the service-id derived from the subdomain. Used when self-hosting PATH behind a single hostname.\n",
+                        "key": "Target-Service-Id",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "appId",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"jsonrpc\": \"<string>\",\n  \"method\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"params\": \"<array>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/:appId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        ":appId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "appId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:14:09.000Z",
+                  "updatedAt": "2026-06-05T15:14:09.000Z",
+                  "uid": "35240-e002dbc1-190c-4deb-825d-e089df37576e"
+                },
+                {
+                  "id": "c7a7ef28-2195-4d4a-aa2f-6238ed34503a",
+                  "name": "Application out of compute units / over plan.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Override the service-id derived from the subdomain. Used when self-hosting PATH behind a single hostname.\n",
+                        "key": "Target-Service-Id",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "appId",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"jsonrpc\": \"<string>\",\n  \"method\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"params\": \"<array>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/:appId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        ":appId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "appId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Payment Required",
+                  "code": 402,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:14:09.000Z",
+                  "updatedAt": "2026-06-05T15:14:09.000Z",
+                  "uid": "35240-c7a7ef28-2195-4d4a-aa2f-6238ed34503a"
+                },
+                {
+                  "id": "e53b6fb3-ab25-46a4-86c7-4dd239f9b5ac",
+                  "name": "Rate limit exceeded for the application or organization.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Override the service-id derived from the subdomain. Used when self-hosting PATH behind a single hostname.\n",
+                        "key": "Target-Service-Id",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "appId",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"jsonrpc\": \"<string>\",\n  \"method\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"params\": \"<array>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/:appId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        ":appId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "appId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:14:09.000Z",
+                  "updatedAt": "2026-06-05T15:14:09.000Z",
+                  "uid": "35240-e53b6fb3-ab25-46a4-86c7-4dd239f9b5ac"
+                },
+                {
+                  "id": "9fb16817-af11-4864-9330-cc69a5c7f3fa",
+                  "name": "No healthy supplier returned a usable response.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Override the service-id derived from the subdomain. Used when self-hosting PATH behind a single hostname.\n",
+                        "key": "Target-Service-Id",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "appId",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"jsonrpc\": \"<string>\",\n  \"method\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"params\": \"<array>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/:appId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        ":appId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "appId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:14:09.000Z",
+                  "updatedAt": "2026-06-05T15:14:09.000Z",
+                  "uid": "35240-9fb16817-af11-4864-9330-cc69a5c7f3fa"
+                }
+              ],
+              "createdAt": "2026-06-05T15:14:09.000Z",
+              "updatedAt": "2026-06-05T15:14:09.000Z",
+              "uid": "35240-6730d88e-52fa-4ecc-a446-0480d7a79c3e"
+            }
+          ],
+          "id": "4294e7f4-1abf-492e-ae58-7b1ea16e5143",
+          "createdAt": "2026-06-05T15:14:09.000Z",
+          "updatedAt": "2026-06-05T15:14:09.000Z",
+          "uid": "35240-4294e7f4-1abf-492e-ae58-7b1ea16e5143"
+        },
+        {
+          "name": "Send Public JSON-RPC Relay",
+          "id": "f708edcd-5a16-4a9a-964c-2e1a0ad8770c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"<string>\",\n  \"method\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"params\": \"<array>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v1"
+              ]
+            },
+            "description": "Send a JSON-RPC payload to a Grove public endpoint. No portal Application ID is required \u2014 the chain is identified by the subdomain. Public endpoints are throttled per-IP and intended for development.\n"
+          },
+          "response": [
+            {
+              "id": "59f49e2f-c782-48bb-9a4b-71be595cf7c9",
+              "name": "Successful relay response.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "appId",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"<string>\",\n  \"method\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"params\": \"<array>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"jsonrpc\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"result\": {},\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"data\": {}\n  }\n}",
+              "createdAt": "2026-06-05T15:14:09.000Z",
+              "updatedAt": "2026-06-05T15:14:09.000Z",
+              "uid": "35240-59f49e2f-c782-48bb-9a4b-71be595cf7c9"
+            },
+            {
+              "id": "f8ad80e1-1e33-4a8f-aa6b-d8321623a9d9",
+              "name": "Public-endpoint rate limit exceeded.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "appId",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"<string>\",\n  \"method\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"params\": \"<array>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:14:09.000Z",
+              "updatedAt": "2026-06-05T15:14:09.000Z",
+              "uid": "35240-f8ad80e1-1e33-4a8f-aa6b-d8321623a9d9"
+            }
+          ],
+          "createdAt": "2026-06-05T15:14:09.000Z",
+          "updatedAt": "2026-06-05T15:14:09.000Z",
+          "uid": "35240-f708edcd-5a16-4a9a-964c-2e1a0ad8770c"
+        }
+      ],
+      "id": "599d5968-41da-4561-9933-a0251d63e737",
+      "createdAt": "2026-06-05T15:14:09.000Z",
+      "updatedAt": "2026-06-05T15:14:09.000Z",
+      "uid": "35240-599d5968-41da-4561-9933-a0251d63e737"
+    },
+    {
+      "name": "healthz",
+      "item": [
+        {
+          "name": "Get Path Liveness",
+          "id": "98c5f7ce-2468-4ff8-88bb-d9df2c8b5058",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/healthz",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "healthz"
+              ]
+            },
+            "description": "Liveness probe exposed by self-hosted PATH instances on port 3069. Returns 200 when the service is running.\n"
+          },
+          "response": [
+            {
+              "id": "76005030-abfa-4017-a3f7-61f106b59c07",
+              "name": "PATH process is alive.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "appId",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/healthz",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "healthz"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"ok\",\n  \"version\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:14:09.000Z",
+              "updatedAt": "2026-06-05T15:14:09.000Z",
+              "uid": "35240-76005030-abfa-4017-a3f7-61f106b59c07"
+            }
+          ],
+          "createdAt": "2026-06-05T15:14:09.000Z",
+          "updatedAt": "2026-06-05T15:14:09.000Z",
+          "uid": "35240-98c5f7ce-2468-4ff8-88bb-d9df2c8b5058"
+        }
+      ],
+      "id": "5784fee7-a680-43e7-a0de-de5590586180",
+      "createdAt": "2026-06-05T15:14:09.000Z",
+      "updatedAt": "2026-06-05T15:14:09.000Z",
+      "uid": "35240-5784fee7-a680-43e7-a0de-de5590586180"
+    },
+    {
+      "name": "readyz",
+      "item": [
+        {
+          "name": "Get Path Readiness",
+          "id": "6fec6ef5-e324-4ce4-ac49-915f450b81e2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/readyz",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "readyz"
+              ]
+            },
+            "description": "Readiness probe. Returns 200 when PATH has loaded its session, supplier, and QoS data and is ready to serve relays.\n"
+          },
+          "response": [
+            {
+              "id": "8d7408a6-f70f-40da-9227-3934e472c5d1",
+              "name": "PATH is ready to serve relays.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "appId",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/readyz",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "readyz"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"ok\",\n  \"version\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:14:09.000Z",
+              "updatedAt": "2026-06-05T15:14:09.000Z",
+              "uid": "35240-8d7408a6-f70f-40da-9227-3934e472c5d1"
+            },
+            {
+              "id": "2587317c-ed2f-41de-a53a-bf161831f3a5",
+              "name": "PATH is not yet ready.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "appId",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/readyz",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "readyz"
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:14:09.000Z",
+              "updatedAt": "2026-06-05T15:14:09.000Z",
+              "uid": "35240-2587317c-ed2f-41de-a53a-bf161831f3a5"
+            }
+          ],
+          "createdAt": "2026-06-05T15:14:09.000Z",
+          "updatedAt": "2026-06-05T15:14:09.000Z",
+          "uid": "35240-6fec6ef5-e324-4ce4-ac49-915f450b81e2"
+        }
+      ],
+      "id": "44be3c83-e663-4465-93fb-17de0d42c0b8",
+      "createdAt": "2026-06-05T15:14:09.000Z",
+      "updatedAt": "2026-06-05T15:14:09.000Z",
+      "uid": "35240-44be3c83-e663-4465-93fb-17de0d42c0b8"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "appId",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://rpc.grove.city"
+    }
+  ]
+}

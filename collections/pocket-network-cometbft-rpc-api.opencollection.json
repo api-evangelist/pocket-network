@@ -1,0 +1,163 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pocket Network CometBFT RPC API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Status",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Cometbft Node Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/status"
+          },
+          "docs": "Return node info, sync status, validator info, and latest block height."
+        },
+        {
+          "info": {
+            "name": "Get Cometbft Network Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/net_info"
+          },
+          "docs": "Return network info including listening status, peer count, and peer list."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Consensus",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Cometbft Block",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/block",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Return a block by height (or latest if omitted)."
+        },
+        {
+          "info": {
+            "name": "Get Cometbft Block Results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/block_results",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Return ABCI execution results for a block (events, gas, tx_results)."
+        },
+        {
+          "info": {
+            "name": "Get Cometbft Block Commit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/commit",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Return the precommit signatures attached to a block."
+        },
+        {
+          "info": {
+            "name": "Get Cometbft Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/tx",
+            "params": [
+              {
+                "name": "hash",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "prove",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Return a transaction by hash, optionally including the inclusion proof."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Mempool",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Cometbft Unconfirmed Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/unconfirmed_txs"
+          },
+          "docs": "Return the current set of unconfirmed transactions in the mempool."
+        },
+        {
+          "info": {
+            "name": "Broadcast Cometbft Transaction Synchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/broadcast_tx_sync",
+            "params": [
+              {
+                "name": "tx",
+                "value": "",
+                "type": "query",
+                "description": "Hex- or base64-encoded transaction bytes."
+              }
+            ]
+          },
+          "docs": "Broadcast a transaction and return once CheckTx has run (does not wait for inclusion in a block).\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
