@@ -93,33 +93,30 @@ access: 3rd-Party
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/pocket-network/overview
-  - type: ArazzoWorkflows
-    url: arazzo/
-    workflows:
-      - url: arazzo/pocket-network-cometbft-node-block-inspect-workflow.yml
-        name: Pocket Network CometBFT Node Block Inspect
-        summary: Read node status for the latest height, fetch that block, then its ABCI results.
-      - url: arazzo/pocket-network-path-relay-readiness-workflow.yml
-        name: Pocket Network PATH Relay Readiness
-        summary: Confirm the PATH gateway is ready, then send an authenticated JSON-RPC relay through it.
-      - url: arazzo/pocket-network-shannon-application-balance-workflow.yml
-        name: Pocket Network Shannon Application Balance
-        summary: Look up a Shannon application, then read the on-chain balances of its address.
-      - url: arazzo/pocket-network-shannon-application-session-workflow.yml
-        name: Pocket Network Shannon Application Session
-        summary: Resolve an application, confirm the target service exists, then fetch its active session.
-      - url: arazzo/pocket-network-shannon-block-explorer-workflow.yml
-        name: Pocket Network Shannon Block Explorer
-        summary: Read the latest Shannon block height, then fetch that exact block by height.
-      - url: arazzo/pocket-network-shannon-service-economics-workflow.yml
-        name: Pocket Network Shannon Service Economics
-        summary: Read a service definition, the network tokenomics parameters, and total supply.
-      - url: arazzo/pocket-network-shannon-supplier-gateway-survey-workflow.yml
-        name: Pocket Network Shannon Supplier and Gateway Survey
-        summary: List suppliers, drill into the first supplier, then list gateways for network context.
-      - url: arazzo/pocket-network-shannon-transaction-lookup-workflow.yml
-        name: Pocket Network Shannon Transaction Lookup
-        summary: Find the latest block, then look up a supplied transaction hash on Shannon.
+  - type: Arazzo
+    url: arazzo/pocket-network-cometbft-node-block-inspect-workflow.yml
+    name: Pocket Network CometBFT Node Block Inspect
+  - type: Arazzo
+    url: arazzo/pocket-network-path-relay-readiness-workflow.yml
+    name: Pocket Network PATH Relay Readiness
+  - type: Arazzo
+    url: arazzo/pocket-network-shannon-application-balance-workflow.yml
+    name: Pocket Network Shannon Application Balance
+  - type: Arazzo
+    url: arazzo/pocket-network-shannon-application-session-workflow.yml
+    name: Pocket Network Shannon Application Session
+  - type: Arazzo
+    url: arazzo/pocket-network-shannon-block-explorer-workflow.yml
+    name: Pocket Network Shannon Block Explorer
+  - type: Arazzo
+    url: arazzo/pocket-network-shannon-service-economics-workflow.yml
+    name: Pocket Network Shannon Service Economics
+  - type: Arazzo
+    url: arazzo/pocket-network-shannon-supplier-gateway-survey-workflow.yml
+    name: Pocket Network Shannon Supplier and Gateway Survey
+  - type: Arazzo
+    url: arazzo/pocket-network-shannon-transaction-lookup-workflow.yml
+    name: Pocket Network Shannon Transaction Lookup
   - type: Portal
     url: https://pocket.network
   - type: Portal
@@ -151,10 +148,10 @@ common:
     type: Documentation
   - url: https://forum.pokt.network/
     name: Pocket Network Forum
-    type: Forum
+    type: Forums
   - url: https://discord.gg/pocket-network
     name: Pocket Network Discord
-    type: Forum
+    type: Forums
   - url: https://github.com/pokt-network
     type: GitHubOrganization
   - url: https://github.com/buildwithgrove
@@ -170,25 +167,25 @@ common:
     type: SourceCode
   - url: https://github.com/pokt-network/shannon-sdk
     name: Shannon SDK (Go)
-    type: SDK
+    type: SDKs
   - url: https://github.com/pokt-network/poktroll-clients-py
     name: poktroll Clients (Python)
-    type: SDK
+    type: SDKs
   - url: https://github.com/pokt-network/shannon-tx-builder
     name: Shannon Transaction Builder (Python)
-    type: SDK
+    type: SDKs
   - url: https://github.com/pokt-network/pocket-js
     name: pocket-js (JavaScript Protocol Library)
-    type: SDK
+    type: SDKs
   - url: https://github.com/pokt-network/homebrew-pocketd
     name: Homebrew tap (poktrolld)
-    type: Tool
+    type: Tools
   - url: https://github.com/pokt-network/pocketdex
     name: Pocketdex (SubQuery indexer)
-    type: Tool
+    type: Tools
   - url: https://github.com/pokt-network/pocket-explorer
     name: Pocket Explorer
-    type: Tool
+    type: Tools
   - url: https://github.com/pokt-network/poktroll/releases
     name: poktroll Releases
     type: ChangeLog

@@ -2,21 +2,31 @@
   "repo": "pocket-network",
   "feeds": [
     {
-      "source": "https://grove.city/news",
-      "feed_url": "https://grove.city/news",
+      "source": "https://medium.com/feed/decentralized-infrastructure",
+      "feed_url": "https://medium.com/feed/decentralized-infrastructure",
       "title": "",
       "saved": 0,
-      "method": "none"
+      "method": "feed"
+    },
+    {
+      "source": "https://pocket.network/feed/",
+      "feed_url": "https://pocket.network/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://medium.com/decentralized-infrastructure",
+      "feed_url": "https://medium.com/feed/decentralized-infrastructure",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
     },
     {
       "source": "https://pocket.network/blog/",
       "error": "HTTPError"
-    },
-    {
-      "source": "https://medium.com/decentralized-infrastructure",
-      "error": "HTTPError"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T12:03:07Z"
 }
