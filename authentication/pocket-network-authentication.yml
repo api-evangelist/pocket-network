@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/pocket-network-path-gateway-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - path
+schemes:
+- name: PortalApplicationId
+  type: apiKey
+  in: path
+  parameter: appId
+  description: Grove portal Application ID embedded in the relay URL.
+  sources:
+  - openapi/pocket-network-path-gateway-api-openapi.yml
