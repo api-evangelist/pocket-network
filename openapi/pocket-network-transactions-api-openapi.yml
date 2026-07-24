@@ -1,0 +1,78 @@
+openapi: 3.1.0
+info:
+  title: Pocket Network CometBFT RPC Application Transactions API
+  description: 'Shannon full nodes expose the standard CometBFT (Tendermint) RPC on port 26657. It is a JSON-RPC 2.0 surface covering consensus, mempool, and network-level queries — node status, network info, peer set, block by height, block results, and unconfirmed transactions. Grove operates a public Shannon mainnet RPC at `shannon-grove-rpc.mainnet.poktroll.com`. Most operations are exposed both as JSON-RPC methods and as HTTP GET shortcuts at the same root URL.
+
+    '
+  version: v1
+  contact:
+    name: Pocket Network Foundation
+    url: https://pocket.network
+  license:
+    name: MIT
+    url: https://github.com/pokt-network/poktroll/blob/main/LICENSE
+servers:
+- url: https://shannon-grove-rpc.mainnet.poktroll.com
+  description: Grove-operated Shannon mainnet CometBFT RPC
+- url: https://shannon-testnet-grove-rpc.beta.poktroll.com
+  description: Grove-operated Shannon beta testnet CometBFT RPC
+tags:
+- name: Transactions
+  description: Transaction lookup and broadcast
+paths:
+  /cosmos/tx/v1beta1/txs/{hash}:
+    get:
+      summary: Get Shannon Transaction By Hash
+      description: Return a Shannon transaction by its hash.
+      operationId: getShannonTransaction
+      tags:
+      - Transactions
+      parameters:
+      - name: hash
+        in: path
+        required: true
+        description: Transaction hash (hex, 64 chars).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Transaction envelope.
+          content:
+            application/json:
+              schema:
+                type: object
+  /cosmos/tx/v1beta1/txs:
+    post:
+      summary: Broadcast Shannon Transaction
+      description: 'Broadcast a signed Shannon transaction. The request body is a TxRaw-encoded transaction with broadcast mode (sync, async, block).
+
+        '
+      operationId: broadcastShannonTransaction
+      tags:
+      - Transactions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - tx_bytes
+              - mode
+              properties:
+                tx_bytes:
+                  type: string
+                  description: Base64-encoded TxRaw.
+                mode:
+                  type: string
+                  enum:
+                  - BROADCAST_MODE_SYNC
+                  - BROADCAST_MODE_ASYNC
+                  - BROADCAST_MODE_BLOCK
+      responses:
+        '200':
+          description: Broadcast result with tx hash and code.
+          content:
+            application/json:
+              schema:
+                type: object

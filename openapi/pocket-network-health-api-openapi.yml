@@ -1,0 +1,69 @@
+openapi: 3.1.0
+info:
+  title: Pocket Network CometBFT RPC Application Health API
+  description: 'Shannon full nodes expose the standard CometBFT (Tendermint) RPC on port 26657. It is a JSON-RPC 2.0 surface covering consensus, mempool, and network-level queries — node status, network info, peer set, block by height, block results, and unconfirmed transactions. Grove operates a public Shannon mainnet RPC at `shannon-grove-rpc.mainnet.poktroll.com`. Most operations are exposed both as JSON-RPC methods and as HTTP GET shortcuts at the same root URL.
+
+    '
+  version: v1
+  contact:
+    name: Pocket Network Foundation
+    url: https://pocket.network
+  license:
+    name: MIT
+    url: https://github.com/pokt-network/poktroll/blob/main/LICENSE
+servers:
+- url: https://shannon-grove-rpc.mainnet.poktroll.com
+  description: Grove-operated Shannon mainnet CometBFT RPC
+- url: https://shannon-testnet-grove-rpc.beta.poktroll.com
+  description: Grove-operated Shannon beta testnet CometBFT RPC
+tags:
+- name: Health
+  description: PATH service liveness and readiness probes
+paths:
+  /healthz:
+    get:
+      summary: Get Path Liveness
+      description: 'Liveness probe exposed by self-hosted PATH instances on port 3069. Returns 200 when the service is running.
+
+        '
+      operationId: getPathLiveness
+      tags:
+      - Health
+      responses:
+        '200':
+          description: PATH process is alive.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+  /readyz:
+    get:
+      summary: Get Path Readiness
+      description: 'Readiness probe. Returns 200 when PATH has loaded its session, supplier, and QoS data and is ready to serve relays.
+
+        '
+      operationId: getPathReadiness
+      tags:
+      - Health
+      responses:
+        '200':
+          description: PATH is ready to serve relays.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+        '503':
+          description: PATH is not yet ready.
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - ok
+          - degraded
+          - unhealthy
+        version:
+          type: string

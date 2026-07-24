@@ -1,0 +1,59 @@
+openapi: 3.1.0
+info:
+  title: Pocket Network CometBFT RPC Application Supplier API
+  description: 'Shannon full nodes expose the standard CometBFT (Tendermint) RPC on port 26657. It is a JSON-RPC 2.0 surface covering consensus, mempool, and network-level queries — node status, network info, peer set, block by height, block results, and unconfirmed transactions. Grove operates a public Shannon mainnet RPC at `shannon-grove-rpc.mainnet.poktroll.com`. Most operations are exposed both as JSON-RPC methods and as HTTP GET shortcuts at the same root URL.
+
+    '
+  version: v1
+  contact:
+    name: Pocket Network Foundation
+    url: https://pocket.network
+  license:
+    name: MIT
+    url: https://github.com/pokt-network/poktroll/blob/main/LICENSE
+servers:
+- url: https://shannon-grove-rpc.mainnet.poktroll.com
+  description: Grove-operated Shannon mainnet CometBFT RPC
+- url: https://shannon-testnet-grove-rpc.beta.poktroll.com
+  description: Grove-operated Shannon beta testnet CometBFT RPC
+tags:
+- name: Supplier
+  description: Pocket supplier module — suppliers stake POKT and serve relays via RelayMiner
+paths:
+  /pocket/supplier/v1/supplier:
+    get:
+      summary: List Shannon Suppliers
+      description: 'List every Supplier module entry. Suppliers stake POKT and run a RelayMiner to serve relays for the services they support.
+
+        '
+      operationId: listShannonSuppliers
+      tags:
+      - Supplier
+      responses:
+        '200':
+          description: Supplier list.
+          content:
+            application/json:
+              schema:
+                type: object
+  /pocket/supplier/v1/supplier/{address}:
+    get:
+      summary: Get Shannon Supplier
+      description: Return a single Supplier by Shannon operator address.
+      operationId: getShannonSupplier
+      tags:
+      - Supplier
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Bech32 Shannon operator address.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Supplier record.
+          content:
+            application/json:
+              schema:
+                type: object

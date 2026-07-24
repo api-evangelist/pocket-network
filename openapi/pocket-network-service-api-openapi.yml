@@ -1,0 +1,59 @@
+openapi: 3.1.0
+info:
+  title: Pocket Network CometBFT RPC Application Service API
+  description: 'Shannon full nodes expose the standard CometBFT (Tendermint) RPC on port 26657. It is a JSON-RPC 2.0 surface covering consensus, mempool, and network-level queries — node status, network info, peer set, block by height, block results, and unconfirmed transactions. Grove operates a public Shannon mainnet RPC at `shannon-grove-rpc.mainnet.poktroll.com`. Most operations are exposed both as JSON-RPC methods and as HTTP GET shortcuts at the same root URL.
+
+    '
+  version: v1
+  contact:
+    name: Pocket Network Foundation
+    url: https://pocket.network
+  license:
+    name: MIT
+    url: https://github.com/pokt-network/poktroll/blob/main/LICENSE
+servers:
+- url: https://shannon-grove-rpc.mainnet.poktroll.com
+  description: Grove-operated Shannon mainnet CometBFT RPC
+- url: https://shannon-testnet-grove-rpc.beta.poktroll.com
+  description: Grove-operated Shannon beta testnet CometBFT RPC
+tags:
+- name: Service
+  description: Pocket service module — services represent the data sources (EVM chains, Solana, etc.) the network serves
+paths:
+  /pocket/service/v1/service:
+    get:
+      summary: List Shannon Services
+      description: 'List every service registered on Shannon. A service represents an external data source (e.g. eth, solana, base, arbitrum) the network can serve relays for. Each service has compute-unit pricing.
+
+        '
+      operationId: listShannonServices
+      tags:
+      - Service
+      responses:
+        '200':
+          description: Service list.
+          content:
+            application/json:
+              schema:
+                type: object
+  /pocket/service/v1/service/{serviceId}:
+    get:
+      summary: Get Shannon Service
+      description: Return a single service definition.
+      operationId: getShannonService
+      tags:
+      - Service
+      parameters:
+      - name: serviceId
+        in: path
+        required: true
+        description: Service identifier (e.g. "eth", "solana", "base").
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Service record.
+          content:
+            application/json:
+              schema:
+                type: object

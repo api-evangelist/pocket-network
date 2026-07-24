@@ -1,0 +1,38 @@
+openapi: 3.1.0
+info:
+  title: Pocket Network CometBFT RPC Application Proof API
+  description: 'Shannon full nodes expose the standard CometBFT (Tendermint) RPC on port 26657. It is a JSON-RPC 2.0 surface covering consensus, mempool, and network-level queries — node status, network info, peer set, block by height, block results, and unconfirmed transactions. Grove operates a public Shannon mainnet RPC at `shannon-grove-rpc.mainnet.poktroll.com`. Most operations are exposed both as JSON-RPC methods and as HTTP GET shortcuts at the same root URL.
+
+    '
+  version: v1
+  contact:
+    name: Pocket Network Foundation
+    url: https://pocket.network
+  license:
+    name: MIT
+    url: https://github.com/pokt-network/poktroll/blob/main/LICENSE
+servers:
+- url: https://shannon-grove-rpc.mainnet.poktroll.com
+  description: Grove-operated Shannon mainnet CometBFT RPC
+- url: https://shannon-testnet-grove-rpc.beta.poktroll.com
+  description: Grove-operated Shannon beta testnet CometBFT RPC
+tags:
+- name: Proof
+  description: Pocket proof module — claims and proofs that suppliers submit to earn POKT
+paths:
+  /pocket/proof/v1/params:
+    get:
+      summary: Get Shannon Proof Parameters
+      description: 'Return the parameters of the on-chain Proof module (claim and proof windows, minimum relay difficulty, target submission probability).
+
+        '
+      operationId: getShannonProofParameters
+      tags:
+      - Proof
+      responses:
+        '200':
+          description: Proof parameters.
+          content:
+            application/json:
+              schema:
+                type: object

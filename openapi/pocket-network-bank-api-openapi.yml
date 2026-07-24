@@ -1,0 +1,57 @@
+openapi: 3.1.0
+info:
+  title: Pocket Network CometBFT RPC Application Bank API
+  description: 'Shannon full nodes expose the standard CometBFT (Tendermint) RPC on port 26657. It is a JSON-RPC 2.0 surface covering consensus, mempool, and network-level queries — node status, network info, peer set, block by height, block results, and unconfirmed transactions. Grove operates a public Shannon mainnet RPC at `shannon-grove-rpc.mainnet.poktroll.com`. Most operations are exposed both as JSON-RPC methods and as HTTP GET shortcuts at the same root URL.
+
+    '
+  version: v1
+  contact:
+    name: Pocket Network Foundation
+    url: https://pocket.network
+  license:
+    name: MIT
+    url: https://github.com/pokt-network/poktroll/blob/main/LICENSE
+servers:
+- url: https://shannon-grove-rpc.mainnet.poktroll.com
+  description: Grove-operated Shannon mainnet CometBFT RPC
+- url: https://shannon-testnet-grove-rpc.beta.poktroll.com
+  description: Grove-operated Shannon beta testnet CometBFT RPC
+tags:
+- name: Bank
+  description: POKT supply, balances, and burn tracking
+paths:
+  /cosmos/bank/v1beta1/balances/{address}:
+    get:
+      summary: Get Shannon Address Balances
+      description: Return all coin balances for a Shannon address (upokt and IBC tokens).
+      operationId: getShannonBalances
+      tags:
+      - Bank
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Bech32 Shannon address (pokt1...).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Balance set.
+          content:
+            application/json:
+              schema:
+                type: object
+  /cosmos/bank/v1beta1/supply:
+    get:
+      summary: Get Shannon Total Supply
+      description: Return the total Shannon supply for every denom (upokt and IBC).
+      operationId: getShannonTotalSupply
+      tags:
+      - Bank
+      responses:
+        '200':
+          description: Supply totals.
+          content:
+            application/json:
+              schema:
+                type: object

@@ -1,0 +1,54 @@
+openapi: 3.1.0
+info:
+  title: Pocket Network CometBFT RPC Application Session API
+  description: 'Shannon full nodes expose the standard CometBFT (Tendermint) RPC on port 26657. It is a JSON-RPC 2.0 surface covering consensus, mempool, and network-level queries — node status, network info, peer set, block by height, block results, and unconfirmed transactions. Grove operates a public Shannon mainnet RPC at `shannon-grove-rpc.mainnet.poktroll.com`. Most operations are exposed both as JSON-RPC methods and as HTTP GET shortcuts at the same root URL.
+
+    '
+  version: v1
+  contact:
+    name: Pocket Network Foundation
+    url: https://pocket.network
+  license:
+    name: MIT
+    url: https://github.com/pokt-network/poktroll/blob/main/LICENSE
+servers:
+- url: https://shannon-grove-rpc.mainnet.poktroll.com
+  description: Grove-operated Shannon mainnet CometBFT RPC
+- url: https://shannon-testnet-grove-rpc.beta.poktroll.com
+  description: Grove-operated Shannon beta testnet CometBFT RPC
+tags:
+- name: Session
+  description: Pocket session module — sessions group applications, suppliers, and services for a given block window
+paths:
+  /pocket/session/v1/get_session:
+    get:
+      summary: Get Shannon Session
+      description: 'Return the active session for a given application/service pair at a given block height. Sessions group applications and suppliers for the duration of a session window.
+
+        '
+      operationId: getShannonSession
+      tags:
+      - Session
+      parameters:
+      - name: application_address
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: service_id
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: block_height
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Session record.
+          content:
+            application/json:
+              schema:
+                type: object
