@@ -1,80 +1,473 @@
 aid: pocket-network
 url: https://raw.githubusercontent.com/api-evangelist/pocket-network/refs/heads/main/apis.yml
 apis:
-  - aid: pocket-network:pocket-network-path-gateway-api
-    name: Pocket Network PATH Gateway API
-    tags:
-      - Pocket Network
-      - Grove
-      - PATH
-      - RPC
-      - Relays
-    humanURL: https://path.grove.city/
-    properties:
-      - url: https://path.grove.city/develop/path/introduction
-        type: Documentation
-      - url: https://path.grove.city/develop/path/cheatsheet
-        type: Documentation
-      - url: openapi/pocket-network-path-gateway-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/pocket-network-relay-schema.json
-        type: JSONSchema
-      - url: json-ld/pocket-network-context.jsonld
-        type: JSONLD
-      - url: https://github.com/buildwithgrove/path
-        type: SourceCode
-    description: >-
-      PATH is the open-source Go gateway (github.com/buildwithgrove/path) that exposes Pocket Network Shannon as a
-      single HTTP surface. It proxies JSON-RPC, REST, and WebSocket relays to Shannon suppliers, scores them via QoS,
-      and signs each relay with the operator's gateway and application keys. Grove operates the largest hosted PATH
-      deployment on rpc.grove.city across 69+ chains, both as authenticated portal endpoints and as no-key public
-      endpoints per chain (e.g. eth.rpc.grove.city, solana.rpc.grove.city).
-  - aid: pocket-network:pocket-network-shannon-rpc-api
-    name: Pocket Network Shannon RPC API
-    tags:
-      - Pocket Network
-      - Shannon
-      - Cosmos
-      - Blockchain
-    humanURL: https://dev.poktroll.com/
-    properties:
-      - url: https://dev.poktroll.com/
-        type: Documentation
-      - url: https://docs.pokt.network/pokt-protocol/the-shannon-upgrade
-        type: Documentation
-      - url: openapi/pocket-network-shannon-rpc-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/pocket-network-shannon-actor-schema.json
-        type: JSONSchema
-      - url: https://github.com/pokt-network/poktroll
-        type: SourceCode
-    description: >-
-      The Shannon chain is a Cosmos SDK + CometBFT chain (github.com/pokt-network/poktroll) that supplanted Morse in
-      June 2025. The REST surface exposes the standard Cosmos modules (bank, staking, base) alongside Pocket-specific
-      modules — application, supplier, gateway, service, session, proof, and tokenomics. Service fees are denominated in
-      compute units (1 USD = 1B CU) and post-PIP-41 a 97.5% mint ratio makes POKT deflationary. Grove operates a public
-      Shannon mainnet REST endpoint at shannon-grove-api.mainnet.poktroll.com.
-  - aid: pocket-network:pocket-network-cometbft-rpc-api
-    name: Pocket Network CometBFT RPC API
-    tags:
-      - Pocket Network
-      - Shannon
-      - CometBFT
-      - Tendermint
-      - Consensus
-    humanURL: https://dev.poktroll.com/
-    properties:
-      - url: https://docs.cometbft.com/v0.38/rpc/
-        type: Documentation
-      - url: openapi/pocket-network-cometbft-rpc-api-openapi.yml
-        type: OpenAPI
-      - url: https://github.com/pokt-network/poktroll
-        type: SourceCode
-    description: >-
-      The CometBFT (Tendermint) JSON-RPC surface exposed by every Shannon full node on port 26657. Covers
-      consensus-level queries (status, net_info, blocks, block_results, tx), mempool inspection, and synchronous
-      transaction broadcast. Grove operates a public Shannon mainnet CometBFT RPC at
-      shannon-grove-rpc.mainnet.poktroll.com.
+- aid: pocket-network:pocket-network-application-api
+  name: Pocket Network Application API
+  description: Pocket application module — applications stake POKT to consume relays
+  humanURL: https://path.grove.city/
+  tags:
+  - Application
+  properties:
+  - type: OpenAPI
+    url: openapi/pocket-network-application-api-openapi.yml
+  - type: Documentation
+    url: https://path.grove.city/develop/path/introduction
+  - type: Documentation
+    url: https://path.grove.city/develop/path/cheatsheet
+  - type: JSONSchema
+    url: json-schema/pocket-network-relay-schema.json
+  - type: JSONLD
+    url: json-ld/pocket-network-context.jsonld
+  - type: SourceCode
+    url: https://github.com/buildwithgrove/path
+  - type: Documentation
+    url: https://dev.poktroll.com/
+  - type: Documentation
+    url: https://docs.pokt.network/pokt-protocol/the-shannon-upgrade
+  - type: JSONSchema
+    url: json-schema/pocket-network-shannon-actor-schema.json
+  - type: SourceCode
+    url: https://github.com/pokt-network/poktroll
+  - type: Documentation
+    url: https://docs.cometbft.com/v0.38/rpc/
+- aid: pocket-network:pocket-network-bank-api
+  name: Pocket Network Bank API
+  description: POKT supply, balances, and burn tracking
+  humanURL: https://path.grove.city/
+  tags:
+  - Bank
+  properties:
+  - type: OpenAPI
+    url: openapi/pocket-network-bank-api-openapi.yml
+  - type: Documentation
+    url: https://path.grove.city/develop/path/introduction
+  - type: Documentation
+    url: https://path.grove.city/develop/path/cheatsheet
+  - type: JSONSchema
+    url: json-schema/pocket-network-relay-schema.json
+  - type: JSONLD
+    url: json-ld/pocket-network-context.jsonld
+  - type: SourceCode
+    url: https://github.com/buildwithgrove/path
+  - type: Documentation
+    url: https://dev.poktroll.com/
+  - type: Documentation
+    url: https://docs.pokt.network/pokt-protocol/the-shannon-upgrade
+  - type: JSONSchema
+    url: json-schema/pocket-network-shannon-actor-schema.json
+  - type: SourceCode
+    url: https://github.com/pokt-network/poktroll
+  - type: Documentation
+    url: https://docs.cometbft.com/v0.38/rpc/
+- aid: pocket-network:pocket-network-blocks-api
+  name: Pocket Network Blocks API
+  description: Block and consensus state queries
+  humanURL: https://path.grove.city/
+  tags:
+  - Blocks
+  properties:
+  - type: OpenAPI
+    url: openapi/pocket-network-blocks-api-openapi.yml
+  - type: Documentation
+    url: https://path.grove.city/develop/path/introduction
+  - type: Documentation
+    url: https://path.grove.city/develop/path/cheatsheet
+  - type: JSONSchema
+    url: json-schema/pocket-network-relay-schema.json
+  - type: JSONLD
+    url: json-ld/pocket-network-context.jsonld
+  - type: SourceCode
+    url: https://github.com/buildwithgrove/path
+  - type: Documentation
+    url: https://dev.poktroll.com/
+  - type: Documentation
+    url: https://docs.pokt.network/pokt-protocol/the-shannon-upgrade
+  - type: JSONSchema
+    url: json-schema/pocket-network-shannon-actor-schema.json
+  - type: SourceCode
+    url: https://github.com/pokt-network/poktroll
+  - type: Documentation
+    url: https://docs.cometbft.com/v0.38/rpc/
+- aid: pocket-network:pocket-network-consensus-api
+  name: Pocket Network Consensus API
+  description: Block, header, and consensus queries
+  humanURL: https://path.grove.city/
+  tags:
+  - Consensus
+  properties:
+  - type: OpenAPI
+    url: openapi/pocket-network-consensus-api-openapi.yml
+  - type: Documentation
+    url: https://path.grove.city/develop/path/introduction
+  - type: Documentation
+    url: https://path.grove.city/develop/path/cheatsheet
+  - type: JSONSchema
+    url: json-schema/pocket-network-relay-schema.json
+  - type: JSONLD
+    url: json-ld/pocket-network-context.jsonld
+  - type: SourceCode
+    url: https://github.com/buildwithgrove/path
+  - type: Documentation
+    url: https://dev.poktroll.com/
+  - type: Documentation
+    url: https://docs.pokt.network/pokt-protocol/the-shannon-upgrade
+  - type: JSONSchema
+    url: json-schema/pocket-network-shannon-actor-schema.json
+  - type: SourceCode
+    url: https://github.com/pokt-network/poktroll
+  - type: Documentation
+    url: https://docs.cometbft.com/v0.38/rpc/
+- aid: pocket-network:pocket-network-gateway-api
+  name: Pocket Network Gateway API
+  description: Pocket gateway module — gateways stake POKT and proxy relays for applications
+  humanURL: https://path.grove.city/
+  tags:
+  - Gateway
+  properties:
+  - type: OpenAPI
+    url: openapi/pocket-network-gateway-api-openapi.yml
+  - type: Documentation
+    url: https://path.grove.city/develop/path/introduction
+  - type: Documentation
+    url: https://path.grove.city/develop/path/cheatsheet
+  - type: JSONSchema
+    url: json-schema/pocket-network-relay-schema.json
+  - type: JSONLD
+    url: json-ld/pocket-network-context.jsonld
+  - type: SourceCode
+    url: https://github.com/buildwithgrove/path
+  - type: Documentation
+    url: https://dev.poktroll.com/
+  - type: Documentation
+    url: https://docs.pokt.network/pokt-protocol/the-shannon-upgrade
+  - type: JSONSchema
+    url: json-schema/pocket-network-shannon-actor-schema.json
+  - type: SourceCode
+    url: https://github.com/pokt-network/poktroll
+  - type: Documentation
+    url: https://docs.cometbft.com/v0.38/rpc/
+- aid: pocket-network:pocket-network-health-api
+  name: Pocket Network Health API
+  description: PATH service liveness and readiness probes
+  humanURL: https://path.grove.city/
+  tags:
+  - Health
+  properties:
+  - type: OpenAPI
+    url: openapi/pocket-network-health-api-openapi.yml
+  - type: Documentation
+    url: https://path.grove.city/develop/path/introduction
+  - type: Documentation
+    url: https://path.grove.city/develop/path/cheatsheet
+  - type: JSONSchema
+    url: json-schema/pocket-network-relay-schema.json
+  - type: JSONLD
+    url: json-ld/pocket-network-context.jsonld
+  - type: SourceCode
+    url: https://github.com/buildwithgrove/path
+  - type: Documentation
+    url: https://dev.poktroll.com/
+  - type: Documentation
+    url: https://docs.pokt.network/pokt-protocol/the-shannon-upgrade
+  - type: JSONSchema
+    url: json-schema/pocket-network-shannon-actor-schema.json
+  - type: SourceCode
+    url: https://github.com/pokt-network/poktroll
+  - type: Documentation
+    url: https://docs.cometbft.com/v0.38/rpc/
+- aid: pocket-network:pocket-network-mempool-api
+  name: Pocket Network Mempool API
+  description: Mempool inspection and broadcast
+  humanURL: https://path.grove.city/
+  tags:
+  - Mempool
+  properties:
+  - type: OpenAPI
+    url: openapi/pocket-network-mempool-api-openapi.yml
+  - type: Documentation
+    url: https://path.grove.city/develop/path/introduction
+  - type: Documentation
+    url: https://path.grove.city/develop/path/cheatsheet
+  - type: JSONSchema
+    url: json-schema/pocket-network-relay-schema.json
+  - type: JSONLD
+    url: json-ld/pocket-network-context.jsonld
+  - type: SourceCode
+    url: https://github.com/buildwithgrove/path
+  - type: Documentation
+    url: https://dev.poktroll.com/
+  - type: Documentation
+    url: https://docs.pokt.network/pokt-protocol/the-shannon-upgrade
+  - type: JSONSchema
+    url: json-schema/pocket-network-shannon-actor-schema.json
+  - type: SourceCode
+    url: https://github.com/pokt-network/poktroll
+  - type: Documentation
+    url: https://docs.cometbft.com/v0.38/rpc/
+- aid: pocket-network:pocket-network-proof-api
+  name: Pocket Network Proof API
+  description: Pocket proof module — claims and proofs that suppliers submit to earn POKT
+  humanURL: https://path.grove.city/
+  tags:
+  - Proof
+  properties:
+  - type: OpenAPI
+    url: openapi/pocket-network-proof-api-openapi.yml
+  - type: Documentation
+    url: https://path.grove.city/develop/path/introduction
+  - type: Documentation
+    url: https://path.grove.city/develop/path/cheatsheet
+  - type: JSONSchema
+    url: json-schema/pocket-network-relay-schema.json
+  - type: JSONLD
+    url: json-ld/pocket-network-context.jsonld
+  - type: SourceCode
+    url: https://github.com/buildwithgrove/path
+  - type: Documentation
+    url: https://dev.poktroll.com/
+  - type: Documentation
+    url: https://docs.pokt.network/pokt-protocol/the-shannon-upgrade
+  - type: JSONSchema
+    url: json-schema/pocket-network-shannon-actor-schema.json
+  - type: SourceCode
+    url: https://github.com/pokt-network/poktroll
+  - type: Documentation
+    url: https://docs.cometbft.com/v0.38/rpc/
+- aid: pocket-network:pocket-network-relays-api
+  name: Pocket Network Relays API
+  description: JSON-RPC, REST, and WebSocket relays proxied to Shannon suppliers
+  humanURL: https://path.grove.city/
+  tags:
+  - Relays
+  properties:
+  - type: OpenAPI
+    url: openapi/pocket-network-relays-api-openapi.yml
+  - type: Documentation
+    url: https://path.grove.city/develop/path/introduction
+  - type: Documentation
+    url: https://path.grove.city/develop/path/cheatsheet
+  - type: JSONSchema
+    url: json-schema/pocket-network-relay-schema.json
+  - type: JSONLD
+    url: json-ld/pocket-network-context.jsonld
+  - type: SourceCode
+    url: https://github.com/buildwithgrove/path
+  - type: Documentation
+    url: https://dev.poktroll.com/
+  - type: Documentation
+    url: https://docs.pokt.network/pokt-protocol/the-shannon-upgrade
+  - type: JSONSchema
+    url: json-schema/pocket-network-shannon-actor-schema.json
+  - type: SourceCode
+    url: https://github.com/pokt-network/poktroll
+  - type: Documentation
+    url: https://docs.cometbft.com/v0.38/rpc/
+- aid: pocket-network:pocket-network-service-api
+  name: Pocket Network Service API
+  description: >-
+    Pocket service module — services represent the data sources (EVM chains, Solana, etc.) the network
+    serves
+  humanURL: https://path.grove.city/
+  tags:
+  - Service
+  properties:
+  - type: OpenAPI
+    url: openapi/pocket-network-service-api-openapi.yml
+  - type: Documentation
+    url: https://path.grove.city/develop/path/introduction
+  - type: Documentation
+    url: https://path.grove.city/develop/path/cheatsheet
+  - type: JSONSchema
+    url: json-schema/pocket-network-relay-schema.json
+  - type: JSONLD
+    url: json-ld/pocket-network-context.jsonld
+  - type: SourceCode
+    url: https://github.com/buildwithgrove/path
+  - type: Documentation
+    url: https://dev.poktroll.com/
+  - type: Documentation
+    url: https://docs.pokt.network/pokt-protocol/the-shannon-upgrade
+  - type: JSONSchema
+    url: json-schema/pocket-network-shannon-actor-schema.json
+  - type: SourceCode
+    url: https://github.com/pokt-network/poktroll
+  - type: Documentation
+    url: https://docs.cometbft.com/v0.38/rpc/
+- aid: pocket-network:pocket-network-session-api
+  name: Pocket Network Session API
+  description: >-
+    Pocket session module — sessions group applications, suppliers, and services for a given block window
+  humanURL: https://path.grove.city/
+  tags:
+  - Session
+  properties:
+  - type: OpenAPI
+    url: openapi/pocket-network-session-api-openapi.yml
+  - type: Documentation
+    url: https://path.grove.city/develop/path/introduction
+  - type: Documentation
+    url: https://path.grove.city/develop/path/cheatsheet
+  - type: JSONSchema
+    url: json-schema/pocket-network-relay-schema.json
+  - type: JSONLD
+    url: json-ld/pocket-network-context.jsonld
+  - type: SourceCode
+    url: https://github.com/buildwithgrove/path
+  - type: Documentation
+    url: https://dev.poktroll.com/
+  - type: Documentation
+    url: https://docs.pokt.network/pokt-protocol/the-shannon-upgrade
+  - type: JSONSchema
+    url: json-schema/pocket-network-shannon-actor-schema.json
+  - type: SourceCode
+    url: https://github.com/pokt-network/poktroll
+  - type: Documentation
+    url: https://docs.cometbft.com/v0.38/rpc/
+- aid: pocket-network:pocket-network-status-api
+  name: Pocket Network Status API
+  description: Node status and network info
+  humanURL: https://path.grove.city/
+  tags:
+  - Status
+  properties:
+  - type: OpenAPI
+    url: openapi/pocket-network-status-api-openapi.yml
+  - type: Documentation
+    url: https://path.grove.city/develop/path/introduction
+  - type: Documentation
+    url: https://path.grove.city/develop/path/cheatsheet
+  - type: JSONSchema
+    url: json-schema/pocket-network-relay-schema.json
+  - type: JSONLD
+    url: json-ld/pocket-network-context.jsonld
+  - type: SourceCode
+    url: https://github.com/buildwithgrove/path
+  - type: Documentation
+    url: https://dev.poktroll.com/
+  - type: Documentation
+    url: https://docs.pokt.network/pokt-protocol/the-shannon-upgrade
+  - type: JSONSchema
+    url: json-schema/pocket-network-shannon-actor-schema.json
+  - type: SourceCode
+    url: https://github.com/pokt-network/poktroll
+  - type: Documentation
+    url: https://docs.cometbft.com/v0.38/rpc/
+- aid: pocket-network:pocket-network-supplier-api
+  name: Pocket Network Supplier API
+  description: Pocket supplier module — suppliers stake POKT and serve relays via RelayMiner
+  humanURL: https://path.grove.city/
+  tags:
+  - Supplier
+  properties:
+  - type: OpenAPI
+    url: openapi/pocket-network-supplier-api-openapi.yml
+  - type: Documentation
+    url: https://path.grove.city/develop/path/introduction
+  - type: Documentation
+    url: https://path.grove.city/develop/path/cheatsheet
+  - type: JSONSchema
+    url: json-schema/pocket-network-relay-schema.json
+  - type: JSONLD
+    url: json-ld/pocket-network-context.jsonld
+  - type: SourceCode
+    url: https://github.com/buildwithgrove/path
+  - type: Documentation
+    url: https://dev.poktroll.com/
+  - type: Documentation
+    url: https://docs.pokt.network/pokt-protocol/the-shannon-upgrade
+  - type: JSONSchema
+    url: json-schema/pocket-network-shannon-actor-schema.json
+  - type: SourceCode
+    url: https://github.com/pokt-network/poktroll
+  - type: Documentation
+    url: https://docs.cometbft.com/v0.38/rpc/
+- aid: pocket-network:pocket-network-tokenomics-api
+  name: Pocket Network Tokenomics API
+  description: Pocket tokenomics module — global mint, burn, and reward parameters
+  humanURL: https://path.grove.city/
+  tags:
+  - Tokenomics
+  properties:
+  - type: OpenAPI
+    url: openapi/pocket-network-tokenomics-api-openapi.yml
+  - type: Documentation
+    url: https://path.grove.city/develop/path/introduction
+  - type: Documentation
+    url: https://path.grove.city/develop/path/cheatsheet
+  - type: JSONSchema
+    url: json-schema/pocket-network-relay-schema.json
+  - type: JSONLD
+    url: json-ld/pocket-network-context.jsonld
+  - type: SourceCode
+    url: https://github.com/buildwithgrove/path
+  - type: Documentation
+    url: https://dev.poktroll.com/
+  - type: Documentation
+    url: https://docs.pokt.network/pokt-protocol/the-shannon-upgrade
+  - type: JSONSchema
+    url: json-schema/pocket-network-shannon-actor-schema.json
+  - type: SourceCode
+    url: https://github.com/pokt-network/poktroll
+  - type: Documentation
+    url: https://docs.cometbft.com/v0.38/rpc/
+- aid: pocket-network:pocket-network-transactions-api
+  name: Pocket Network Transactions API
+  description: Transaction lookup and broadcast
+  humanURL: https://path.grove.city/
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/pocket-network-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://path.grove.city/develop/path/introduction
+  - type: Documentation
+    url: https://path.grove.city/develop/path/cheatsheet
+  - type: JSONSchema
+    url: json-schema/pocket-network-relay-schema.json
+  - type: JSONLD
+    url: json-ld/pocket-network-context.jsonld
+  - type: SourceCode
+    url: https://github.com/buildwithgrove/path
+  - type: Documentation
+    url: https://dev.poktroll.com/
+  - type: Documentation
+    url: https://docs.pokt.network/pokt-protocol/the-shannon-upgrade
+  - type: JSONSchema
+    url: json-schema/pocket-network-shannon-actor-schema.json
+  - type: SourceCode
+    url: https://github.com/pokt-network/poktroll
+  - type: Documentation
+    url: https://docs.cometbft.com/v0.38/rpc/
+- aid: pocket-network:pocket-network-validators-api
+  name: Pocket Network Validators API
+  description: Staking and validator queries
+  humanURL: https://path.grove.city/
+  tags:
+  - Validators
+  properties:
+  - type: OpenAPI
+    url: openapi/pocket-network-validators-api-openapi.yml
+  - type: Documentation
+    url: https://path.grove.city/develop/path/introduction
+  - type: Documentation
+    url: https://path.grove.city/develop/path/cheatsheet
+  - type: JSONSchema
+    url: json-schema/pocket-network-relay-schema.json
+  - type: JSONLD
+    url: json-ld/pocket-network-context.jsonld
+  - type: SourceCode
+    url: https://github.com/buildwithgrove/path
+  - type: Documentation
+    url: https://dev.poktroll.com/
+  - type: Documentation
+    url: https://docs.pokt.network/pokt-protocol/the-shannon-upgrade
+  - type: JSONSchema
+    url: json-schema/pocket-network-shannon-actor-schema.json
+  - type: SourceCode
+    url: https://github.com/pokt-network/poktroll
+  - type: Documentation
+    url: https://docs.cometbft.com/v0.38/rpc/
 name: Pocket Network
 tags:
   - Web3
@@ -88,7 +481,20 @@ tags:
   - Cosmos
   - POKT
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/pocket-network.png
 access: 3rd-Party
 common:
   - type: AgenticAccess
