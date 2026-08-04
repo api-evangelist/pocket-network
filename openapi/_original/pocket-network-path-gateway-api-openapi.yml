@@ -1,0 +1,228 @@
+openapi: 3.1.0
+info:
+  title: Pocket Network PATH Gateway API
+  description: >
+    PATH (Path API and Toolkit Harness) is the open-source Go gateway maintained
+    by Grove (github.com/buildwithgrove/path mirrored at github.com/pokt-network/path)
+    that exposes Pocket Network Shannon as a single HTTP surface. PATH proxies
+    JSON-RPC, REST, and WebSocket calls for every service (blockchain) staked
+    on Shannon, selects suppliers via Quality-of-Service scoring, signs relay
+    requests with the operator's Gateway and Application keys, and returns
+    upstream responses verbatim. The same protocol drives Grove's hosted
+    endpoints on rpc.grove.city — each chain is exposed as a subdomain such as
+    `eth.rpc.grove.city/v1/{appId}` or `solana.rpc.grove.city/v1/{appId}`. The
+    payload for every operation is the JSON-RPC envelope of the target chain
+    (e.g. Ethereum eth_*, Solana getBalance) so PATH itself is service-agnostic.
+  version: 0.1.0
+  contact:
+    name: Grove Support
+    url: https://grove.city
+  license:
+    name: MIT
+    url: https://github.com/buildwithgrove/path/blob/main/LICENSE
+servers:
+  - url: https://rpc.grove.city
+    description: Grove hosted PATH gateway (authenticated, paid)
+  - url: https://eth.rpc.grove.city
+    description: Grove public Ethereum endpoint (no key required)
+  - url: https://solana.rpc.grove.city
+    description: Grove public Solana endpoint (no key required)
+security:
+  - PortalApplicationId: []
+  - {}
+tags:
+  - name: Relays
+    description: JSON-RPC, REST, and WebSocket relays proxied to Shannon suppliers
+  - name: Health
+    description: PATH service liveness and readiness probes
+paths:
+  /v1/{appId}:
+    post:
+      summary: Send Authenticated JSON-RPC Relay
+      description: >
+        Send a JSON-RPC payload for the configured service through a Grove
+        portal application. The path segment `appId` is the Grove portal
+        Application ID returned by the dashboard; the subdomain selects the
+        chain (e.g. `eth.rpc.grove.city`). The request body is the standard
+        JSON-RPC 2.0 envelope of the target chain — PATH does not rewrite it.
+      operationId: sendAuthenticatedRelay
+      tags:
+        - Relays
+      parameters:
+        - name: appId
+          in: path
+          required: true
+          description: Grove portal Application ID (alphanumeric).
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          required: false
+          description: Optional bearer token for portal-secured applications.
+          schema:
+            type: string
+        - name: Target-Service-Id
+          in: header
+          required: false
+          description: >
+            Override the service-id derived from the subdomain. Used when
+            self-hosting PATH behind a single hostname.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JsonRpcRequest'
+            examples:
+              EthBlockNumber:
+                summary: Ethereum eth_blockNumber
+                value:
+                  jsonrpc: '2.0'
+                  id: 1
+                  method: eth_blockNumber
+                  params: []
+              EthGetBalance:
+                summary: Ethereum eth_getBalance
+                value:
+                  jsonrpc: '2.0'
+                  id: 2
+                  method: eth_getBalance
+                  params:
+                    - '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+                    - latest
+      responses:
+        '200':
+          description: Successful relay response from a Shannon supplier.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonRpcResponse'
+        '401':
+          description: Missing or invalid portal authentication.
+        '402':
+          description: Application out of compute units / over plan.
+        '429':
+          description: Rate limit exceeded for the application or organization.
+        '503':
+          description: No healthy supplier returned a usable response.
+  /v1:
+    post:
+      summary: Send Public JSON-RPC Relay
+      description: >
+        Send a JSON-RPC payload to a Grove public endpoint. No portal
+        Application ID is required — the chain is identified by the subdomain.
+        Public endpoints are throttled per-IP and intended for development.
+      operationId: sendPublicRelay
+      tags:
+        - Relays
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JsonRpcRequest'
+      responses:
+        '200':
+          description: Successful relay response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonRpcResponse'
+        '429':
+          description: Public-endpoint rate limit exceeded.
+  /healthz:
+    get:
+      summary: Get Path Liveness
+      description: >
+        Liveness probe exposed by self-hosted PATH instances on port 3069.
+        Returns 200 when the service is running.
+      operationId: getPathLiveness
+      tags:
+        - Health
+      responses:
+        '200':
+          description: PATH process is alive.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+  /readyz:
+    get:
+      summary: Get Path Readiness
+      description: >
+        Readiness probe. Returns 200 when PATH has loaded its session, supplier,
+        and QoS data and is ready to serve relays.
+      operationId: getPathReadiness
+      tags:
+        - Health
+      responses:
+        '200':
+          description: PATH is ready to serve relays.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+        '503':
+          description: PATH is not yet ready.
+components:
+  securitySchemes:
+    PortalApplicationId:
+      type: apiKey
+      in: path
+      name: appId
+      description: Grove portal Application ID embedded in the relay URL.
+  schemas:
+    JsonRpcRequest:
+      type: object
+      description: JSON-RPC 2.0 request envelope of the target service.
+      required:
+        - jsonrpc
+        - method
+      properties:
+        jsonrpc:
+          type: string
+          const: '2.0'
+        id:
+          oneOf:
+            - type: integer
+            - type: string
+            - type: 'null'
+        method:
+          type: string
+          description: JSON-RPC method of the target chain (e.g. eth_blockNumber).
+        params:
+          description: Method parameters, varies per chain and method.
+          oneOf:
+            - type: array
+            - type: object
+    JsonRpcResponse:
+      type: object
+      description: JSON-RPC 2.0 response envelope returned by the supplier.
+      properties:
+        jsonrpc:
+          type: string
+          const: '2.0'
+        id:
+          oneOf:
+            - type: integer
+            - type: string
+            - type: 'null'
+        result: {}
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+            message:
+              type: string
+            data: {}
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [ok, degraded, unhealthy]
+        version:
+          type: string
