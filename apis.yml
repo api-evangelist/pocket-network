@@ -497,6 +497,9 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/pocket-network.png
 access: 3rd-Party
 common:
+  - type: License
+    name: MIT
+    url: https://github.com/buildwithgrove/path/blob/main/LICENSE
   - type: AgenticAccess
     url: agentic-access/pocket-network-agentic-access.yml
   - type: DomainSecurity
