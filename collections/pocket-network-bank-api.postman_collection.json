@@ -1,0 +1,202 @@
+{
+  "item": [
+    {
+      "id": "241cf4d3-d076-4417-b57f-6ae92fa2634d",
+      "name": "Bank",
+      "description": {
+        "content": "POKT supply, balances, and burn tracking",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8498ef34-7686-48fd-92e8-00efa7fc0328",
+          "name": "Get Shannon Address Balances",
+          "request": {
+            "name": "Get Shannon Address Balances",
+            "description": {
+              "content": "Return all coin balances for a Shannon address (upokt and IBC tokens).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cosmos",
+                "bank",
+                "v1beta1",
+                "balances",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Bech32 Shannon address (pokt1...)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "79c0557a-50fd-48ad-81dd-0ce780bf9a56",
+              "name": "Balance set.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cosmos",
+                    "bank",
+                    "v1beta1",
+                    "balances",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Bech32 Shannon address (pokt1...)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "df852e9b-7085-45f5-a408-8c1de087bf47",
+          "name": "Get Shannon Total Supply",
+          "request": {
+            "name": "Get Shannon Total Supply",
+            "description": {
+              "content": "Return the total Shannon supply for every denom (upokt and IBC).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cosmos",
+                "bank",
+                "v1beta1",
+                "supply"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c090dfc-0e38-4829-aa44-23a9e1b4b16e",
+              "name": "Supply totals.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cosmos",
+                    "bank",
+                    "v1beta1",
+                    "supply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://shannon-grove-rpc.mainnet.poktroll.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "21a4f1c5-a0d1-41d2-aa1e-fc19a59064d4",
+    "name": "Pocket Network CometBFT RPC Application Bank API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Shannon full nodes expose the standard CometBFT (Tendermint) RPC on port 26657. It is a JSON-RPC 2.0 surface covering consensus, mempool, and network-level queries — node status, network info, peer set, block by height, block results, and unconfirmed transactions. Grove operates a public Shannon mainnet RPC at `shannon-grove-rpc.mainnet.poktroll.com`. Most operations are exposed both as JSON-RPC methods and as HTTP GET shortcuts at the same root URL.\n\n\nContact Support:\n Name: Pocket Network Foundation",
+      "type": "text/plain"
+    }
+  }
+}

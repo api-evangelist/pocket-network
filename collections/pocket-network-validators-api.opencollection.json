@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pocket Network CometBFT RPC Application Validators API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Validators",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Shannon Validators",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/cosmos/staking/v1beta1/validators"
+          },
+          "docs": "List Cosmos staking validators for the Shannon chain."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

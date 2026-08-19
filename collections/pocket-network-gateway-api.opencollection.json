@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pocket Network CometBFT RPC Application Gateway API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Gateway",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Shannon Gateways",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/pocket/gateway/v1/gateway"
+          },
+          "docs": "List every Gateway module entry. Gateways stake POKT and are authorized by Applications to sign relays on their behalf.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pocket Network CometBFT RPC Application Relays API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Relays",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send Authenticated JSON-RPC Relay",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/v1/:appId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "Target-Service-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "Grove portal Application ID (alphanumeric)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send a JSON-RPC payload for the configured service through a Grove portal application. The path segment `appId` is the Grove portal Application ID returned by the dashboard; the subdomain selects the chain (e.g. `eth.rpc.grove.city`). The request body is the standard JSON-RPC 2.0 envelope of the target chain — PATH does not rewrite it.\n"
+        },
+        {
+          "info": {
+            "name": "Send Public JSON-RPC Relay",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/v1",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send a JSON-RPC payload to a Grove public endpoint. No portal Application ID is required — the chain is identified by the subdomain. Public endpoints are throttled per-IP and intended for development.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,46 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pocket Network CometBFT RPC Application Session API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Session",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Shannon Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/pocket/session/v1/get_session",
+            "params": [
+              {
+                "name": "application_address",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "block_height",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Return the active session for a given application/service pair at a given block height. Sessions group applications and suppliers for the duration of a session window.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

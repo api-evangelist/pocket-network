@@ -1,0 +1,202 @@
+{
+  "item": [
+    {
+      "id": "3f0e92d1-6d9c-443c-8e66-48e6dbd83cf1",
+      "name": "Supplier",
+      "description": {
+        "content": "Pocket supplier module — suppliers stake POKT and serve relays via RelayMiner",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "836cb852-4cd7-4702-8470-7d74a252016a",
+          "name": "List Shannon Suppliers",
+          "request": {
+            "name": "List Shannon Suppliers",
+            "description": {
+              "content": "List every Supplier module entry. Suppliers stake POKT and run a RelayMiner to serve relays for the services they support.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pocket",
+                "supplier",
+                "v1",
+                "supplier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3ff61ec0-6de8-427c-8f21-b23685ef8e42",
+              "name": "Supplier list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pocket",
+                    "supplier",
+                    "v1",
+                    "supplier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "311b1990-9de8-4690-af2c-92f3c59ece10",
+          "name": "Get Shannon Supplier",
+          "request": {
+            "name": "Get Shannon Supplier",
+            "description": {
+              "content": "Return a single Supplier by Shannon operator address.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pocket",
+                "supplier",
+                "v1",
+                "supplier",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Bech32 Shannon operator address."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e2d1e45d-4e60-4f9c-bd1f-1c18bda941f2",
+              "name": "Supplier record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pocket",
+                    "supplier",
+                    "v1",
+                    "supplier",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Bech32 Shannon operator address."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://shannon-grove-rpc.mainnet.poktroll.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d08c4722-01d3-4d27-b2bb-1b25e4c62f98",
+    "name": "Pocket Network CometBFT RPC Application Supplier API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Shannon full nodes expose the standard CometBFT (Tendermint) RPC on port 26657. It is a JSON-RPC 2.0 surface covering consensus, mempool, and network-level queries — node status, network info, peer set, block by height, block results, and unconfirmed transactions. Grove operates a public Shannon mainnet RPC at `shannon-grove-rpc.mainnet.poktroll.com`. Most operations are exposed both as JSON-RPC methods and as HTTP GET shortcuts at the same root URL.\n\n\nContact Support:\n Name: Pocket Network Foundation",
+      "type": "text/plain"
+    }
+  }
+}

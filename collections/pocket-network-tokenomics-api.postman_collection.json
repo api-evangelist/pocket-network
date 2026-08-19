@@ -1,0 +1,108 @@
+{
+  "item": [
+    {
+      "id": "5459d58f-5d52-427c-9085-831b633287e8",
+      "name": "Tokenomics",
+      "description": {
+        "content": "Pocket tokenomics module — global mint, burn, and reward parameters",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e732170f-9bf3-4ebc-a2d3-d017f5fe5464",
+          "name": "Get Shannon Tokenomics Parameters",
+          "request": {
+            "name": "Get Shannon Tokenomics Parameters",
+            "description": {
+              "content": "Return the Shannon tokenomics parameters — mint ratio, allocations to DAO/proposer/source-owner/supplier, and global inflation/deflation settings (post-PIP-41 deflationary 97.5% mint ratio).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pocket",
+                "tokenomics",
+                "v1",
+                "params"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cbf11df7-2e08-4e6a-b382-f313b9894869",
+              "name": "Tokenomics parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pocket",
+                    "tokenomics",
+                    "v1",
+                    "params"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://shannon-grove-rpc.mainnet.poktroll.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e526a616-a358-4fdd-b2b8-b0277c8ad6af",
+    "name": "Pocket Network CometBFT RPC Application Tokenomics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Shannon full nodes expose the standard CometBFT (Tendermint) RPC on port 26657. It is a JSON-RPC 2.0 surface covering consensus, mempool, and network-level queries — node status, network info, peer set, block by height, block results, and unconfirmed transactions. Grove operates a public Shannon mainnet RPC at `shannon-grove-rpc.mainnet.poktroll.com`. Most operations are exposed both as JSON-RPC methods and as HTTP GET shortcuts at the same root URL.\n\n\nContact Support:\n Name: Pocket Network Foundation",
+      "type": "text/plain"
+    }
+  }
+}

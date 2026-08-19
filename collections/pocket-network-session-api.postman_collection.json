@@ -1,0 +1,139 @@
+{
+  "item": [
+    {
+      "id": "07727dda-3012-4a5b-b150-7cbd63dbe5a2",
+      "name": "Session",
+      "description": {
+        "content": "Pocket session module — sessions group applications, suppliers, and services for a given block window",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "20885935-cb4f-47b2-b07c-f0e967271554",
+          "name": "Get Shannon Session",
+          "request": {
+            "name": "Get Shannon Session",
+            "description": {
+              "content": "Return the active session for a given application/service pair at a given block height. Sessions group applications and suppliers for the duration of a session window.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pocket",
+                "session",
+                "v1",
+                "get_session"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "application_address",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "service_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "block_height",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e062e7b4-20bb-40fb-837f-137d7e0e97ea",
+              "name": "Session record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pocket",
+                    "session",
+                    "v1",
+                    "get_session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "application_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "block_height",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://shannon-grove-rpc.mainnet.poktroll.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0bc8949e-0cdf-4fe8-8344-e45c2133508f",
+    "name": "Pocket Network CometBFT RPC Application Session API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Shannon full nodes expose the standard CometBFT (Tendermint) RPC on port 26657. It is a JSON-RPC 2.0 surface covering consensus, mempool, and network-level queries — node status, network info, peer set, block by height, block results, and unconfirmed transactions. Grove operates a public Shannon mainnet RPC at `shannon-grove-rpc.mainnet.poktroll.com`. Most operations are exposed both as JSON-RPC methods and as HTTP GET shortcuts at the same root URL.\n\n\nContact Support:\n Name: Pocket Network Foundation",
+      "type": "text/plain"
+    }
+  }
+}

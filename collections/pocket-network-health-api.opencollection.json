@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pocket Network CometBFT RPC Application Health API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Path Liveness",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/healthz"
+          },
+          "docs": "Liveness probe exposed by self-hosted PATH instances on port 3069. Returns 200 when the service is running.\n"
+        },
+        {
+          "info": {
+            "name": "Get Path Readiness",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/readyz"
+          },
+          "docs": "Readiness probe. Returns 200 when PATH has loaded its session, supplier, and QoS data and is ready to serve relays.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

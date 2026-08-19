@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pocket Network CometBFT RPC Application Supplier API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Supplier",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Shannon Suppliers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/pocket/supplier/v1/supplier"
+          },
+          "docs": "List every Supplier module entry. Suppliers stake POKT and run a RelayMiner to serve relays for the services they support.\n"
+        },
+        {
+          "info": {
+            "name": "Get Shannon Supplier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/pocket/supplier/v1/supplier/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Bech32 Shannon operator address."
+              }
+            ]
+          },
+          "docs": "Return a single Supplier by Shannon operator address."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,202 @@
+{
+  "item": [
+    {
+      "id": "e960fd21-0144-4349-b770-12c730992947",
+      "name": "Service",
+      "description": {
+        "content": "Pocket service module — services represent the data sources (EVM chains, Solana, etc.) the network serves",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "565d391a-573b-41be-a0ab-c15999b9efd6",
+          "name": "List Shannon Services",
+          "request": {
+            "name": "List Shannon Services",
+            "description": {
+              "content": "List every service registered on Shannon. A service represents an external data source (e.g. eth, solana, base, arbitrum) the network can serve relays for. Each service has compute-unit pricing.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pocket",
+                "service",
+                "v1",
+                "service"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fd997acd-f177-4293-a607-e9bfaa466637",
+              "name": "Service list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pocket",
+                    "service",
+                    "v1",
+                    "service"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "204c3b85-2c62-4646-ab28-d470fc43d1e0",
+          "name": "Get Shannon Service",
+          "request": {
+            "name": "Get Shannon Service",
+            "description": {
+              "content": "Return a single service definition.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pocket",
+                "service",
+                "v1",
+                "service",
+                ":serviceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "serviceId",
+                  "description": "(Required) Service identifier (e.g. \"eth\", \"solana\", \"base\")."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "42722adc-cab5-423c-8abb-c23c3592a415",
+              "name": "Service record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pocket",
+                    "service",
+                    "v1",
+                    "service",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceId",
+                      "description": "(Required) Service identifier (e.g. \"eth\", \"solana\", \"base\")."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://shannon-grove-rpc.mainnet.poktroll.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fa5ae386-208a-4dc5-9fd7-27fa43a9366d",
+    "name": "Pocket Network CometBFT RPC Application Service API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Shannon full nodes expose the standard CometBFT (Tendermint) RPC on port 26657. It is a JSON-RPC 2.0 surface covering consensus, mempool, and network-level queries — node status, network info, peer set, block by height, block results, and unconfirmed transactions. Grove operates a public Shannon mainnet RPC at `shannon-grove-rpc.mainnet.poktroll.com`. Most operations are exposed both as JSON-RPC methods and as HTTP GET shortcuts at the same root URL.\n\n\nContact Support:\n Name: Pocket Network Foundation",
+      "type": "text/plain"
+    }
+  }
+}

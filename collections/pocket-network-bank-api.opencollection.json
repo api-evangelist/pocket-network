@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pocket Network CometBFT RPC Application Bank API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bank",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Shannon Address Balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/cosmos/bank/v1beta1/balances/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Bech32 Shannon address (pokt1...)."
+              }
+            ]
+          },
+          "docs": "Return all coin balances for a Shannon address (upokt and IBC tokens)."
+        },
+        {
+          "info": {
+            "name": "Get Shannon Total Supply",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/cosmos/bank/v1beta1/supply"
+          },
+          "docs": "Return the total Shannon supply for every denom (upokt and IBC)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,202 @@
+{
+  "item": [
+    {
+      "id": "4579e75f-adf2-4c9b-bdfd-6c51a86b0f98",
+      "name": "Application",
+      "description": {
+        "content": "Pocket application module — applications stake POKT to consume relays",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "aa46ec35-a616-4849-93c5-49b96129c85d",
+          "name": "List Shannon Applications",
+          "request": {
+            "name": "List Shannon Applications",
+            "description": {
+              "content": "List every Application module entry. Applications stake POKT to consume relays via gateways for one or more services.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pocket",
+                "application",
+                "v1",
+                "application"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2b644647-89c6-4b6c-82d4-f9754960cf54",
+              "name": "Application list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pocket",
+                    "application",
+                    "v1",
+                    "application"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64000b3e-ddd5-4e05-81d7-0bb2cda9e31f",
+          "name": "Get Shannon Application",
+          "request": {
+            "name": "Get Shannon Application",
+            "description": {
+              "content": "Return a single Application by Shannon address.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pocket",
+                "application",
+                "v1",
+                "application",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Bech32 Shannon address (pokt1...)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "264a0278-f383-4451-8800-e6f61916b101",
+              "name": "Application record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pocket",
+                    "application",
+                    "v1",
+                    "application",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Bech32 Shannon address (pokt1...)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://shannon-grove-rpc.mainnet.poktroll.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f741b35a-a7f6-4438-8f1a-dfafd1b0e84f",
+    "name": "Pocket Network CometBFT RPC Application API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Shannon full nodes expose the standard CometBFT (Tendermint) RPC on port 26657. It is a JSON-RPC 2.0 surface covering consensus, mempool, and network-level queries — node status, network info, peer set, block by height, block results, and unconfirmed transactions. Grove operates a public Shannon mainnet RPC at `shannon-grove-rpc.mainnet.poktroll.com`. Most operations are exposed both as JSON-RPC methods and as HTTP GET shortcuts at the same root URL.\n\n\nContact Support:\n Name: Pocket Network Foundation",
+      "type": "text/plain"
+    }
+  }
+}

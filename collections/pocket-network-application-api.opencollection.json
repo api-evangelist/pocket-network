@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pocket Network CometBFT RPC Application API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Application",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Shannon Applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/pocket/application/v1/application"
+          },
+          "docs": "List every Application module entry. Applications stake POKT to consume relays via gateways for one or more services.\n"
+        },
+        {
+          "info": {
+            "name": "Get Shannon Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/pocket/application/v1/application/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Bech32 Shannon address (pokt1...)."
+              }
+            ]
+          },
+          "docs": "Return a single Application by Shannon address."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,108 @@
+{
+  "item": [
+    {
+      "id": "285b84d3-228b-43ed-b9f6-9cbd6949416e",
+      "name": "Gateway",
+      "description": {
+        "content": "Pocket gateway module — gateways stake POKT and proxy relays for applications",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "307e42c3-23a1-4512-8467-9be0f2cbb943",
+          "name": "List Shannon Gateways",
+          "request": {
+            "name": "List Shannon Gateways",
+            "description": {
+              "content": "List every Gateway module entry. Gateways stake POKT and are authorized by Applications to sign relays on their behalf.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pocket",
+                "gateway",
+                "v1",
+                "gateway"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ab9baa34-5c0b-43ed-b01c-c36c2d87d99d",
+              "name": "Gateway list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pocket",
+                    "gateway",
+                    "v1",
+                    "gateway"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://shannon-grove-rpc.mainnet.poktroll.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0cc98ca3-8d28-4ae0-abb5-fe781f5535f0",
+    "name": "Pocket Network CometBFT RPC Application Gateway API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Shannon full nodes expose the standard CometBFT (Tendermint) RPC on port 26657. It is a JSON-RPC 2.0 surface covering consensus, mempool, and network-level queries — node status, network info, peer set, block by height, block results, and unconfirmed transactions. Grove operates a public Shannon mainnet RPC at `shannon-grove-rpc.mainnet.poktroll.com`. Most operations are exposed both as JSON-RPC methods and as HTTP GET shortcuts at the same root URL.\n\n\nContact Support:\n Name: Pocket Network Foundation",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "item": [
+    {
+      "id": "05c8d251-31a6-42cf-9e44-de91cfc32e86",
+      "name": "Validators",
+      "description": {
+        "content": "Staking and validator queries",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a5a0bd32-a0f9-4c30-94a6-68bab7ca3dbb",
+          "name": "List Shannon Validators",
+          "request": {
+            "name": "List Shannon Validators",
+            "description": {
+              "content": "List Cosmos staking validators for the Shannon chain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cosmos",
+                "staking",
+                "v1beta1",
+                "validators"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f6f6c0a6-88f2-4b0c-b96f-69c99318582f",
+              "name": "Validator set.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cosmos",
+                    "staking",
+                    "v1beta1",
+                    "validators"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://shannon-grove-rpc.mainnet.poktroll.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e93ef706-f32b-4b06-83dc-2e2bcf237012",
+    "name": "Pocket Network CometBFT RPC Application Validators API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Shannon full nodes expose the standard CometBFT (Tendermint) RPC on port 26657. It is a JSON-RPC 2.0 surface covering consensus, mempool, and network-level queries — node status, network info, peer set, block by height, block results, and unconfirmed transactions. Grove operates a public Shannon mainnet RPC at `shannon-grove-rpc.mainnet.poktroll.com`. Most operations are exposed both as JSON-RPC methods and as HTTP GET shortcuts at the same root URL.\n\n\nContact Support:\n Name: Pocket Network Foundation",
+      "type": "text/plain"
+    }
+  }
+}

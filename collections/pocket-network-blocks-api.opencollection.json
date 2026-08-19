@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pocket Network CometBFT RPC Application Blocks API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Blocks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Latest Shannon Block",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/cosmos/base/tendermint/v1beta1/blocks/latest"
+          },
+          "docs": "Return the most recently committed CometBFT block."
+        },
+        {
+          "info": {
+            "name": "Get Shannon Block By Height",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/cosmos/base/tendermint/v1beta1/blocks/:height",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "path",
+                "description": "Block height."
+              }
+            ]
+          },
+          "docs": "Return the Shannon block at a specific height."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

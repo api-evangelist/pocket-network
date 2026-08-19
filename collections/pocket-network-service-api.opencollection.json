@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pocket Network CometBFT RPC Application Service API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Service",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Shannon Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/pocket/service/v1/service"
+          },
+          "docs": "List every service registered on Shannon. A service represents an external data source (e.g. eth, solana, base, arbitrum) the network can serve relays for. Each service has compute-unit pricing.\n"
+        },
+        {
+          "info": {
+            "name": "Get Shannon Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/pocket/service/v1/service/:serviceId",
+            "params": [
+              {
+                "name": "serviceId",
+                "value": "",
+                "type": "path",
+                "description": "Service identifier (e.g. \"eth\", \"solana\", \"base\")."
+              }
+            ]
+          },
+          "docs": "Return a single service definition."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

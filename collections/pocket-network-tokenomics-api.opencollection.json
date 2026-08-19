@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pocket Network CometBFT RPC Application Tokenomics API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tokenomics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Shannon Tokenomics Parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/pocket/tokenomics/v1/params"
+          },
+          "docs": "Return the Shannon tokenomics parameters — mint ratio, allocations to DAO/proposer/source-owner/supplier, and global inflation/deflation settings (post-PIP-41 deflationary 97.5% mint ratio).\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pocket Network CometBFT RPC Application Mempool API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Mempool",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Cometbft Unconfirmed Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/unconfirmed_txs"
+          },
+          "docs": "Return the current set of unconfirmed transactions in the mempool."
+        },
+        {
+          "info": {
+            "name": "Broadcast Cometbft Transaction Synchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/broadcast_tx_sync",
+            "params": [
+              {
+                "name": "tx",
+                "value": "",
+                "type": "query",
+                "description": "Hex- or base64-encoded transaction bytes."
+              }
+            ]
+          },
+          "docs": "Broadcast a transaction and return once CheckTx has run (does not wait for inclusion in a block).\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

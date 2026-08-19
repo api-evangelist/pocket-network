@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pocket Network CometBFT RPC Application Transactions API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Shannon Transaction By Hash",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/cosmos/tx/v1beta1/txs/:hash",
+            "params": [
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path",
+                "description": "Transaction hash (hex, 64 chars)."
+              }
+            ]
+          },
+          "docs": "Return a Shannon transaction by its hash."
+        },
+        {
+          "info": {
+            "name": "Broadcast Shannon Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/cosmos/tx/v1beta1/txs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Broadcast a signed Shannon transaction. The request body is a TxRaw-encoded transaction with broadcast mode (sync, async, block).\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

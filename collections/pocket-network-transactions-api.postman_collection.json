@@ -1,0 +1,223 @@
+{
+  "item": [
+    {
+      "id": "a919f4cc-9ee3-4dc5-a767-ebde20612e7e",
+      "name": "Transactions",
+      "description": {
+        "content": "Transaction lookup and broadcast",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "723bc667-c4b1-49bc-a005-105b83711c34",
+          "name": "Get Shannon Transaction By Hash",
+          "request": {
+            "name": "Get Shannon Transaction By Hash",
+            "description": {
+              "content": "Return a Shannon transaction by its hash.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cosmos",
+                "tx",
+                "v1beta1",
+                "txs",
+                ":hash"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hash",
+                  "description": "(Required) Transaction hash (hex, 64 chars)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "71b7e20f-c53a-4c53-81b9-2ded513fbd35",
+              "name": "Transaction envelope.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cosmos",
+                    "tx",
+                    "v1beta1",
+                    "txs",
+                    ":hash"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hash",
+                      "description": "(Required) Transaction hash (hex, 64 chars)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29c1cf10-9c37-4607-9dc6-896958c4a2c1",
+          "name": "Broadcast Shannon Transaction",
+          "request": {
+            "name": "Broadcast Shannon Transaction",
+            "description": {
+              "content": "Broadcast a signed Shannon transaction. The request body is a TxRaw-encoded transaction with broadcast mode (sync, async, block).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cosmos",
+                "tx",
+                "v1beta1",
+                "txs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tx_bytes\": \"<string>\",\n  \"mode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a697a514-20e0-4f2d-bda1-5c406186bab7",
+              "name": "Broadcast result with tx hash and code.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cosmos",
+                    "tx",
+                    "v1beta1",
+                    "txs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tx_bytes\": \"<string>\",\n  \"mode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://shannon-grove-rpc.mainnet.poktroll.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "10df61dd-7c63-4de0-8123-8047e1d9d8cf",
+    "name": "Pocket Network CometBFT RPC Application Transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Shannon full nodes expose the standard CometBFT (Tendermint) RPC on port 26657. It is a JSON-RPC 2.0 surface covering consensus, mempool, and network-level queries — node status, network info, peer set, block by height, block results, and unconfirmed transactions. Grove operates a public Shannon mainnet RPC at `shannon-grove-rpc.mainnet.poktroll.com`. Most operations are exposed both as JSON-RPC methods and as HTTP GET shortcuts at the same root URL.\n\n\nContact Support:\n Name: Pocket Network Foundation",
+      "type": "text/plain"
+    }
+  }
+}

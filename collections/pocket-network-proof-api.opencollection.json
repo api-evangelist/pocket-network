@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pocket Network CometBFT RPC Application Proof API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Proof",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Shannon Proof Parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shannon-grove-rpc.mainnet.poktroll.com/pocket/proof/v1/params"
+          },
+          "docs": "Return the parameters of the on-chain Proof module (claim and proof windows, minimum relay difficulty, target submission probability).\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
