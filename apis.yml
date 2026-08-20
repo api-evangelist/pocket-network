@@ -415,6 +415,8 @@ apis:
   description: Transaction lookup and broadcast
   humanURL: https://path.grove.city/
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
@@ -470,6 +472,17 @@ apis:
     url: https://docs.cometbft.com/v0.38/rpc/
 name: Pocket Network
 tags:
+  - Web3
+  - Blockchain
+  - RPC
+  - Decentralized Infrastructure
+  - Pocket Network
+  - Grove
+  - Path
+  - Shannon
+  - Cosmos
+  - POKT
+tags_raw:
   - Web3
   - Blockchain
   - RPC
