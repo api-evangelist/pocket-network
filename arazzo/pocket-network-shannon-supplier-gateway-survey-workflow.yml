@@ -12,8 +12,11 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: shannonRpcApi
-  url: ../openapi/pocket-network-shannon-rpc-api-openapi.yml
+- name: gatewayApi
+  url: ../openapi/pocket-network-gateway-api-openapi.yml
+  type: openapi
+- name: supplierApi
+  url: ../openapi/pocket-network-supplier-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: shannon-supplier-gateway-survey

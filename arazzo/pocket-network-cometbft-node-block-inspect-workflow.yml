@@ -12,8 +12,11 @@ info:
     opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: cometbftRpcApi
-  url: ../openapi/pocket-network-cometbft-rpc-api-openapi.yml
+- name: consensusApi
+  url: ../openapi/pocket-network-consensus-api-openapi.yml
+  type: openapi
+- name: statusApi
+  url: ../openapi/pocket-network-status-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: cometbft-node-block-inspect

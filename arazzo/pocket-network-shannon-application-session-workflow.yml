@@ -14,8 +14,14 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: shannonRpcApi
-  url: ../openapi/pocket-network-shannon-rpc-api-openapi.yml
+- name: applicationApi
+  url: ../openapi/pocket-network-application-api-openapi.yml
+  type: openapi
+- name: serviceApi
+  url: ../openapi/pocket-network-service-api-openapi.yml
+  type: openapi
+- name: sessionApi
+  url: ../openapi/pocket-network-session-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: shannon-application-session

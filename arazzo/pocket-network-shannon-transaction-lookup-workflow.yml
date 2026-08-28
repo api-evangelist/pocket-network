@@ -11,8 +11,11 @@ info:
     read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: shannonRpcApi
-  url: ../openapi/pocket-network-shannon-rpc-api-openapi.yml
+- name: blocksApi
+  url: ../openapi/pocket-network-blocks-api-openapi.yml
+  type: openapi
+- name: transactionsApi
+  url: ../openapi/pocket-network-transactions-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: shannon-transaction-lookup

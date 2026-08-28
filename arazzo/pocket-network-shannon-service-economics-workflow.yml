@@ -13,8 +13,14 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: shannonRpcApi
-  url: ../openapi/pocket-network-shannon-rpc-api-openapi.yml
+- name: bankApi
+  url: ../openapi/pocket-network-bank-api-openapi.yml
+  type: openapi
+- name: serviceApi
+  url: ../openapi/pocket-network-service-api-openapi.yml
+  type: openapi
+- name: tokenomicsApi
+  url: ../openapi/pocket-network-tokenomics-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: shannon-service-economics

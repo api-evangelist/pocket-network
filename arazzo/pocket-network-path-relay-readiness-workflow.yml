@@ -14,8 +14,11 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: pathGatewayApi
-  url: ../openapi/pocket-network-path-gateway-api-openapi.yml
+- name: healthApi
+  url: ../openapi/pocket-network-health-api-openapi.yml
+  type: openapi
+- name: relaysApi
+  url: ../openapi/pocket-network-relays-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: path-relay-readiness
