@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Pocket Network CometBFT RPC Application Gateway API
-  description: 'Shannon full nodes expose the standard CometBFT (Tendermint) RPC on port 26657. It is a JSON-RPC 2.0 surface covering consensus, mempool, and network-level queries — node status, network info, peer set, block by height, block results, and unconfirmed transactions. Grove operates a public Shannon mainnet RPC at `shannon-grove-rpc.mainnet.poktroll.com`. Most operations are exposed both as JSON-RPC methods and as HTTP GET shortcuts at the same root URL.
+  title: Pocket Network Shannon RPC Gateway API
+  description: 'The Pocket Network Shannon chain is a Cosmos SDK + CometBFT chain (poktroll). Every full node exposes the standard Cosmos REST and CometBFT RPC surfaces. Public endpoints are operated by Grove and Pocket Network Foundation. This profile documents the read-only endpoints most often consumed by integrators — block, transaction, validator, supply, and on-chain module queries (application, supplier, gateway, service, session, proof, tokenomics). Write operations are signed transactions broadcast via the same REST surface or the poktrolld CLI; they share the `/cosmos/tx/v1beta1/txs` endpoint.
 
     '
   version: v1
@@ -12,10 +12,10 @@ info:
     name: MIT
     url: https://github.com/pokt-network/poktroll/blob/main/LICENSE
 servers:
-- url: https://shannon-grove-rpc.mainnet.poktroll.com
-  description: Grove-operated Shannon mainnet CometBFT RPC
-- url: https://shannon-testnet-grove-rpc.beta.poktroll.com
-  description: Grove-operated Shannon beta testnet CometBFT RPC
+- url: https://shannon-grove-api.mainnet.poktroll.com
+  description: Grove-operated Shannon mainnet REST endpoint
+- url: https://shannon-testnet-grove-api.beta.poktroll.com
+  description: Grove-operated Shannon beta testnet REST endpoint
 tags:
 - name: Gateway
   description: Pocket gateway module — gateways stake POKT and proxy relays for applications
