@@ -122,6 +122,8 @@ apis:
   description: Pocket gateway module — gateways stake POKT and proxy relays for applications
   humanURL: https://path.grove.city/
   tags:
+  - Gateways
+  tags_raw:
   - Gateway
   properties:
   - type: OpenAPI
@@ -238,6 +240,8 @@ apis:
   description: JSON-RPC, REST, and WebSocket relays proxied to Shannon suppliers
   humanURL: https://path.grove.city/
   tags:
+  - Relay
+  tags_raw:
   - Relays
   properties:
   - type: OpenAPI
@@ -269,6 +273,8 @@ apis:
     serves
   humanURL: https://path.grove.city/
   tags:
+  - Services
+  tags_raw:
   - Service
   properties:
   - type: OpenAPI
@@ -299,6 +305,8 @@ apis:
     Pocket session module — sessions group applications, suppliers, and services for a given block window
   humanURL: https://path.grove.city/
   tags:
+  - Sessions
+  tags_raw:
   - Session
   properties:
   - type: OpenAPI
@@ -446,6 +454,8 @@ apis:
   description: Staking and validator queries
   humanURL: https://path.grove.city/
   tags:
+  - Validator
+  tags_raw:
   - Validators
   properties:
   - type: OpenAPI
