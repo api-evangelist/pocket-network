@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Pocket Network CometBFT RPC Mempool API
-  description: 'Shannon full nodes expose the standard CometBFT (Tendermint) RPC on port 26657. It is a JSON-RPC 2.0 surface covering consensus, mempool, and network-level queries — node status, network info, peer set, block by height, block results, and unconfirmed transactions. Grove operates a public Shannon mainnet RPC at `shannon-grove-rpc.mainnet.poktroll.com`. Most operations are exposed both as JSON-RPC methods and as HTTP GET shortcuts at the same root URL.
-
-    '
+  description: Shannon full nodes expose the standard CometBFT (Tendermint) RPC on port 26657. It is a JSON-RPC 2.0 surface covering consensus, mempool, and network-level queries — node status, network info, peer set, block by height, block results, and unconfirmed transactions. Grove operates a public Shannon mainnet RPC at `shannon-grove-rpc.mainnet.poktroll.com`. Most operations are exposed both as JSON-RPC methods and as HTTP GET shortcuts at the same root URL.
   version: v1
   contact:
     name: Pocket Network Foundation
@@ -37,9 +35,7 @@ paths:
   /broadcast_tx_sync:
     get:
       summary: Broadcast Cometbft Transaction Synchronously
-      description: 'Broadcast a transaction and return once CheckTx has run (does not wait for inclusion in a block).
-
-        '
+      description: Broadcast a transaction and return once CheckTx has run (does not wait for inclusion in a block).
       operationId: broadcastCometbftTxSync
       tags:
       - Mempool

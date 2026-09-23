@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Pocket Network PATH Gateway Health API
-  description: 'PATH (Path API and Toolkit Harness) is the open-source Go gateway maintained by Grove (github.com/buildwithgrove/path mirrored at github.com/pokt-network/path) that exposes Pocket Network Shannon as a single HTTP surface. PATH proxies JSON-RPC, REST, and WebSocket calls for every service (blockchain) staked on Shannon, selects suppliers via Quality-of-Service scoring, signs relay requests with the operator''s Gateway and Application keys, and returns upstream responses verbatim. The same protocol drives Grove''s hosted endpoints on rpc.grove.city — each chain is exposed as a subdomain such as `eth.rpc.grove.city/v1/{appId}` or `solana.rpc.grove.city/v1/{appId}`. The payload for every operation is the JSON-RPC envelope of the target chain (e.g. Ethereum eth_*, Solana getBalance) so PATH itself is service-agnostic.
-
-    '
+  description: PATH (Path API and Toolkit Harness) is the open-source Go gateway maintained by Grove (github.com/buildwithgrove/path mirrored at github.com/pokt-network/path) that exposes Pocket Network Shannon as a single HTTP surface.
   version: 0.1.0
   contact:
     name: Grove Support
@@ -28,9 +26,7 @@ paths:
   /healthz:
     get:
       summary: Get Path Liveness
-      description: 'Liveness probe exposed by self-hosted PATH instances on port 3069. Returns 200 when the service is running.
-
-        '
+      description: Liveness probe exposed by self-hosted PATH instances on port 3069. Returns 200 when the service is running.
       operationId: getPathLiveness
       tags:
       - Health
@@ -44,9 +40,7 @@ paths:
   /readyz:
     get:
       summary: Get Path Readiness
-      description: 'Readiness probe. Returns 200 when PATH has loaded its session, supplier, and QoS data and is ready to serve relays.
-
-        '
+      description: Readiness probe. Returns 200 when PATH has loaded its session, supplier, and QoS data and is ready to serve relays.
       operationId: getPathReadiness
       tags:
       - Health

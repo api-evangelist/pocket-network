@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Pocket Network Shannon RPC Supplier API
-  description: 'The Pocket Network Shannon chain is a Cosmos SDK + CometBFT chain (poktroll). Every full node exposes the standard Cosmos REST and CometBFT RPC surfaces. Public endpoints are operated by Grove and Pocket Network Foundation. This profile documents the read-only endpoints most often consumed by integrators — block, transaction, validator, supply, and on-chain module queries (application, supplier, gateway, service, session, proof, tokenomics). Write operations are signed transactions broadcast via the same REST surface or the poktrolld CLI; they share the `/cosmos/tx/v1beta1/txs` endpoint.
-
-    '
+  description: The Pocket Network Shannon chain is a Cosmos SDK + CometBFT chain (poktroll).
   version: v1
   contact:
     name: Pocket Network Foundation
@@ -23,9 +21,7 @@ paths:
   /pocket/supplier/v1/supplier:
     get:
       summary: List Shannon Suppliers
-      description: 'List every Supplier module entry. Suppliers stake POKT and run a RelayMiner to serve relays for the services they support.
-
-        '
+      description: List every Supplier module entry. Suppliers stake POKT and run a RelayMiner to serve relays for the services they support.
       operationId: listShannonSuppliers
       tags:
       - Supplier

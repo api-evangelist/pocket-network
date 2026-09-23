@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Pocket Network PATH Gateway Relays API
-  description: 'PATH (Path API and Toolkit Harness) is the open-source Go gateway maintained by Grove (github.com/buildwithgrove/path mirrored at github.com/pokt-network/path) that exposes Pocket Network Shannon as a single HTTP surface. PATH proxies JSON-RPC, REST, and WebSocket calls for every service (blockchain) staked on Shannon, selects suppliers via Quality-of-Service scoring, signs relay requests with the operator''s Gateway and Application keys, and returns upstream responses verbatim. The same protocol drives Grove''s hosted endpoints on rpc.grove.city — each chain is exposed as a subdomain such as `eth.rpc.grove.city/v1/{appId}` or `solana.rpc.grove.city/v1/{appId}`. The payload for every operation is the JSON-RPC envelope of the target chain (e.g. Ethereum eth_*, Solana getBalance) so PATH itself is service-agnostic.
-
-    '
+  description: PATH (Path API and Toolkit Harness) is the open-source Go gateway maintained by Grove (github.com/buildwithgrove/path mirrored at github.com/pokt-network/path) that exposes Pocket Network Shannon as a single HTTP surface.
   version: 0.1.0
   contact:
     name: Grove Support
@@ -28,9 +26,7 @@ paths:
   /v1/{appId}:
     post:
       summary: Send Authenticated JSON-RPC Relay
-      description: 'Send a JSON-RPC payload for the configured service through a Grove portal application. The path segment `appId` is the Grove portal Application ID returned by the dashboard; the subdomain selects the chain (e.g. `eth.rpc.grove.city`). The request body is the standard JSON-RPC 2.0 envelope of the target chain — PATH does not rewrite it.
-
-        '
+      description: Send a JSON-RPC payload for the configured service through a Grove portal application. The path segment `appId` is the Grove portal Application ID returned by the dashboard; the subdomain selects the chain (e.g. `eth.rpc.grove.city`). The request body is the standard JSON-RPC 2.0 envelope of the target chain — PATH does not rewrite it.
       operationId: sendAuthenticatedRelay
       tags:
       - Relays
@@ -96,9 +92,7 @@ paths:
   /v1:
     post:
       summary: Send Public JSON-RPC Relay
-      description: 'Send a JSON-RPC payload to a Grove public endpoint. No portal Application ID is required — the chain is identified by the subdomain. Public endpoints are throttled per-IP and intended for development.
-
-        '
+      description: Send a JSON-RPC payload to a Grove public endpoint. No portal Application ID is required — the chain is identified by the subdomain. Public endpoints are throttled per-IP and intended for development.
       operationId: sendPublicRelay
       tags:
       - Relays
@@ -119,6 +113,27 @@ paths:
           description: Public-endpoint rate limit exceeded.
 components:
   schemas:
+    JsonRpcResponse:
+      type: object
+      description: JSON-RPC 2.0 response envelope returned by the supplier.
+      properties:
+        jsonrpc:
+          type: string
+          const: '2.0'
+        id:
+          oneOf:
+          - type: integer
+          - type: string
+          - type: 'null'
+        result: {}
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+            message:
+              type: string
+            data: {}
     JsonRpcRequest:
       type: object
       description: JSON-RPC 2.0 request envelope of the target service.
@@ -142,27 +157,6 @@ components:
           oneOf:
           - type: array
           - type: object
-    JsonRpcResponse:
-      type: object
-      description: JSON-RPC 2.0 response envelope returned by the supplier.
-      properties:
-        jsonrpc:
-          type: string
-          const: '2.0'
-        id:
-          oneOf:
-          - type: integer
-          - type: string
-          - type: 'null'
-        result: {}
-        error:
-          type: object
-          properties:
-            code:
-              type: integer
-            message:
-              type: string
-            data: {}
   securitySchemes:
     PortalApplicationId:
       type: apiKey
