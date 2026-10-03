@@ -113,27 +113,6 @@ paths:
           description: Public-endpoint rate limit exceeded.
 components:
   schemas:
-    JsonRpcResponse:
-      type: object
-      description: JSON-RPC 2.0 response envelope returned by the supplier.
-      properties:
-        jsonrpc:
-          type: string
-          const: '2.0'
-        id:
-          oneOf:
-          - type: integer
-          - type: string
-          - type: 'null'
-        result: {}
-        error:
-          type: object
-          properties:
-            code:
-              type: integer
-            message:
-              type: string
-            data: {}
     JsonRpcRequest:
       type: object
       description: JSON-RPC 2.0 request envelope of the target service.
@@ -157,6 +136,27 @@ components:
           oneOf:
           - type: array
           - type: object
+    JsonRpcResponse:
+      type: object
+      description: JSON-RPC 2.0 response envelope returned by the supplier.
+      properties:
+        jsonrpc:
+          type: string
+          const: '2.0'
+        id:
+          oneOf:
+          - type: integer
+          - type: string
+          - type: 'null'
+        result: {}
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+            message:
+              type: string
+            data: {}
   securitySchemes:
     PortalApplicationId:
       type: apiKey
