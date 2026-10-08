@@ -117,3 +117,44 @@ plans:
       - name: 97.5% mint ratio (deflationary post-PIP-41)
       - name: Permissionless service registration
       - name: F-Chains public-data program
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - metered
+  - negotiated
+  units: []
+  plans:
+  - name: Grove Public Endpoints
+    access: free
+    model: free
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Grove Portal — Pay-As-You-Go
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - other
+    periods:
+    - per-use
+  - name: Grove Enterprise
+    access: negotiated
+    model: negotiated
+    model_how: stated
+    units:
+    - other
+    periods:
+    - month
+  - name: Pocket Network Wholesale (Non-Profit)
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - other
+    periods:
+    - per-use
