@@ -1,0 +1,118 @@
+edges:
+- partner_name: DefiLlama Chainlist (extraRpcs.js)
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://github.com/DefiLlama/chainlist/blob/main/constants/extraRpcs.js
+  category: Public JSON-RPC node endpoint
+  contract_reference:
+    register: DefiLlama Chainlist (extraRpcs.js)
+    standard: JSON-RPC node endpoint listing
+    spec_file: null
+    role: public-rpc-operator
+    registered_name: pokt
+    name_source: register
+    register_id: pocket.network
+    matched_domain: pocket.network
+    matched_by: domain+name-among-holders+dedupe:pokt
+    domain_source: rpc host
+    endpoints_sample:
+    - https://eth.api.pocket.network
+    - wss://eth.api.pocket.network
+    - https://poly-amoy-testnet.api.pocket.network
+    chains_sample:
+    - Amoy
+    - Arbitrum One
+    - Arbitrum Sepolia
+    - Avalanche C-Chain
+    - BNB Smart Chain Mainnet
+    - Base
+    - Base Sepolia Testnet
+    - Berachain
+    signal_note: 'listing only: per-chain entries are context, never counted; breadth is not credit; the register
+      certifies nothing, so no certified_products'
+    detected_by: sweep-blockchain-rpc.py
+    detected: '2026-10-18'
+    tracking_labels:
+    - none
+  detected_by: sweep-blockchain-rpc.py
+  first_seen: '2026-10-18'
+- partner_name: cosmos/chain-registry (apis.rpc)
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://github.com/cosmos/chain-registry
+  category: Public JSON-RPC node endpoint
+  contract_reference:
+    register: cosmos/chain-registry (apis.rpc)
+    standard: JSON-RPC node endpoint listing
+    spec_file: null
+    role: public-rpc-operator
+    registered_name: Pocket Network
+    name_source: register
+    register_id: pocket.network
+    matched_domain: pocket.network
+    matched_by: domain+name-among-holders
+    domain_source: rpc host
+    endpoints_sample:
+    - https://sauron-rpc.infra.pocket.network:443
+    - https://pocket.api.pocket.network:443
+    - https://atomone.api.pocket.network
+    chains_sample:
+    - akash
+    - atomone
+    - cheqd
+    - chihuahua
+    - cosmoshub
+    - fetchhub
+    - jackal
+    - juno
+    signal_note: 'listing only: per-chain entries are context, never counted; breadth is not credit; the register
+      certifies nothing, so no certified_products'
+    detected_by: sweep-blockchain-rpc.py
+    detected: '2026-10-18'
+  detected_by: sweep-blockchain-rpc.py
+  first_seen: '2026-10-18'
+- partner_name: Ethereum JSON-RPC (execution-apis)
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: compatible
+  shape: ethereum-json-rpc
+  degree: listed
+  evidence_kind: register-listing
+  report_only: true
+  direction: partner-built
+  evidence: https://github.com/DefiLlama/chainlist/blob/main/constants/extraRpcs.js
+  note: an EVM chain's public RPC list carries this provider's endpoint; a listing, not a conformance test. REPORT
+    ONLY (compatible edges are never in depth or position)
+  contract_reference:
+    register: Chainlist / ethereum-lists EVM RPC listings
+    spec_file: https://github.com/ethereum/execution-apis
+    role: evm-json-rpc-endpoint
+    matched_domain: pocket.network
+    endpoints_sample:
+    - https://eth.api.pocket.network
+    - wss://eth.api.pocket.network
+    signal_note: report only
+    detected_by: sweep-blockchain-rpc.py
+    detected: '2026-10-18'
+  detected_by: sweep-blockchain-rpc.py
+  first_seen: '2026-10-18'
+generated: '2026-10-18'
+method: searched
+source:
+- https://github.com/DefiLlama/chainlist/blob/main/constants/extraRpcs.js
+- https://chainid.network/chains.json
+- https://github.com/cosmos/chain-registry
+checked:
+- https://chainid.network/chains.json
+- https://github.com/DefiLlama/chainlist/blob/main/constants/extraRpcs.js
+- https://github.com/cosmos/chain-registry
