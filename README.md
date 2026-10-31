@@ -1,4 +1,4 @@
-# Pocket Network (pocket-network)
+# Pocket Network
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,150 +66,168 @@
 
 Pocket Network is the decentralized RPC layer of Web3 — a permissionless, fully open data delivery protocol built on Cosmos SDK and CometBFT (the Shannon upgrade, June 2025). 5,000+ independent supplier nodes serve relays across 60-69+ blockchains, metered in compute units at $1/billion and settled on-chain in POKT under deflationary tokenomics (PIP-41, 97.5% mint ratio). Grove (grove.city) is the for-profit infrastructure company that operates the largest gateway on the network — rpc.grove.city — and maintains PATH, the open-source Go gateway any operator can run to expose Pocket Network as a single HTTP endpoint. Grove offers free no-API-key per-IP public endpoints per chain (eth.rpc.grove.city, solana.rpc.grove.city, etc.) plus paid portal applications with relay analytics and SLAs. Together they form the canonical decentralized alternative to Alchemy / Infura / QuickNode for serving JSON-RPC, REST, and WebSocket traffic to any public blockchain.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/pocket-network/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/pocket-network/refs/heads/main/apis.yml)
+**Areas:** Web3 · Blockchain · RPC · Decentralized Infrastructure · Pocket Network · Grove · Path · Shannon · Cosmos · POKT
 
-## Scope
+## Pocket Network on APIs.io
 
-- **Position:** Consuming
-- **Access:** 3rd-Party
+Everything profiled for Pocket Network is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/pocket-network/](https://apis.io/providers/pocket-network/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (16)
 
-- Web3
-- Blockchain
-- RPC
-- Decentralized Infrastructure
-- Pocket Network
-- Grove
-- PATH
-- Shannon
-- Cosmos
-- POKT
+- [Pocket Network Application API](https://apis.io/apis/pocket-network/pocket-network-application-api/) — Pocket application module — applications stake POKT to consume relays
+- [Pocket Network Bank API](https://apis.io/apis/pocket-network/pocket-network-bank-api/) — POKT supply, balances, and burn tracking
+- [Pocket Network Blocks API](https://apis.io/apis/pocket-network/pocket-network-blocks-api/) — Block and consensus state queries
+- [Pocket Network Consensus API](https://apis.io/apis/pocket-network/pocket-network-consensus-api/) — Block, header, and consensus queries
+- [Pocket Network Gateway API](https://apis.io/apis/pocket-network/pocket-network-gateway-api/) — Pocket gateway module — gateways stake POKT and proxy relays for applications
+- [Pocket Network Health API](https://apis.io/apis/pocket-network/pocket-network-health-api/) — PATH service liveness and readiness probes
+- [Pocket Network Mempool API](https://apis.io/apis/pocket-network/pocket-network-mempool-api/) — Mempool inspection and broadcast
+- [Pocket Network Proof API](https://apis.io/apis/pocket-network/pocket-network-proof-api/) — Pocket proof module — claims and proofs that suppliers submit to earn POKT
+- [Pocket Network Relays API](https://apis.io/apis/pocket-network/pocket-network-relays-api/) — JSON-RPC, REST, and WebSocket relays proxied to Shannon suppliers
+- [Pocket Network Service API](https://apis.io/apis/pocket-network/pocket-network-service-api/) — Pocket service module — services represent the data sources (EVM chains, Solana, etc.) the network serves
+- [Pocket Network Session API](https://apis.io/apis/pocket-network/pocket-network-session-api/) — Pocket session module — sessions group applications, suppliers, and services for a given block window
+- [Pocket Network Status API](https://apis.io/apis/pocket-network/pocket-network-status-api/) — Node status and network info
+- [Pocket Network Supplier API](https://apis.io/apis/pocket-network/pocket-network-supplier-api/) — Pocket supplier module — suppliers stake POKT and serve relays via RelayMiner
+- [Pocket Network Tokenomics API](https://apis.io/apis/pocket-network/pocket-network-tokenomics-api/) — Pocket tokenomics module — global mint, burn, and reward parameters
+- [Pocket Network Transactions API](https://apis.io/apis/pocket-network/pocket-network-transactions-api/) — Transaction lookup and broadcast
+- [Pocket Network Validators API](https://apis.io/apis/pocket-network/pocket-network-validators-api/) — Staking and validator queries
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-25
-- **Modified:** 2026-05-25
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Arazzo workflows (8)
 
-### Pocket Network PATH Gateway API
+Multi-step workflows that chain operations into a business task.
 
-PATH is the open-source Go gateway (github.com/buildwithgrove/path) that exposes Pocket Network Shannon as a single HTTP surface. It proxies JSON-RPC, REST, and WebSocket relays to Shannon suppliers, scores them via QoS, and signs each relay with the operator's gateway and application keys. Grove operates the largest hosted PATH deployment on rpc.grove.city across 69+ chains, both as authenticated portal endpoints and as no-key public endpoints per chain (e.g. eth.rpc.grove.city, solana.rpc.grove.city).
+- [Pocket Network CometBFT Node Block Inspect](https://apis.io/arazzos/pocket-network/pocket-network-cometbft-node-block-inspect-workflow/)
+- [Pocket Network PATH Relay Readiness](https://apis.io/arazzos/pocket-network/pocket-network-path-relay-readiness-workflow/)
+- [Pocket Network Shannon Application Balance](https://apis.io/arazzos/pocket-network/pocket-network-shannon-application-balance-workflow/)
+- [Pocket Network Shannon Application Session](https://apis.io/arazzos/pocket-network/pocket-network-shannon-application-session-workflow/)
+- [Pocket Network Shannon Block Explorer](https://apis.io/arazzos/pocket-network/pocket-network-shannon-block-explorer-workflow/)
+- [Pocket Network Shannon Service Economics](https://apis.io/arazzos/pocket-network/pocket-network-shannon-service-economics-workflow/)
+- [Pocket Network Shannon Supplier and Gateway Survey](https://apis.io/arazzos/pocket-network/pocket-network-shannon-supplier-gateway-survey-workflow/)
+- [Pocket Network Shannon Transaction Lookup](https://apis.io/arazzos/pocket-network/pocket-network-shannon-transaction-lookup-workflow/)
 
-- **Human URL:** [https://path.grove.city/](https://path.grove.city/)
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Pocket Network
-- Grove
-- PATH
-- RPC
-- Relays
+- [Pocket Network Agentic Access](https://apis.io/agentic-access/pocket-network/pocket-network-agentic-access/)
 
-#### Properties
+#### JSON Schema (2)
 
-- [Documentation](https://path.grove.city/develop/path/introduction)
-- [Documentation](https://path.grove.city/develop/path/cheatsheet)
-- [OpenAPI](openapi/pocket-network-path-gateway-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/pocket-network-path-gateway-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/pocket-network-path-gateway-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/pocket-network-relay-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/pocket-network-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Source Code](https://github.com/buildwithgrove/path)
+The data models the API reads and writes.
 
-### Pocket Network Shannon RPC API
+- [Pocket Network Relay](https://apis.io/schemas/pocket-network/pocket-network-relay/)
+- [Pocket Network Shannon Actor](https://apis.io/schemas/pocket-network/pocket-network-shannon-actor/)
 
-The Shannon chain is a Cosmos SDK + CometBFT chain (github.com/pokt-network/poktroll) that supplanted Morse in June 2025. The REST surface exposes the standard Cosmos modules (bank, staking, base) alongside Pocket-specific modules — application, supplier, gateway, service, session, proof, and tokenomics. Service fees are denominated in compute units (1 USD = 1B CU) and post-PIP-41 a 97.5% mint ratio makes POKT deflationary. Grove operates a public Shannon mainnet REST endpoint at shannon-grove-api.mainnet.poktroll.com.
+#### JSON-LD (1)
 
-- **Human URL:** [https://dev.poktroll.com/](https://dev.poktroll.com/)
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags
+- [Pocket Network Context](https://apis.io/jsonld/pocket-network/pocket-network-context/)
 
-- Pocket Network
-- Shannon
-- Cosmos
-- Blockchain
+#### Vocabulary (1)
 
-#### Properties
+The provider's domain terms, defined.
 
-- [Documentation](https://dev.poktroll.com/)
-- [Documentation](https://docs.pokt.network/pokt-protocol/the-shannon-upgrade)
-- [OpenAPI](openapi/pocket-network-shannon-rpc-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/pocket-network-shannon-rpc-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/pocket-network-shannon-rpc-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/pocket-network-shannon-actor-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [Source Code](https://github.com/pokt-network/poktroll)
+- [Pocket Network Vocabulary](https://apis.io/vocabularies/pocket-network/pocket-network-vocabulary/)
 
-### Pocket Network CometBFT RPC API
+#### Examples (3)
 
-The CometBFT (Tendermint) JSON-RPC surface exposed by every Shannon full node on port 26657. Covers consensus-level queries (status, net_info, blocks, block_results, tx), mempool inspection, and synchronous transaction broadcast. Grove operates a public Shannon mainnet CometBFT RPC at shannon-grove-rpc.mainnet.poktroll.com.
+Example requests and responses.
 
-- **Human URL:** [https://dev.poktroll.com/](https://dev.poktroll.com/)
+- [Pocket Network Eth Block Number Example](https://apis.io/examples/pocket-network/pocket-network-eth-block-number-example/)
+- [Pocket Network List Shannon Services Example](https://apis.io/examples/pocket-network/pocket-network-list-shannon-services-example/)
+- [Pocket Network Shannon Latest Block Example](https://apis.io/examples/pocket-network/pocket-network-shannon-latest-block-example/)
 
-#### Tags
+#### Collections (22)
 
-- Pocket Network
-- Shannon
-- CometBFT
-- Tendermint
-- Consensus
+Postman and Open Collection request collections.
 
-#### Properties
+- [Pocket Network CometBFT RPC Application API](https://apis.io/collections/pocket-network/open-pocket-network-application-api/)
+- [Pocket Network CometBFT RPC Application Bank API](https://apis.io/collections/pocket-network/open-pocket-network-bank-api/)
+- [Pocket Network CometBFT RPC Application Blocks API](https://apis.io/collections/pocket-network/open-pocket-network-blocks-api/)
+- [Pocket Network CometBFT RPC API](https://apis.io/collections/pocket-network/open-pocket-network-cometbft-rpc-api/)
+- [Pocket Network CometBFT RPC Application Consensus API](https://apis.io/collections/pocket-network/open-pocket-network-consensus-api/)
+- [Pocket Network CometBFT RPC Application Gateway API](https://apis.io/collections/pocket-network/open-pocket-network-gateway-api/)
+- [Pocket Network CometBFT RPC Application Health API](https://apis.io/collections/pocket-network/open-pocket-network-health-api/)
+- [Pocket Network CometBFT RPC Application Mempool API](https://apis.io/collections/pocket-network/open-pocket-network-mempool-api/)
+- [Pocket Network PATH Gateway API](https://apis.io/collections/pocket-network/open-pocket-network-path-gateway-api/)
+- [Pocket Network CometBFT RPC Application Proof API](https://apis.io/collections/pocket-network/open-pocket-network-proof-api/)
+- [Pocket Network CometBFT RPC Application Relays API](https://apis.io/collections/pocket-network/open-pocket-network-relays-api/)
+- [Pocket Network CometBFT RPC Application Service API](https://apis.io/collections/pocket-network/open-pocket-network-service-api/)
+- [Pocket Network CometBFT RPC Application Session API](https://apis.io/collections/pocket-network/open-pocket-network-session-api/)
+- [Pocket Network Shannon RPC API](https://apis.io/collections/pocket-network/open-pocket-network-shannon-rpc-api/)
+- [Pocket Network CometBFT RPC Application Status API](https://apis.io/collections/pocket-network/open-pocket-network-status-api/)
+- [Pocket Network CometBFT RPC Application Supplier API](https://apis.io/collections/pocket-network/open-pocket-network-supplier-api/)
+- [Pocket Network CometBFT RPC Application Tokenomics API](https://apis.io/collections/pocket-network/open-pocket-network-tokenomics-api/)
+- [Pocket Network CometBFT RPC Application Transactions API](https://apis.io/collections/pocket-network/open-pocket-network-transactions-api/)
+- [Pocket Network CometBFT RPC Application Validators API](https://apis.io/collections/pocket-network/open-pocket-network-validators-api/)
+- [Pocket Network CometBFT RPC API](https://apis.io/collections/pocket-network/postman-pocket-network-cometbft-rpc-api/)
+- [Pocket Network PATH Gateway API](https://apis.io/collections/pocket-network/postman-pocket-network-path-gateway-api/)
+- [Pocket Network Shannon RPC API](https://apis.io/collections/pocket-network/postman-pocket-network-shannon-rpc-api/)
 
-- [Documentation](https://docs.cometbft.com/v0.38/rpc/)
-- [OpenAPI](openapi/pocket-network-cometbft-rpc-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/pocket-network-cometbft-rpc-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/pocket-network-cometbft-rpc-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Source Code](https://github.com/pokt-network/poktroll)
+#### Governance rules (2)
 
-## Common Properties
+Spectral rulesets for the provider's contracts.
 
-- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
-- [Portal](https://pocket.network)
-- [Portal](https://grove.city)
+- [Pocket Network — jsonschema rules](https://apis.io/rules/pocket-network/pocket-network-jsonschema-spectral-rules/)
+- [Pocket Network API Rules](https://apis.io/rules/pocket-network/pocket-network-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Pocket Network Authentication](https://apis.io/security/pocket-network/pocket-network-authentication/)
+- [Pocket Network Domain Security](https://apis.io/security/pocket-network/pocket-network-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Pocket Network Plans Pricing](https://apis.io/plans/pocket-network/pocket-network-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Pocket Network Rate Limits](https://apis.io/rate-limits/pocket-network/pocket-network-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Pocket Network Finops](https://apis.io/finops/pocket-network/pocket-network-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Documentation](https://path.grove.city/)
-- [Documentation](https://docs.pokt.network/)
-- [Documentation](https://docs.grove.city/)
-- [Documentation](https://dev.poktroll.com/)
-- [Status Page](https://status.pocket.network/)
-- [Status Page](https://status.grove.city/)
-- [Documentation](https://explorer.pocket.network/pocket-mainnet)
-- [Documentation](https://wallet.pocket.network/)
-- [Forum](https://forum.pokt.network/)
-- [Forum](https://discord.gg/pocket-network)
-- [GitHub Organization](https://github.com/pokt-network)
-- [GitHub Organization](https://github.com/buildwithgrove)
-- [Source Code](https://github.com/pokt-network/poktroll)
-- [Source Code](https://github.com/buildwithgrove/path)
-- [Source Code](https://github.com/pokt-network/path)
-- [SDK](https://github.com/pokt-network/shannon-sdk)
-- [SDK](https://github.com/pokt-network/poktroll-clients-py)
-- [SDK](https://github.com/pokt-network/shannon-tx-builder)
-- [SDK](https://github.com/pokt-network/pocket-js)
-- [Tool](https://github.com/pokt-network/homebrew-pocketd)
-- [Tool](https://github.com/pokt-network/pocketdex)
-- [Tool](https://github.com/pokt-network/pocket-explorer)
+- [Getting started](https://pocket.network/pocket-developer-guide/)
+- [Pricing](https://grove.city/pricing)
 - [Changelog](https://github.com/pokt-network/poktroll/releases)
 - [Blog](https://medium.com/decentralized-infrastructure)
-- [Blog](https://pocket.network/blog/)
-- [Getting Started](https://pocket.network/pocket-developer-guide/)
-- [Documentation](https://pocket.network/shannon-upgrade-faq/)
-- [Documentation](https://pocket.network/decentralized-data-stack/)
-- [Documentation](https://grove.city/chains)
-- [Documentation](https://grove.city/partners)
-- [Pricing](https://grove.city/pricing)
-- [Privacy Policy](https://pocket.network/legal/privacy-policy/)
-- [Terms of Service](https://pocket.network/legal/terms-of-service/)
-- [Plans](plans/pocket-network-plans-pricing.yml)
-- [Rate Limits](rate-limits/pocket-network-rate-limits.yml)
-- [Fin Ops](finops/pocket-network-finops.yml)
-- [Spectral Rules](rules/pocket-network-rules.yml)
-- [Vocabulary](vocabulary/pocket-network-vocabulary.yml)
-- [Features](undefined)
+- [Terms of service](https://pocket.network/legal/terms-of-service/)
+- [Privacy policy](https://pocket.network/legal/privacy-policy/)
+- [GitHub](https://github.com/pokt-network)
+- [Status](https://status.pocket.network/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** info@apievangelist.com
-**URL:** https://apievangelist.com
+**Unrated** — no public website could be reached for this company, so there was almost nothing to measure and nothing a reader could check.
+
+This is not a score of zero. No rating is published for this company. If that is wrong because something public exists that we missed, say so on this repository or email [info@apievangelist.com](mailto:info@apievangelist.com) and it will be re-run — free, and no justification needed.
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Pocket Network: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/pocket-network/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
